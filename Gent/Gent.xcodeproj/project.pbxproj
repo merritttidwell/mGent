@@ -8,13 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E97FE1F79E63C00D97658 /* AppDelegate.swift */; };
-		920E98011F79E63C00D97658 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E98001F79E63C00D97658 /* FirstViewController.swift */; };
-		920E98031F79E63C00D97658 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E98021F79E63C00D97658 /* SecondViewController.swift */; };
 		920E98061F79E63C00D97658 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920E98041F79E63C00D97658 /* Main.storyboard */; };
 		920E98081F79E63C00D97658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 920E98071F79E63C00D97658 /* Assets.xcassets */; };
 		920E980B1F79E63C00D97658 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920E98091F79E63C00D97658 /* LaunchScreen.storyboard */; };
 		920E98161F79E63C00D97658 /* GentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E98151F79E63C00D97658 /* GentTests.swift */; };
 		920E98211F79E63C00D97658 /* GentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E98201F79E63C00D97658 /* GentUITests.swift */; };
+		920E982F1F79EAF700D97658 /* MVPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E982E1F79EAF700D97658 /* MVPViewController.swift */; };
+		920E98311F79EB3C00D97658 /* TradeInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E98301F79EB3C00D97658 /* TradeInViewController.swift */; };
+		920E98331F79EB4F00D97658 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E98321F79EB4F00D97658 /* ShopViewController.swift */; };
+		920E98351F79EB6000D97658 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E98341F79EB6000D97658 /* CartViewController.swift */; };
+		920E98371F79EB6D00D97658 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E98361F79EB6D00D97658 /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,8 +40,6 @@
 /* Begin PBXFileReference section */
 		920E97FB1F79E63C00D97658 /* Gent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		920E97FE1F79E63C00D97658 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		920E98001F79E63C00D97658 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		920E98021F79E63C00D97658 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		920E98051F79E63C00D97658 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		920E98071F79E63C00D97658 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		920E980A1F79E63C00D97658 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +50,11 @@
 		920E981C1F79E63C00D97658 /* GentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		920E98201F79E63C00D97658 /* GentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentUITests.swift; sourceTree = "<group>"; };
 		920E98221F79E63C00D97658 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		920E982E1F79EAF700D97658 /* MVPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVPViewController.swift; sourceTree = "<group>"; };
+		920E98301F79EB3C00D97658 /* TradeInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeInViewController.swift; sourceTree = "<group>"; };
+		920E98321F79EB4F00D97658 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		920E98341F79EB6000D97658 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		920E98361F79EB6D00D97658 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +105,12 @@
 		920E97FD1F79E63C00D97658 /* Gent */ = {
 			isa = PBXGroup;
 			children = (
+				920E983D1F79EE4100D97658 /* Cart */,
+				920E983C1F79EE3C00D97658 /* Chat */,
+				920E983B1F79EE3700D97658 /* Shop */,
+				920E983A1F79EE2100D97658 /* Trade In */,
+				920E98391F79EDF500D97658 /* MVP */,
 				920E97FE1F79E63C00D97658 /* AppDelegate.swift */,
-				920E98001F79E63C00D97658 /* FirstViewController.swift */,
-				920E98021F79E63C00D97658 /* SecondViewController.swift */,
 				920E98041F79E63C00D97658 /* Main.storyboard */,
 				920E98071F79E63C00D97658 /* Assets.xcassets */,
 				920E98091F79E63C00D97658 /* LaunchScreen.storyboard */,
@@ -126,6 +135,46 @@
 				920E98221F79E63C00D97658 /* Info.plist */,
 			);
 			path = GentUITests;
+			sourceTree = "<group>";
+		};
+		920E98391F79EDF500D97658 /* MVP */ = {
+			isa = PBXGroup;
+			children = (
+				920E982E1F79EAF700D97658 /* MVPViewController.swift */,
+			);
+			path = MVP;
+			sourceTree = "<group>";
+		};
+		920E983A1F79EE2100D97658 /* Trade In */ = {
+			isa = PBXGroup;
+			children = (
+				920E98301F79EB3C00D97658 /* TradeInViewController.swift */,
+			);
+			path = "Trade In";
+			sourceTree = "<group>";
+		};
+		920E983B1F79EE3700D97658 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				920E98321F79EB4F00D97658 /* ShopViewController.swift */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		920E983C1F79EE3C00D97658 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				920E98361F79EB6D00D97658 /* ChatViewController.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		920E983D1F79EE4100D97658 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				920E98341F79EB6000D97658 /* CartViewController.swift */,
+			);
+			path = Cart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +311,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				920E98031F79E63C00D97658 /* SecondViewController.swift in Sources */,
+				920E982F1F79EAF700D97658 /* MVPViewController.swift in Sources */,
+				920E98371F79EB6D00D97658 /* ChatViewController.swift in Sources */,
+				920E98351F79EB6000D97658 /* CartViewController.swift in Sources */,
+				920E98331F79EB4F00D97658 /* ShopViewController.swift in Sources */,
 				920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */,
-				920E98011F79E63C00D97658 /* FirstViewController.swift in Sources */,
+				920E98311F79EB3C00D97658 /* TradeInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
