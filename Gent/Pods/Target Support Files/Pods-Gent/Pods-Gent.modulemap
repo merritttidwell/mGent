@@ -1,0 +1,6 @@
+framework module Pods_Gent {
+  umbrella header "Pods-Gent-umbrella.h"
+
+  export *
+  module * { export * }
+}
