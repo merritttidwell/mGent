@@ -2,22 +2,36 @@
 //  CreateAccountTableViewController.swift
 //  Gent
 //
-//  Created by Christina Sund on 10/1/17.
+//  Created by Christina Sund on 10/4/17.
 //  Copyright © 2017 Christina Sund. All rights reserved.
 //
 
 import UIKit
+import Firebase
+
 
 class CreateAccountTableViewController: UITableViewController {
 
+    var formLabels = [String]()
+    var formPlaceholders = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        FirebaseApp.configure()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        formLabels = ["Name","Email","Phone", "Carrier", "Serial", "Model"]
+        formPlaceholders = ["John Smith","example@email.com","8585551234", "Verizon", "23425555", "iPhone 6s"]
+        
+        tableView.estimatedRowHeight = 30
+
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,21 +43,40 @@ class CreateAccountTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return formLabels.count
     }
 
-  /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "accountCell", for: indexPath)
+        
+        let cell =            self.tableView.dequeueReusableCell(withIdentifier:
+            "FormTableCell", for: indexPath)
+            as! FormTableViewCell
+        
+        let row = indexPath.row
+        cell.formLabel.font =
+            UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
+        cell.formLabel.text = formLabels[row]
+        cell.formTextField.placeholder = formPlaceholders[row]
         return cell
     }
- */
-
+ 
+    @IBAction func submitButton(_ sender: Any) {
+    
+        // let index = IndexPath(row: 0, section: 0)
+        // let cell: FormTableViewCell = self.myTableView.cellForRow(at: index) as! FormTableViewCell
+        
+        
+        Auth.auth().createUser(withEmail: "email", password: "password") { (user, error) in
+            // ...
+        }
+    
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -92,6 +125,4 @@ class CreateAccountTableViewController: UITableViewController {
     @IBAction func cancelButtonPressed(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
     }
-    
-    
 }

@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		433A10A149F72DCD3A4E9CCE /* Pods_GentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A662339FF991BFC0808AFCA /* Pods_GentUITests.framework */; };
+		6B4DD7B81F85DE1C00D511B1 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */; };
+		6B4DD7BA1F85DE4300D511B1 /* FormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DD7B91F85DE4300D511B1 /* FormTableViewCell.swift */; };
 		6B896D7E1F81875B0070DCA7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */; };
-		6B896D801F8190C30070DCA7 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B896D7F1F8190C30070DCA7 /* CreateAccountTableViewController.swift */; };
 		6BA65A8E1F817F7F0099D60F /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA65A8D1F817F7F0099D60F /* NewsViewController.swift */; };
 		6BA65A911F8180220099D60F /* BuyBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA65A901F8180220099D60F /* BuyBackViewController.swift */; };
 		768441104A8ED4E7ACAD7684 /* Pods_GentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89D8BF4798AEA47C2374CD4 /* Pods_GentTests.framework */; };
@@ -44,8 +45,9 @@
 
 /* Begin PBXFileReference section */
 		0A662339FF991BFC0808AFCA /* Pods_GentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTableViewController.swift; sourceTree = "<group>"; };
+		6B4DD7B91F85DE4300D511B1 /* FormTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
 		6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		6B896D7F1F8190C30070DCA7 /* CreateAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTableViewController.swift; sourceTree = "<group>"; };
 		6BA65A8D1F817F7F0099D60F /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		6BA65A901F8180220099D60F /* BuyBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyBackViewController.swift; sourceTree = "<group>"; };
 		918239316A00CA3B7082B5B6 /* Pods-Gent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gent.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gent/Pods-Gent.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,7 +181,8 @@
 			isa = PBXGroup;
 			children = (
 				920E982E1F79EAF700D97658 /* MVPViewController.swift */,
-				6B896D7F1F8190C30070DCA7 /* CreateAccountTableViewController.swift */,
+				6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */,
+				6B4DD7B91F85DE4300D511B1 /* FormTableViewCell.swift */,
 			);
 			path = MVP;
 			sourceTree = "<group>";
@@ -506,9 +509,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				920E982F1F79EAF700D97658 /* MVPViewController.swift in Sources */,
+				6B4DD7BA1F85DE4300D511B1 /* FormTableViewCell.swift in Sources */,
 				920E98371F79EB6D00D97658 /* ChatViewController.swift in Sources */,
 				920E98331F79EB4F00D97658 /* ShopViewController.swift in Sources */,
-				6B896D801F8190C30070DCA7 /* CreateAccountTableViewController.swift in Sources */,
+				6B4DD7B81F85DE1C00D511B1 /* CreateAccountTableViewController.swift in Sources */,
 				6BA65A8E1F817F7F0099D60F /* NewsViewController.swift in Sources */,
 				6BA65A911F8180220099D60F /* BuyBackViewController.swift in Sources */,
 				920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */,
