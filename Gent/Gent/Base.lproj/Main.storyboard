@@ -113,6 +113,9 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="editingChanged:" destination="oiL-YY-MJX" eventType="editingChanged" id="yxP-jy-hKn"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -128,6 +131,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="ndl-LA-imM"/>
+                    <connections>
+                        <outlet property="submitButton" destination="Wui-Wv-pKC" id="hnC-vd-iGo"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="izJ-Xi-1SR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

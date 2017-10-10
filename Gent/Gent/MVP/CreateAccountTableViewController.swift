@@ -14,46 +14,35 @@ class CreateAccountTableViewController: UITableViewController {
 
     var formLabels = [String]()
     var formPlaceholders = [String]()
+    var values = [String?]()
+    
+    @IBOutlet weak var submitButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        FirebaseApp.configure()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        submitButton.isEnabled = false
         
-        formLabels = ["Name","Email","Phone", "Carrier", "Serial", "Model"]
-        formPlaceholders = ["John Smith","example@email.com","8585551234", "Verizon", "23425555", "iPhone 6s"]
+        formLabels = ["Name","Email","Password", "Phone","Carrier", "Serial", "Model"]
+        formPlaceholders = ["John Smith","example@email.com","Enter Password","8585551234", "Verizon", "23425555", "iPhone 6s"]
+        values = [nil, nil, nil, nil, nil, nil, nil]
         
         tableView.estimatedRowHeight = 30
-
         
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return formLabels.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell =            self.tableView.dequeueReusableCell(withIdentifier:
+        let cell = self.tableView.dequeueReusableCell(withIdentifier:
             "FormTableCell", for: indexPath)
             as! FormTableViewCell
         
@@ -62,67 +51,60 @@ class CreateAccountTableViewController: UITableViewController {
             UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
         cell.formLabel.text = formLabels[row]
         cell.formTextField.placeholder = formPlaceholders[row]
+        // Secure entry on password field
+        if row == 2 { cell.formTextField.isSecureTextEntry = true }
+        // Email keyboard on email field
+        if row == 1 { cell.formTextField.keyboardType = UIKeyboardType.emailAddress }
+        cell.delegate = self
         return cell
     }
  
     @IBAction func submitButton(_ sender: Any) {
     
-        // let index = IndexPath(row: 0, section: 0)
-        // let cell: FormTableViewCell = self.myTableView.cellForRow(at: index) as! FormTableViewCell
+        print(#function, values)
         
+        let email = values[1]
+        let name = values[0]
+        let phone = values[3]
+        let password = values[2]
+        let carrier = values[4]
+        let serial = values[5]
+        let model = values[6]
         
-        Auth.auth().createUser(withEmail: "email", password: "password") { (user, error) in
-            // ...
+        Auth.auth().createUser(withEmail: email!, password: password!) { (user, error) in
+            if (error != nil) {
+                print(error)
+                return
+            }
+            
+            // successfuly authenticated user
+            guard let uid = user?.uid else { return }
+            
+            // Create database reference
+            var ref: DatabaseReference!
+            ref = Database.database().reference()
+            // Create users reference
+            let usersRef = ref.child("users").child(uid)
+            // Create dictionary with form info
+            let values = ["name": name, "email": email, "phone": phone, "carrier": carrier, "sn":serial,"model":model]
+            usersRef.updateChildValues(values)
         }
     
     }
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
+    }
+}
+
+// delegate protocol to update model as text fields change
+extension CreateAccountTableViewController: FormTableViewCellDelegate {
+    func fieldValueChanged(cell: UITableViewCell, textField: UITextField) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        values[indexPath.row] = textField.text
+        if values[0] != nil && values[1] != nil && values[2] != nil && values[3] != nil && values[4] != nil && values[5] != nil && values[6] != nil {
+            submitButton.isEnabled = true
+        }
     }
 }

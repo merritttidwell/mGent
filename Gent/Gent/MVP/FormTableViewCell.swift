@@ -8,11 +8,24 @@
 
 import UIKit
 
+// Delegate
+protocol FormTableViewCellDelegate: class {
+    func fieldValueChanged(cell: UITableViewCell, textField: UITextField)
+}
+
+
 class FormTableViewCell: UITableViewCell {
 
+    weak var delegate: FormTableViewCellDelegate?
+    
     @IBOutlet weak var formLabel: UILabel!
     
     @IBOutlet weak var formTextField: UITextField!
+    
+    // Set up editing changed event and send to delegate
+    @IBAction func editingChanged(_ sender: UITextField) {
+        delegate?.fieldValueChanged(cell: self, textField: sender)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
