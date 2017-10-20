@@ -10,6 +10,7 @@
 		433A10A149F72DCD3A4E9CCE /* Pods_GentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A662339FF991BFC0808AFCA /* Pods_GentUITests.framework */; };
 		6B4DD7B81F85DE1C00D511B1 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */; };
 		6B4DD7BA1F85DE4300D511B1 /* FormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DD7B91F85DE4300D511B1 /* FormTableViewCell.swift */; };
+		6B6C5CA31F8C5D080047A51F /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6C5CA21F8C5D080047A51F /* SignInTableViewController.swift */; };
 		6B896D7E1F81875B0070DCA7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */; };
 		6BA65A8E1F817F7F0099D60F /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA65A8D1F817F7F0099D60F /* NewsViewController.swift */; };
 		6BA65A911F8180220099D60F /* BuyBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA65A901F8180220099D60F /* BuyBackViewController.swift */; };
@@ -47,6 +48,7 @@
 		0A662339FF991BFC0808AFCA /* Pods_GentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTableViewController.swift; sourceTree = "<group>"; };
 		6B4DD7B91F85DE4300D511B1 /* FormTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
+		6B6C5CA21F8C5D080047A51F /* SignInTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTableViewController.swift; sourceTree = "<group>"; };
 		6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6BA65A8D1F817F7F0099D60F /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		6BA65A901F8180220099D60F /* BuyBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyBackViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				920E982E1F79EAF700D97658 /* MVPViewController.swift */,
 				6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */,
 				6B4DD7B91F85DE4300D511B1 /* FormTableViewCell.swift */,
+				6B6C5CA21F8C5D080047A51F /* SignInTableViewController.swift */,
 			);
 			path = MVP;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				6BA65A8E1F817F7F0099D60F /* NewsViewController.swift in Sources */,
 				6BA65A911F8180220099D60F /* BuyBackViewController.swift in Sources */,
 				920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */,
+				6B6C5CA31F8C5D080047A51F /* SignInTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
