@@ -61,36 +61,17 @@ class CreateAccountTableViewController: UITableViewController {
     
     @IBAction func submitButton(_ sender: Any) {
         
-        createFirebaseUser(userData: userData)
-        
-    }
-    
-    internal func createFirebaseUser (userData : [String: String]) {
-        
+        let name = userData["name"] ?? ""
         let email =  userData["email"]  ?? ""
         let password = userData["password"]  ?? ""
         
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-            if error != nil {
-                print(error ?? "unknown error")
-                return
-            }
-            
-            guard let uuid = user?.uid else {return}
-            
-            // Create database reference
-            var ref: DatabaseReference!
-            ref = Database.database().reference()
-            // Create users reference
-            let usersRef = ref.child("users").child(uuid)
-            usersRef.updateChildValues(self.userData)
-            
-        }
+        User.registerUser(withName:name, email: email, password: password, userData: self.userData)
         
     }
+
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

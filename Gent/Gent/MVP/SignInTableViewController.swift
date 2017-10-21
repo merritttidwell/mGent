@@ -58,11 +58,17 @@ class SignInTableViewController: UITableViewController {
         print("Submit Pressed")
         let email = emailTextField.text
         let password = passwordTextField.text
-        signIn(emailAdd: email!, pass: password!)
+        User.loginUser(withEmail: email!, password: password!) { (loginsuccessful) in
+            if (loginsuccessful) {
+                
+                print("user logged in sucessfully")
+            }
+        }
+    
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
 
