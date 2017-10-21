@@ -8,12 +8,12 @@
 
 import UIKit
 
-class BuyBackViewController: UIViewController {
+class BuyBackViewController: GentsViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Buy Back Loaded")
-        // Do any additional setup after loading the view.
+
     }
 
     override func didReceiveMemoryWarning() {

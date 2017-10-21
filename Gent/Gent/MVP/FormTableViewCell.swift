@@ -10,12 +10,12 @@ import UIKit
 
 // Delegate
 protocol FormTableViewCellDelegate: class {
-    func fieldValueChanged(cell: UITableViewCell, textField: UITextField)
+    func fieldValueChanged(textField: UITextField, cell: UITableViewCell)
 }
 
 
-class FormTableViewCell: UITableViewCell {
-
+class FormTableViewCell: UITableViewCell, UITextFieldDelegate {
+    
     weak var delegate: FormTableViewCellDelegate?
     
     @IBOutlet weak var formLabel: UILabel!
@@ -23,19 +23,28 @@ class FormTableViewCell: UITableViewCell {
     @IBOutlet weak var formTextField: UITextField!
     
     // Set up editing changed event and send to delegate
-    @IBAction func editingChanged(_ sender: UITextField) {
-        delegate?.fieldValueChanged(cell: self, textField: sender)
+    
+    public func configure(titleLabel: String, text: String?, placeholder: String) {
+        
+        formLabel.text = titleLabel
+        formLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
+        
+        formTextField.text = text
+        formTextField.placeholder = placeholder
+        formTextField.delegate = self
+        
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        delegate?.fieldValueChanged(textField: formTextField, cell: self)
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
 }
+

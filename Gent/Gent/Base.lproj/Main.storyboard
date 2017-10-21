@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -78,7 +78,7 @@
                         <sections>
                             <tableViewSection id="YpG-Eu-c6j">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hDj-8C-nTy">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hDj-8C-nTy">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hDj-8C-nTy" id="mGG-Cv-FQh">
@@ -172,7 +172,7 @@
                                 </navigationItem>
                             </items>
                         </navigationBar>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="qcU-7Q-w1P">
+                        <view key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleToFill" id="qcU-7Q-w1P">
                             <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -208,9 +208,6 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <action selector="editingChanged:" destination="oiL-YY-MJX" eventType="editingChanged" id="yxP-jy-hKn"/>
-                                            </connections>
                                         </textField>
                                     </subviews>
                                 </tableViewCellContentView>

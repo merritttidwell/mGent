@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E9CA2901F9AC6680017D34B /* GentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9CA28F1F9AC6680017D34B /* GentsViewController.swift */; };
 		433A10A149F72DCD3A4E9CCE /* Pods_GentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A662339FF991BFC0808AFCA /* Pods_GentUITests.framework */; };
 		6B4DD7B81F85DE1C00D511B1 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */; };
 		6B4DD7BA1F85DE4300D511B1 /* FormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DD7B91F85DE4300D511B1 /* FormTableViewCell.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		0A662339FF991BFC0808AFCA /* Pods_GentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E9CA28F1F9AC6680017D34B /* GentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentsViewController.swift; sourceTree = "<group>"; };
 		6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTableViewController.swift; sourceTree = "<group>"; };
 		6B4DD7B91F85DE4300D511B1 /* FormTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
 		6B6C5CA21F8C5D080047A51F /* SignInTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTableViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E9CA2911F9ACC020017D34B /* Base Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2E9CA28F1F9AC6680017D34B /* GentsViewController.swift */,
+			);
+			path = "Base Classes";
+			sourceTree = "<group>";
+		};
 		6BA65A8A1F817F400099D60F /* News */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */,
+				2E9CA2911F9ACC020017D34B /* Base Classes */,
 				6BA65A8F1F8180110099D60F /* BuyBack */,
 				6BA65A8A1F817F400099D60F /* News */,
 				920E983C1F79EE3C00D97658 /* Chat */,
@@ -183,8 +194,8 @@
 			isa = PBXGroup;
 			children = (
 				920E982E1F79EAF700D97658 /* MVPViewController.swift */,
-				6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */,
 				6B4DD7B91F85DE4300D511B1 /* FormTableViewCell.swift */,
+				6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */,
 				6B6C5CA21F8C5D080047A51F /* SignInTableViewController.swift */,
 			);
 			path = MVP;
@@ -517,6 +528,7 @@
 				920E98331F79EB4F00D97658 /* ShopViewController.swift in Sources */,
 				6B4DD7B81F85DE1C00D511B1 /* CreateAccountTableViewController.swift in Sources */,
 				6BA65A8E1F817F7F0099D60F /* NewsViewController.swift in Sources */,
+				2E9CA2901F9AC6680017D34B /* GentsViewController.swift in Sources */,
 				6BA65A911F8180220099D60F /* BuyBackViewController.swift in Sources */,
 				920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */,
 				6B6C5CA31F8C5D080047A51F /* SignInTableViewController.swift in Sources */,

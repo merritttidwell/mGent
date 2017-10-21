@@ -1,22 +1,25 @@
 //
-//  ChatViewController.swift
+//  GentsViewController.swift
 //  Gent
 //
-//  Created by christina schell on 9/25/17.
+//  Created by Merritt Tidwell on 10/20/17.
 //  Copyright © 2017 Christina Sund. All rights reserved.
 //
 
 import UIKit
 
-class ChatViewController: GentsViewController {
+class GentsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        print("Chat Loaded")
+        
+        //background
+        
+        let imageView = UIImageView(frame: self.view.bounds)
+        imageView.image = UIImage(named: "wallpaper")
+        imageView.contentMode = .scaleAspectFill
+        self.view.addSubview(imageView)
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
