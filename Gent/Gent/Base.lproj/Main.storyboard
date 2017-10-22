@@ -361,7 +361,7 @@
                             <outlet property="delegate" destination="6Xi-88-Pf3" id="iXM-7Z-ldm"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="News" selectedImage="first" id="hi5-Xd-VRf"/>
+                    <tabBarItem key="tabBarItem" title="News" id="hi5-Xd-VRf"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MMx-e6-OBV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
