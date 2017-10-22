@@ -16,7 +16,7 @@ class GentsViewController: UIViewController {
         //background
         
         let imageView = UIImageView(frame: self.view.bounds)
-        imageView.image = UIImage(named: "wallpaper2")
+        imageView.image = UIImage(named: "wallpaper_edit_shield")
         imageView.contentMode = .scaleAspectFill
         self.view.addSubview(imageView)
     }
