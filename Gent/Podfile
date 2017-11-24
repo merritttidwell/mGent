@@ -10,6 +10,8 @@ pod 'Firebase'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 
+pod 'Stripe'
+
   target 'GentTests' do
     inherit! :search_paths
     # Pods for testing
