@@ -1,6 +1,0 @@
-framework module Pods_GentTests {
-  umbrella header "Pods-GentTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
