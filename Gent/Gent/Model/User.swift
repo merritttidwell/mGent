@@ -9,17 +9,26 @@
 import Foundation
 import UIKit
 import Firebase
+import Stripe
+import Alamofire
 
-class User: NSObject {
+typealias completionSuccess = (_ isSuccessful: Bool) -> (Void)
+
+class User: NSObject, STPPaymentContextDelegate {
     
     //MARK: Properties
     let name: String
     let email: String
     let id: String
     
+    //var customerCtx : STPCustomerContext
+    //var payCtx : STPPaymentContext
+    private(set) var stpCustomerID = ""
+    
     //MARK: Methods
-    class func registerUser(withName: String, email: String, password: String, userData:[String:String]) {
+    class func registerUser(withName: String, email: String, password: String, userData:[String:String], completion: @escaping completionSuccess) {
         
+        var userData = userData
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if error != nil {
                 print(error ?? "unknown error")
@@ -28,15 +37,24 @@ class User: NSObject {
             
             guard let uuid = user?.uid else {return}
             
-            // Create database reference
-            var ref: DatabaseReference!
-            ref = Database.database().reference()
-            // Create users reference
-            let usersRef = ref.child("users").child(uuid)
-            usersRef.updateChildValues(userData)
-            
+            StripeAPIClient.sharedClient.createStripeCustomer(email: email) { resp, err in
+                
+                guard err == nil else {
+                    completion(false)
+                    return
+                }
+                // Create database reference
+                var ref: DatabaseReference!
+                ref = Database.database().reference()
+                
+                // Create users reference
+                let usersRef = ref.child("users").child(uuid)
+                userData["stp_customer_id"] = resp?["id"] as? String
+                userData["uid"] = uuid
+                usersRef.updateChildValues(userData)
+                completion(true)
+            }
         }
-        
     }
     
     class func loginUser(withEmail: String, password: String, completion: @escaping (Bool) -> Swift.Void) {
@@ -104,11 +122,38 @@ class User: NSObject {
         })
     }
     
+    class func delete() {
+        Auth.auth().currentUser?.delete(completion: { (err) in
+            print(err ?? "N/A")
+        })
+    }
     
     //MARK: Inits
     init(name: String, email: String, id: String) {
         self.name = name
         self.email = email
         self.id = id
+        
+        //customerCtx = STPCustomerContext(keyProvider: StripeAPIClient.sharedClient)
+        //payCtx = STPPaymentContext(customerContext: customerCtx)
+        
+        //payCtx.delegate = self
+    }
+    
+    //MARK: -STPPaymentContextDelegateDelegate
+    func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
+        
+    }
+    
+    func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
+        
+    }
+    
+    func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
+        
+    }
+    
+    func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
+        
     }
 }
