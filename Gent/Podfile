@@ -11,6 +11,8 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 
 pod 'Stripe'
+pod 'Alamofire'
+pod 'KeychainSwift'
 
   target 'GentTests' do
     inherit! :search_paths
