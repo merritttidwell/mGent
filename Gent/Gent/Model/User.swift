@@ -32,6 +32,7 @@ class User: NSObject {
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if error != nil {
                 print(error ?? "unknown error")
+                completion(false)
                 return
             }
             
