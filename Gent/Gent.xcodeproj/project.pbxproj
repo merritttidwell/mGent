@@ -24,6 +24,7 @@
 		768441104A8ED4E7ACAD7684 /* Pods_GentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89D8BF4798AEA47C2374CD4 /* Pods_GentTests.framework */; };
 		8F2354601FCBBDB700731975 /* StripeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */; };
 		8FAA33761FCBCC2D00D9F304 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */; };
+		8FAA33781FCBDC1A00D9F304 /* reademe.md in Resources */ = {isa = PBXBuildFile; fileRef = 8FAA33771FCBDC1A00D9F304 /* reademe.md */; };
 		920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E97FE1F79E63C00D97658 /* AppDelegate.swift */; };
 		920E98061F79E63C00D97658 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920E98041F79E63C00D97658 /* Main.storyboard */; };
 		920E98081F79E63C00D97658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 920E98071F79E63C00D97658 /* Assets.xcassets */; };
@@ -69,6 +70,7 @@
 		6BD37E521F9C65E100EEFCCC /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		6BD37E531F9C65E100EEFCCC /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeAPIClient.swift; sourceTree = "<group>"; };
+		8FAA33771FCBDC1A00D9F304 /* reademe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = reademe.md; sourceTree = "<group>"; };
 		918239316A00CA3B7082B5B6 /* Pods-Gent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gent.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gent/Pods-Gent.release.xcconfig"; sourceTree = "<group>"; };
 		920E97FB1F79E63C00D97658 /* Gent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		920E97FE1F79E63C00D97658 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */,
 				2E9CA28F1F9AC6680017D34B /* GentsViewController.swift */,
 				2E1E391C1F9BF15400290A87 /* User.swift */,
+				8FAA33771FCBDC1A00D9F304 /* reademe.md */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FAA33781FCBDC1A00D9F304 /* reademe.md in Resources */,
 				920E980B1F79E63C00D97658 /* LaunchScreen.storyboard in Resources */,
 				6B1F239C1F9EE46300B6F9D0 /* UnderConstruction.xib in Resources */,
 				6B896D7E1F81875B0070DCA7 /* GoogleService-Info.plist in Resources */,
