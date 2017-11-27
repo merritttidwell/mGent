@@ -51,8 +51,13 @@ class User: NSObject {
                 // Create users reference
                 let usersRef = ref.child("users").child(uuid)
                 userData["strp_customer_id"] = resp?["id"] as? String
-                usersRef.updateChildValues(userData)
-                completion(true)
+                usersRef.updateChildValues(userData, withCompletionBlock: { (err, ref) in
+                    if err == nil {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
             }
         }
     }
