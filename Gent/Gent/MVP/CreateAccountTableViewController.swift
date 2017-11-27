@@ -65,8 +65,10 @@ class CreateAccountTableViewController: UITableViewController {
         let email =  userData["email"]  ?? ""
         let password = userData["password"]  ?? ""
         
-        User.registerUser(withName:name, email: email, password: password, userData: self.userData)
-        
+        //User.registerUser(withName:name, email: email, password: password, userData: self.userData)
+        User.registerUser(withName: name, email: email, password: password, userData: self.userData) { (isOK)  in
+            print("Register new user = \(isOK)")
+        }
     }
 
     
