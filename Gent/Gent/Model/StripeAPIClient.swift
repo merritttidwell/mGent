@@ -12,7 +12,7 @@ import Alamofire
 
 typealias CompletionBlock = ([String: AnyObject]?, Error?) -> (Void)
 
-class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
+class StripeAPIClient: NSObject, STPEphemeralKeyProvider, STPPaymentContextDelegate {
     
     static let sharedClient = StripeAPIClient()
     var baseURLString: String? = "http://localhost:3000"
@@ -24,6 +24,7 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
         }
     }
     var cusID = ""
+    private(set) var ephemeralKey = [String: AnyObject]();
     
     func completeCharge(_ result: STPPaymentResult,
                         amount: Int,
@@ -58,6 +59,7 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
             .responseJSON { responseJSON in
                 switch responseJSON.result {
                 case .success(let json):
+                    self.ephemeralKey = json as! [String : AnyObject]
                     completion(json as? [String: AnyObject], nil)
                 case .failure(let error):
                     completion(nil, error)
@@ -79,5 +81,22 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
                     completion(nil, error)
                 }
         }
+    }
+    
+    //MARK: -STPPaymentContextDelegateDelegate
+    func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
+        
+    }
+    
+    func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
+        
+    }
+    
+    func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
+        
+    }
+    
+    func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
+        
     }
 }
