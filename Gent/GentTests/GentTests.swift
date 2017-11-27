@@ -21,9 +21,41 @@ class GentTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testRegisterUser() {
+        let data = ["phone" : "6302460328", "carrier" : "Sprint", "email" : "usama.cpp@gmail.com", "model" : "iPhone8P", "name" : "Sam", "sn" : "1234567890"]
+        
+        let exp = expectation(description: "register")
+        
+        User.registerUser(withName: "Sam", email: "usama.cpp@gmail.com", password: "sam123", userData: data) { isOK in
+            print("Register User = \(isOK)")
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 30) { (err) in
+            
+            if err != nil {
+                print("testRegisterUser - failed =>")
+                print(err)
+                XCTAssert(false)
+            }
+        }
+    }
+    
+    func testLoginUser() {
+        let exp = self.expectation(description: "login")
+        
+        User.loginUser(withEmail: "usama.cpp@gmail.com", password: "sam123") { (user) in
+            print("login user = \(String(describing: user))")
+            exp.fulfill()
+        }
+        
+        self.waitForExpectations(timeout: 30) { (err) in
+            if err != nil {
+                print("testLoginUser - failed =>")
+                print(err)
+                XCTAssert(false)
+            }
+        }
     }
     
     func testPerformanceExample() {
