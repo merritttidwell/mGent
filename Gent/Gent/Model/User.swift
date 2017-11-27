@@ -14,16 +14,16 @@ import Alamofire
 
 typealias completionSuccess = (_ isSuccessful: Bool) -> (Void)
 
-class User: NSObject, STPPaymentContextDelegate {
+class User: NSObject {
     
     //MARK: Properties
     let name: String
     let email: String
     let id: String
     
-    //var customerCtx : STPCustomerContext
-    //var payCtx : STPPaymentContext
-    private(set) var stpCustomerID = ""
+    var customerCtx : STPCustomerContext?
+    //var payCtx : STPPaymentContext?
+    private(set) var strpCustomerID = ""
     
     //MARK: Methods
     class func registerUser(withName: String, email: String, password: String, userData:[String:String], completion: @escaping completionSuccess) {
@@ -43,28 +43,44 @@ class User: NSObject, STPPaymentContextDelegate {
                     completion(false)
                     return
                 }
+                
                 // Create database reference
                 var ref: DatabaseReference!
                 ref = Database.database().reference()
                 
                 // Create users reference
                 let usersRef = ref.child("users").child(uuid)
-                userData["stp_customer_id"] = resp?["id"] as? String
-                userData["uid"] = uuid
+                userData["strp_customer_id"] = resp?["id"] as? String
                 usersRef.updateChildValues(userData)
                 completion(true)
             }
         }
     }
     
-    class func loginUser(withEmail: String, password: String, completion: @escaping (Bool) -> Swift.Void) {
+    class func loginUser(withEmail: String, password: String, completion: @escaping (_ user: User?) -> Swift.Void) {
         Auth.auth().signIn(withEmail: withEmail, password: password, completion: { (user, error) in
             if error == nil {
                 let userInfo = ["email": withEmail, "password": password]
                 UserDefaults.standard.set(userInfo, forKey: "userInformation")
-                completion(true)
+                
+                Database.database().reference().child("users").child((user?.uid)!).observeSingleEvent(of: .value) { snapshot in
+                    let value = snapshot.value as? NSDictionary
+                    
+                    guard value != nil else {
+                        completion(nil)
+                        return
+                    }
+                    
+                    let name = value!["name"] as! String
+                    let email = value!["email"] as! String
+                    let sn = value!["sn"] as! String
+                    let strpID = value!["strp_customer_id"] as! String
+                    let usr = User(name: name, email: email, sn: sn, stripeID: strpID)
+                    
+                    completion(usr)
+                }
             } else {
-                completion(false)
+                completion(nil)
             }
         })
     }
@@ -84,10 +100,11 @@ class User: NSObject, STPPaymentContextDelegate {
             if let data = snapshot.value as? [String: String] {
                 let name = data["name"]!
                 let email = data["email"]!
+                let strpID = data["strp_customer_id"]!
                 let link = URL.init(string: data["profilePicLink"]!)
                 URLSession.shared.dataTask(with: link!, completionHandler: { (data, response, error) in
                     if error == nil {
-                        let user = User.init(name: name, email: email, id: forUserID)
+                        let user = User.init(name: name, email: email, sn: forUserID, stripeID: strpID)
                         completion(user)
                     }
                 }).resume()
@@ -129,31 +146,18 @@ class User: NSObject, STPPaymentContextDelegate {
     }
     
     //MARK: Inits
-    init(name: String, email: String, id: String) {
+    init(name: String, email: String, sn: String, stripeID: String) {
         self.name = name
         self.email = email
-        self.id = id
+        self.id = sn
+        self.strpCustomerID = stripeID
         
-        //customerCtx = STPCustomerContext(keyProvider: StripeAPIClient.sharedClient)
-        //payCtx = STPPaymentContext(customerContext: customerCtx)
-        
-        //payCtx.delegate = self
-    }
-    
-    //MARK: -STPPaymentContextDelegateDelegate
-    func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
-        
-    }
-    
-    func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
-        
-    }
-    
-    func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
-        
-    }
-    
-    func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
-        
+        if strpCustomerID != "" {
+            StripeAPIClient.sharedClient.cusID = strpCustomerID
+            customerCtx = STPCustomerContext(keyProvider: StripeAPIClient.sharedClient)
+            //payCtx = STPPaymentContext(customerContext: customerCtx)
+            
+            //payCtx.delegate = self
+        }
     }
 }
