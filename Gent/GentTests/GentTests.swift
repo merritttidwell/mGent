@@ -28,6 +28,9 @@ class GentTests: XCTestCase {
         
         User.registerUser(withName: "Sam", email: "usama.cpp@gmail.com", password: "sam123", userData: data) { isOK in
             print("Register User = \(isOK)")
+            if isOK == false {
+                XCTAssert(false)
+            }
             exp.fulfill()
         }
         
@@ -46,6 +49,9 @@ class GentTests: XCTestCase {
         
         User.loginUser(withEmail: "usama.cpp@gmail.com", password: "sam123") { (user) in
             print("login user = \(String(describing: user))")
+            if user == nil {
+                XCTAssert(false)
+            }
             exp.fulfill()
         }
         
