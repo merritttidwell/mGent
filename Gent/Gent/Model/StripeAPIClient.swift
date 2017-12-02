@@ -10,9 +10,7 @@ import Foundation
 import Stripe
 import Alamofire
 
-typealias CompletionBlock = ([String: AnyObject]?, Error?) -> (Void)
-
-class StripeAPIClient: NSObject, STPEphemeralKeyProvider, STPPaymentContextDelegate {
+class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
     
     static let sharedClient = StripeAPIClient()
     var baseURLString: String? = "http://localhost:3000"
@@ -26,29 +24,6 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider, STPPaymentContextDeleg
     var cusID = ""
     private(set) var ephemeralKey = [String: AnyObject]();
     
-    func completeCharge(_ result: STPPaymentResult,
-                        amount: Int,
-                        shippingAddress: STPAddress?,
-                        shippingMethod: PKShippingMethod?,
-                        completion: @escaping STPErrorBlock) {
-        let url = self.baseURL.appendingPathComponent("charge")
-        var params: [String: Any] = [
-            "source": result.source.stripeID,
-            "amount": amount
-        ]
-        params["shipping"] = STPAddress.shippingInfoForCharge(with: shippingAddress, shippingMethod: shippingMethod)
-        Alamofire.request(url, method: .post, parameters: params)
-            .validate(statusCode: 200..<300)
-            .responseString { response in
-                switch response.result {
-                case .success:
-                    completion(nil)
-                case .failure(let error):
-                    completion(error)
-                }
-        }
-    }
-
     func createCustomerKey(withAPIVersion apiVersion: String, completion: @escaping STPJSONResponseCompletionBlock) {
         let url = self.baseURL.appendingPathComponent("ephemeral_keys")
         Alamofire.request(url, method: .post, headers: [
@@ -67,7 +42,7 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider, STPPaymentContextDeleg
         }
     }
 
-    func createStripeCustomer(email: String, completion: @escaping CompletionBlock) {
+    func createStripeCustomer(email: String, completion: @escaping STPJSONResponseCompletionBlock) {
         let url = self.baseURL.appendingPathComponent("create_customer")
         Alamofire.request(url, method: .post, headers: [
             "email": email
@@ -83,20 +58,33 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider, STPPaymentContextDeleg
         }
     }
     
-    //MARK: -STPPaymentContextDelegateDelegate
-    func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
+    func completeCharge(_ result: STPPaymentResult,
+                        amount: Int,
+                        description: String,
+                        shippingAddress: STPAddress?,
+                        shippingMethod: PKShippingMethod?,
+                        completion: @escaping STPErrorBlock) {
         
-    }
-    
-    func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
+        let url = self.baseURL.appendingPathComponent("charge")
+        let params: [String: String] = [
+            "card": result.source.stripeID,
+            "cus": cusID,
+            "amount": "\(amount)",
+            "desc": description
+        ]
         
-    }
-    
-    func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
-        
-    }
-    
-    func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
-        
+        //params["shipping"] = STPAddress.shippingInfoForCharge(with: shippingAddress, shippingMethod: shippingMethod) as AnyObject
+        Alamofire.request(url, method: .post, headers: params)
+            .validate(statusCode: 200..<300)
+            .responseString { response in
+                print(response)
+                
+                switch response.result {
+                case .success:
+                    completion(nil)
+                case .failure(let error):
+                    completion(error)
+                }
+        }
     }
 }
