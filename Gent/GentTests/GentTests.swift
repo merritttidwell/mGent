@@ -11,6 +11,16 @@ import XCTest
 
 class GentTests: XCTestCase {
     
+    let userName = "Sam2"
+    let userEmail = "sam2@gmail.com"
+    let userPassword = "Sam1234"
+    let userData = [
+        "phone" : "6302460328",
+        "carrier" : "Sprint",
+        "model" : "iPhone8P",
+        "sn" : "1234567890"
+    ]
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -22,13 +32,33 @@ class GentTests: XCTestCase {
     }
     
     func testRegisterUser() {
-        let data = ["phone" : "6302460328", "carrier" : "Sprint", "email" : "usama.cpp@gmail.com", "model" : "iPhone8P", "name" : "Sam", "sn" : "1234567890"]
-        
         let exp = expectation(description: "register")
         
-        User.registerUser(withName: "Sam", email: "usama.cpp@gmail.com", password: "sam123", userData: data) { isOK in
+        User.registerUser(withName: userName, email: userEmail, password: userPassword, userData: userData) { isOK in
             print("Register User = \(isOK)")
             if isOK == false {
+                XCTAssert(false)
+            }
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 30) { (err) in
+            
+            if err != nil {
+                print("testRegisterUser - failed =>")
+                print(err)
+                XCTAssert(false)
+            }
+        }
+    }
+    
+    //negative test, should be successful, if re-register existing user failed
+    func testReRegisterUser() {
+        let exp = expectation(description: "register")
+        
+        User.registerUser(withName: userName, email: userEmail, password: userPassword, userData: userData) { isOK in
+            print("Register User = \(isOK)")
+            if isOK == true {
                 XCTAssert(false)
             }
             exp.fulfill()
@@ -47,7 +77,7 @@ class GentTests: XCTestCase {
     func testLoginUser() {
         let exp = self.expectation(description: "login")
         
-        User.loginUser(withEmail: "usama.cpp@gmail.com", password: "sam123") { (user) in
+        User.loginUser(withEmail: userEmail, password: userPassword) { (user) in
             print("login user = \(String(describing: user))")
             if user == nil {
                 XCTAssert(false)
@@ -58,7 +88,45 @@ class GentTests: XCTestCase {
         self.waitForExpectations(timeout: 30) { (err) in
             if err != nil {
                 print("testLoginUser - failed =>")
-                print(err)
+                print(err as Any)
+                XCTAssert(false)
+            }
+        }
+    }
+    
+    func testMakePayment() {
+        let exp1 = self.expectation(description: "make payment")
+        var usr : User?
+        
+        User.loginUser(withEmail: userEmail, password: userPassword) { (user) in
+            print("login user = \(String(describing: user))")
+            if user == nil {
+                XCTAssert(false)
+            }
+            usr = user
+            exp1.fulfill()
+        }
+        
+        self.waitForExpectations(timeout: 30) { (err) in
+            if err != nil {
+                print("testLoginUser - failed =>")
+                print(err as Any)
+                XCTAssert(false)
+            }
+        }
+        
+        //make payment
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "StripeTest")
+        let _ = vc.view
+        usr?.pay(amount: 2500, description: "TT")
+        usr?.payCtx?.requestPayment()
+        
+        let exp2 = self.expectation(description: "make payment")
+        
+        self.waitForExpectations(timeout: 30) { (err) in
+            if err != nil {
+                print("testLoginUser - failed =>")
+                print(err as Any)
                 XCTAssert(false)
             }
         }
