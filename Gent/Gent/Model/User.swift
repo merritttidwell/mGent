@@ -14,7 +14,7 @@ import Alamofire
 
 typealias completionSuccess = (_ isSuccessful: Bool) -> (Void)
 
-class User: NSObject {
+class User: NSObject, STPPaymentContextDelegate {
     
     //MARK: Properties
     let name: String
@@ -22,8 +22,8 @@ class User: NSObject {
     let id: String
     
     var customerCtx : STPCustomerContext?
-    //var payCtx : STPPaymentContext?
     private(set) var strpCustomerID = ""
+    var payCtx : STPPaymentContext?
     
     //MARK: Methods
     class func registerUser(withName: String, email: String, password: String, userData:[String:String], completion: @escaping completionSuccess) {
@@ -52,6 +52,8 @@ class User: NSObject {
                 // Create users reference
                 let usersRef = ref.child("users").child(uuid)
                 userData["strp_customer_id"] = resp?["id"] as? String
+                userData["email"] = email
+                userData["name"] = withName
                 usersRef.updateChildValues(userData, withCompletionBlock: { (err, ref) in
                     if err == nil {
                         completion(true)
@@ -91,10 +93,11 @@ class User: NSObject {
         })
     }
     
-    class func logOutUser(completion: @escaping (Bool) -> Swift.Void) {
+    func logOutUser(completion: @escaping (Bool) -> Swift.Void) {
         do {
             try Auth.auth().signOut()
             UserDefaults.standard.removeObject(forKey: "userInformation")
+            customerCtx?.clearCachedCustomer()
             completion(true)
         } catch _ {
             completion(false)
@@ -147,7 +150,7 @@ class User: NSObject {
     
     class func delete() {
         Auth.auth().currentUser?.delete(completion: { (err) in
-            print(err ?? "N/A")
+            print(err ?? "n/a")
         })
     }
     
@@ -161,9 +164,60 @@ class User: NSObject {
         if strpCustomerID != "" {
             StripeAPIClient.sharedClient.cusID = strpCustomerID
             customerCtx = STPCustomerContext(keyProvider: StripeAPIClient.sharedClient)
-            //payCtx = STPPaymentContext(customerContext: customerCtx)
-            
-            //payCtx.delegate = self
         }
+    }
+    
+    func pay(amount: Int, description: String, host: UIViewController? = nil, completion: STPErrorBlock? = nil) {
+        guard customerCtx != nil else {
+            print("customer context n/a")
+            return
+        }
+        
+        payCtx = STPPaymentContext(customerContext: customerCtx!)
+        
+        payCtx?.delegate = self
+        payCtx?.hostViewController = host
+        payCtx?.paymentAmount = amount
+        payCtx?.paymentCurrency = "USD"
+        
+        /*customerCtx?.retrieveCustomer({ [weak self] (cus, err) in
+            if cus?.defaultSource != nil {
+                self?.payCtx?.requestPayment()
+            } else {
+                self?.payCtx?.presentPaymentMethodsViewController()
+            }
+        })*/
+        
+        //payCtx?.presentPaymentMethodsViewController()
+        //payCtx?.presentShippingViewController()
+        
+        payCtx?.requestPayment()
+    }
+    
+    //MARK: -STPPaymentContextDelegateDelegate
+    func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
+        print("didFailToLoadWithError")
+        print(error)
+    }
+    
+    func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
+        print("paymentContextDidChange")
+        print(paymentContext)
+    }
+    
+    func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
+        print("didCreatePaymentResult")
+        print(paymentResult.source.stripeID)
+        print(paymentContext.selectedPaymentMethod)
+        
+        StripeAPIClient.sharedClient.completeCharge(paymentResult, amount: paymentContext.paymentAmount, description: "test!!", shippingAddress: nil, shippingMethod: nil) { (err) in
+            completion(err)
+        }
+    }
+    
+    func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
+        print("didFinish")
+        print(status)
+        print(error)
     }
 }
