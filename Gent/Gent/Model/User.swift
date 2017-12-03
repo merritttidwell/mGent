@@ -14,7 +14,51 @@ import Alamofire
 
 typealias completionSuccess = (_ isSuccessful: Bool) -> (Void)
 
-class User: NSObject, STPPaymentContextDelegate {
+class User: NSObject {
+    
+    class payProcess : NSObject, STPPaymentContextDelegate {
+        
+        let amount : Int
+        let desc : String
+        let payCompletion : STPErrorBlock?
+        private(set) var isFulfilled = false
+        
+        init(amount: Int, desc: String, payCompletion: STPErrorBlock?) {
+            self.amount = amount
+            self.desc = desc
+            self.payCompletion = payCompletion
+        }
+        
+        //MARK: -STPPaymentContextDelegateDelegate
+        func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
+            print("didFailToLoadWithError")
+            print(error)
+        }
+        
+        func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
+            print("paymentContextDidChange")
+            print(paymentContext)
+        }
+        
+        func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
+            print("didCreatePaymentResult")
+            print(paymentResult.source.stripeID)
+            print(paymentContext.selectedPaymentMethod)
+            
+            StripeAPIClient.sharedClient.completeCharge(paymentResult, amount: paymentContext.paymentAmount, description: desc, shippingAddress: nil, shippingMethod: nil) { [unowned self] (err) in
+                
+                completion(err)
+                self.payCompletion?(err)
+            }
+        }
+        
+        func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
+            print("didFinish")
+            print(status)
+            
+            self.isFulfilled = true
+        }
+    }
     
     //MARK: Properties
     let name: String
@@ -167,18 +211,29 @@ class User: NSObject, STPPaymentContextDelegate {
         }
     }
     
+    var payp = [payProcess]()
+    
     func pay(amount: Int, description: String, host: UIViewController? = nil, completion: STPErrorBlock? = nil) {
         guard customerCtx != nil else {
             print("customer context n/a")
             return
         }
         
+        payp = payp.filter { if !$0.isFulfilled { return true }; return false }
+        
+        let pp = payProcess(amount: amount, desc: description, payCompletion: completion)
         payCtx = STPPaymentContext(customerContext: customerCtx!)
         
-        payCtx?.delegate = self
+        payp.append(pp)
+        
+        payCtx?.delegate = pp
         payCtx?.hostViewController = host
         payCtx?.paymentAmount = amount
         payCtx?.paymentCurrency = "USD"
+        
+        DispatchQueue.global().sync {
+            payCtx?.requestPayment()
+        }
         
         /*customerCtx?.retrieveCustomer({ [weak self] (cus, err) in
             if cus?.defaultSource != nil {
@@ -191,33 +246,12 @@ class User: NSObject, STPPaymentContextDelegate {
         //payCtx?.presentPaymentMethodsViewController()
         //payCtx?.presentShippingViewController()
         
-        payCtx?.requestPayment()
-    }
-    
-    //MARK: -STPPaymentContextDelegateDelegate
-    func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
-        print("didFailToLoadWithError")
-        print(error)
-    }
-    
-    func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
-        print("paymentContextDidChange")
-        print(paymentContext)
-    }
-    
-    func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
-        print("didCreatePaymentResult")
-        print(paymentResult.source.stripeID)
-        print(paymentContext.selectedPaymentMethod)
-        
-        StripeAPIClient.sharedClient.completeCharge(paymentResult, amount: paymentContext.paymentAmount, description: "test!!", shippingAddress: nil, shippingMethod: nil) { (err) in
-            completion(err)
+        /*let dgrp = DispatchGroup()
+        dgrp.notify(queue: DispatchQueue.main) {
         }
-    }
-    
-    func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
-        print("didFinish")
-        print(status)
-        print(error)
+        
+        dgrp.enter()
+        payCtx?.requestPayment()
+        dgrp.leave()*/
     }
 }
