@@ -109,7 +109,7 @@ class GentTests: XCTestCase {
         
         self.waitForExpectations(timeout: 30) { (err) in
             if err != nil {
-                print("testLoginUser - failed =>")
+                print("testMakePayment - failed =>")
                 print(err as Any)
                 XCTAssert(false)
             }
@@ -118,14 +118,22 @@ class GentTests: XCTestCase {
         //make payment
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "StripeTest")
         let _ = vc.view
-        usr?.pay(amount: 2500, description: "TT")
-        usr?.payCtx?.requestPayment()
         
         let exp2 = self.expectation(description: "make payment")
         
+        usr?.pay(amount: 500, description: "TT", host: vc, completion: { (err) in
+            if err != nil {
+                print("testMakePayment - failed =>")
+                print(err as Any)
+                XCTAssert(false)
+            }
+            
+            exp2.fulfill()
+        })
+        
         self.waitForExpectations(timeout: 30) { (err) in
             if err != nil {
-                print("testLoginUser - failed =>")
+                print("testMakePayment - failed =>")
                 print(err as Any)
                 XCTAssert(false)
             }
