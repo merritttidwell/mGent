@@ -22,11 +22,51 @@ class User: NSObject {
         let desc : String
         let payCompletion : STPErrorBlock?
         private(set) var isFulfilled = false
+        let payCtx : STPPaymentContext
+        let cusCtx : STPCustomerContext
         
-        init(amount: Int, desc: String, payCompletion: STPErrorBlock?) {
+        init(amount: Int, desc: String, customerContext: STPCustomerContext, payCompletion: STPErrorBlock?) {
             self.amount = amount
             self.desc = desc
             self.payCompletion = payCompletion
+            
+            self.cusCtx = customerContext
+            payCtx = STPPaymentContext(customerContext: cusCtx)
+            //payCtx = STPPaymentContext(customerContext: cusCtx, configuration: payProcess.getConfig(), theme: STPTheme.default())
+            
+            super.init()
+            payCtx.delegate = self
+            payCtx.paymentAmount = amount
+            payCtx.paymentCurrency = "USD"
+        }
+        
+        class func getConfig() -> STPPaymentConfiguration {
+            
+            let config = STPPaymentConfiguration.shared()
+            
+            config.publishableKey = "pk_test_5MG4Sw3JfAGO39ujgbCYkqyD"
+            config.appleMerchantIdentifier = nil
+            config.companyName = "The Mobile Gents"
+            config.requiredBillingAddressFields = STPBillingAddressFields.full
+            config.requiredShippingAddressFields = PKAddressField.all
+            config.shippingType = STPShippingType.shipping
+            config.additionalPaymentMethods = .all
+            
+            return config
+            
+        }
+        
+        func pay() {
+            
+            /*cusCtx.retrieveCustomer({ [weak self] (cus, err) in
+                if cus?.defaultSource != nil {
+                    self?.payCtx.requestPayment()
+                } else {
+                    self?.payCtx.presentPaymentMethodsViewController()
+                }
+            })*/
+            
+            payCtx.requestPayment()
         }
         
         //MARK: -STPPaymentContextDelegateDelegate
@@ -67,7 +107,7 @@ class User: NSObject {
     
     var customerCtx : STPCustomerContext?
     private(set) var strpCustomerID = ""
-    var payCtx : STPPaymentContext?
+    //var payCtx : STPPaymentContext?
     
     //MARK: Methods
     class func registerUser(withName: String, email: String, password: String, userData:[String:String], completion: @escaping completionSuccess) {
@@ -221,37 +261,10 @@ class User: NSObject {
         
         payp = payp.filter { if !$0.isFulfilled { return true }; return false }
         
-        let pp = payProcess(amount: amount, desc: description, payCompletion: completion)
-        payCtx = STPPaymentContext(customerContext: customerCtx!)
-        
+        let pp = payProcess(amount: amount, desc: description, customerContext: customerCtx!, payCompletion: completion)
+        pp.payCtx.hostViewController = host
         payp.append(pp)
         
-        payCtx?.delegate = pp
-        payCtx?.hostViewController = host
-        payCtx?.paymentAmount = amount
-        payCtx?.paymentCurrency = "USD"
-        
-        DispatchQueue.global().sync {
-            payCtx?.requestPayment()
-        }
-        
-        /*customerCtx?.retrieveCustomer({ [weak self] (cus, err) in
-            if cus?.defaultSource != nil {
-                self?.payCtx?.requestPayment()
-            } else {
-                self?.payCtx?.presentPaymentMethodsViewController()
-            }
-        })*/
-        
-        //payCtx?.presentPaymentMethodsViewController()
-        //payCtx?.presentShippingViewController()
-        
-        /*let dgrp = DispatchGroup()
-        dgrp.notify(queue: DispatchQueue.main) {
-        }
-        
-        dgrp.enter()
-        payCtx?.requestPayment()
-        dgrp.leave()*/
+        pp.pay()
     }
 }
