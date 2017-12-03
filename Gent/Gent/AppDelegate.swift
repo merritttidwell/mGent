@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Initialize Firebase
     override init() {
         FirebaseApp.configure()
-        STPPaymentConfiguration.shared().publishableKey = "pk_test_5MG4Sw3JfAGO39ujgbCYkqyD"
+        STPPaymentConfiguration.shared().publishableKey = StripeAPIData.publishableKey
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

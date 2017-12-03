@@ -44,7 +44,7 @@ class User: NSObject {
             
             let config = STPPaymentConfiguration.shared()
             
-            config.publishableKey = "pk_test_5MG4Sw3JfAGO39ujgbCYkqyD"
+            config.publishableKey = StripeAPIData.publishableKey
             config.appleMerchantIdentifier = nil
             config.companyName = "The Mobile Gents"
             config.requiredBillingAddressFields = STPBillingAddressFields.full

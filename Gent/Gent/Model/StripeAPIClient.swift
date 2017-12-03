@@ -10,10 +10,15 @@ import Foundation
 import Stripe
 import Alamofire
 
+struct StripeAPIData {
+    static let myServer = "http://localhost:3000"
+    static let publishableKey = "pk_test_5MG4Sw3JfAGO39ujgbCYkqyD"
+}
+
 class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
     
     static let sharedClient = StripeAPIClient()
-    var baseURLString: String? = "http://localhost:3000"
+    var baseURLString: String? = StripeAPIData.myServer
     var baseURL: URL {
         if let urlString = self.baseURLString, let url = URL(string: urlString) {
             return url
