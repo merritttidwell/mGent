@@ -21,9 +21,26 @@ class GentTests: XCTestCase {
         "sn" : "1234567890"
     ]
     
+    var usr : User?
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        print(self.testRun?.test.name)
+        
+        if self.testRun?.test.name == "-[GentTests testMakePayment]" {
+            let exp =  self.expectation(description: "user login")
+            User.loginUser(withEmail: userEmail, password: userPassword, completion: { [weak self] (usr) in
+                
+                self?.usr = usr
+                exp.fulfill()
+            })
+            
+            self.waitForExpectations(timeout: 30) { (err) in
+                print(err)
+            }
+        }
     }
     
     override func tearDown() {
@@ -95,43 +112,18 @@ class GentTests: XCTestCase {
     }
     
     func testMakePayment() {
-        let exp1 = self.expectation(description: "make payment")
-        var usr : User?
+        let exp = self.expectation(description: "make payment")
         
-        User.loginUser(withEmail: userEmail, password: userPassword) { (user) in
-            print("login user = \(String(describing: user))")
-            if user == nil {
-                XCTAssert(false)
-            }
-            usr = user
-            exp1.fulfill()
-        }
-        
-        self.waitForExpectations(timeout: 30) { (err) in
-            if err != nil {
-                print("testMakePayment - failed =>")
-                print(err as Any)
-                XCTAssert(false)
-            }
-        }
-        
-        //make payment
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "StripeTest")
-        let _ = vc.view
-        
-        let exp2 = self.expectation(description: "make payment")
-        
-        usr?.pay(amount: 500, description: "TT", host: vc, completion: { (err) in
-            if err != nil {
-                print("testMakePayment - failed =>")
-                print(err as Any)
-                XCTAssert(false)
-            }
+        let host = UIApplication.shared.keyWindow?.rootViewController
+        self.usr?.pay(amount: 500, description: "UT", host: host, completion: { (err) in
             
-            exp2.fulfill()
+            if err != nil {
+                XCTAssert(false)
+            }
+            exp.fulfill()
         })
         
-        self.waitForExpectations(timeout: 30) { (err) in
+        self.waitForExpectations(timeout: 40) { (err) in
             if err != nil {
                 print("testMakePayment - failed =>")
                 print(err as Any)
