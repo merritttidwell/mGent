@@ -85,7 +85,11 @@ class User: NSObject {
             //print(paymentResult.source.stripeID)
             //print(paymentContext.selectedPaymentMethod)
             
-            StripeAPIClient.sharedClient.completeCharge(paymentResult, amount: paymentContext.paymentAmount, description: desc, shippingAddress: nil, shippingMethod: nil) { [unowned self] (err) in
+            StripeAPIClient.sharedClient.completeCharge(paymentResult, amount: paymentContext.paymentAmount, description: desc, shippingAddress: nil, shippingMethod: nil) { [unowned self] (json, err) in
+                
+                let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).child("payments")
+                
+                ref.childByAutoId().updateChildValues(json!)
                 
                 completion(err)
                 self.payCompletion?(err)
