@@ -73,6 +73,8 @@ class User: NSObject {
         func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
             print("didFailToLoadWithError")
             print(error)
+            
+            payCompletion?(error)
         }
         
         func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
