@@ -68,7 +68,7 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
                         description: String,
                         shippingAddress: STPAddress?,
                         shippingMethod: PKShippingMethod?,
-                        completion: @escaping STPErrorBlock) {
+                        completion: @escaping STPJSONResponseCompletionBlock) {
         
         let url = self.baseURL.appendingPathComponent("charge")
         let params: [String: String] = [
@@ -86,9 +86,10 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
                 
                 switch response.result {
                 case .success:
-                    completion(nil)
+                    let json = try? JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+                    completion(json as? [AnyHashable : Any], nil)
                 case .failure(let error):
-                    completion(error)
+                    completion(nil, error)
                 }
         }
     }
