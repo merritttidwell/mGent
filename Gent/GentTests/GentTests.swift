@@ -27,9 +27,11 @@ class GentTests: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        print(self.testRun?.test.name)
+        let testName = self.testRun?.test.name
         
-        if self.testRun?.test.name == "-[GentTests testMakePayment]" {
+        print(testName)
+        
+        if testName == "-[GentTests testMakePayment]" || testName == "-[GentTests testGetPaymentsList]" {
             let exp =  self.expectation(description: "user login")
             User.loginUser(withEmail: userEmail, password: userPassword, completion: { [weak self] (usr) in
                 
@@ -126,6 +128,38 @@ class GentTests: XCTestCase {
         self.waitForExpectations(timeout: 40) { (err) in
             if err != nil {
                 print("testMakePayment - failed =>")
+                print(err as Any)
+                XCTAssert(false)
+            }
+        }
+    }
+    
+    func testGetPaymentsList() {
+        
+        let exp = self.expectation(description: "get payment")
+        
+        let query = self.usr?.getPayments()
+        
+        if query == nil {
+            XCTAssert(false)
+        }
+        
+        query?.observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.childrenCount == 0 {
+                XCTAssert(false)
+                return
+            }
+            
+            for charge in snapshot.children.reversed() {
+                print(charge)
+            }
+            
+            exp.fulfill()
+        })
+        
+        self.waitForExpectations(timeout: 30) { (err) in
+            if err != nil {
+                print("testGetPaymentsList - failed =>")
                 print(err as Any)
                 XCTAssert(false)
             }
