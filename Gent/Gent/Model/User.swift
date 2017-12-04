@@ -271,4 +271,13 @@ class User: NSObject {
         
         pp.pay()
     }
+    
+    func getPayments() -> DatabaseQuery? {
+        
+        guard Auth.auth().currentUser != nil else {
+            return nil
+        }
+        
+        return Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("payments").queryOrdered(byChild: "created")
+    }
 }
