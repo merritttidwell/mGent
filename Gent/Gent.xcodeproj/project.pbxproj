@@ -25,6 +25,8 @@
 		8F108C771FD4710F001B69CB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E391C1F9BF15400290A87 /* User.swift */; };
 		8F108C781FD47120001B69CB /* StripeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */; };
 		8F2354601FCBBDB700731975 /* StripeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */; };
+		8F63AC7F1FD4B7E20032F72F /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 8F63AC7D1FD4B7E20032F72F /* readme.md */; };
+		8F63AC801FD4B7E20032F72F /* server.js in Resources */ = {isa = PBXBuildFile; fileRef = 8F63AC7E1FD4B7E20032F72F /* server.js */; };
 		8FAA33761FCBCC2D00D9F304 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */; };
 		8FAA33781FCBDC1A00D9F304 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 8FAA33771FCBDC1A00D9F304 /* readme.md */; };
 		920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E97FE1F79E63C00D97658 /* AppDelegate.swift */; };
@@ -72,6 +74,8 @@
 		6BD37E521F9C65E100EEFCCC /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		6BD37E531F9C65E100EEFCCC /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeAPIClient.swift; sourceTree = "<group>"; };
+		8F63AC7D1FD4B7E20032F72F /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
+		8F63AC7E1FD4B7E20032F72F /* server.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = server.js; sourceTree = "<group>"; };
 		8FAA33771FCBDC1A00D9F304 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		918239316A00CA3B7082B5B6 /* Pods-Gent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gent.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gent/Pods-Gent.release.xcconfig"; sourceTree = "<group>"; };
 		920E97FB1F79E63C00D97658 /* Gent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gent.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +160,15 @@
 			path = BuyBack;
 			sourceTree = "<group>";
 		};
+		8F63AC7C1FD4B7AE0032F72F /* Stripe NodeJS server */ = {
+			isa = PBXGroup;
+			children = (
+				8F63AC7D1FD4B7E20032F72F /* readme.md */,
+				8F63AC7E1FD4B7E20032F72F /* server.js */,
+			);
+			path = "Stripe NodeJS server";
+			sourceTree = "<group>";
+		};
 		920E97F21F79E63C00D97658 = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +194,7 @@
 		920E97FD1F79E63C00D97658 /* Gent */ = {
 			isa = PBXGroup;
 			children = (
+				8F63AC7C1FD4B7AE0032F72F /* Stripe NodeJS server */,
 				6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */,
 				2E1E391E1F9BF16300290A87 /* Model */,
 				6BA65A8F1F8180110099D60F /* BuyBack */,
@@ -386,7 +400,9 @@
 				8FAA33781FCBDC1A00D9F304 /* readme.md in Resources */,
 				920E980B1F79E63C00D97658 /* LaunchScreen.storyboard in Resources */,
 				6B1F239C1F9EE46300B6F9D0 /* UnderConstruction.xib in Resources */,
+				8F63AC801FD4B7E20032F72F /* server.js in Resources */,
 				6B896D7E1F81875B0070DCA7 /* GoogleService-Info.plist in Resources */,
+				8F63AC7F1FD4B7E20032F72F /* readme.md in Resources */,
 				920E98081F79E63C00D97658 /* Assets.xcassets in Resources */,
 				920E98061F79E63C00D97658 /* Main.storyboard in Resources */,
 			);
