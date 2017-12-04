@@ -82,7 +82,7 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
         Alamofire.request(url, method: .post, headers: params)
             .validate(statusCode: 200..<300)
             .responseString { response in
-                print(response)
+                //print(response)
                 
                 switch response.result {
                 case .success:

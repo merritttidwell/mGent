@@ -77,13 +77,13 @@ class User: NSObject {
         
         func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
             print("paymentContextDidChange")
-            print(paymentContext)
+            //print(paymentContext)
         }
         
         func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
             print("didCreatePaymentResult")
-            print(paymentResult.source.stripeID)
-            print(paymentContext.selectedPaymentMethod)
+            //print(paymentResult.source.stripeID)
+            //print(paymentContext.selectedPaymentMethod)
             
             StripeAPIClient.sharedClient.completeCharge(paymentResult, amount: paymentContext.paymentAmount, description: desc, shippingAddress: nil, shippingMethod: nil) { [unowned self] (err) in
                 
@@ -94,7 +94,7 @@ class User: NSObject {
         
         func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
             print("didFinish")
-            print(status)
+            //print(status)
             
             self.isFulfilled = true
         }
