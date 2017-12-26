@@ -14,7 +14,7 @@ import Alamofire
 
 typealias completionSuccess = (_ isSuccessful: Bool) -> (Void)
 
-class User: NSObject {
+class GentsUser: NSObject {
     
     class payProcess : NSObject, STPPaymentContextDelegate {
         
@@ -91,7 +91,9 @@ class User: NSObject {
                 
                 let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).child("payments")
                 
+                ref.keepSynced(true)
                 ref.childByAutoId().updateChildValues(json!)
+                ref.keepSynced(false)
                 
                 completion(err)
                 self.payCompletion?(err)
@@ -144,18 +146,49 @@ class User: NSObject {
                 userData["strp_customer_id"] = resp?["id"] as? String
                 userData["email"] = email
                 userData["name"] = withName
-                usersRef.updateChildValues(userData, withCompletionBlock: { (err, ref) in
+                usersRef.keepSynced(true)
+                usersRef.updateChildValues(userData, withCompletionBlock: { [weak usersRef] (err, ref) in
                     if err == nil {
                         completion(true)
                     } else {
                         completion(false)
                     }
+                    
+                    usersRef?.keepSynced(false)
                 })
             }
         }
     }
     
-    class func loginUser(withEmail: String, password: String, completion: @escaping (_ user: User?) -> Swift.Void) {
+    class func loginUser(withEmail: String, password: String, completion: @escaping (_ user: GentsUser?) -> Swift.Void) {
+        
+        let usr = Auth.auth().currentUser
+        
+        if usr != nil && usr?.email == withEmail {
+            
+            Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: DataEventType.value, with: { (snap) in
+                
+                let value = snap.value as? NSDictionary
+                
+                guard value != nil else {
+                    completion(nil)
+                    return
+                }
+                
+                let name = value!["name"] as? String
+                let sn = value!["sn"] as? String
+                let stripeID = value!["strp_customer_id"] as? String
+                
+                guard name != nil && sn != nil && stripeID != nil else {
+                    completion(nil)
+                    return
+                }
+                
+                completion(GentsUser.init(name: name!, email: (usr?.email)!, sn: sn!, stripeID: stripeID!))
+            })
+            return
+        }
+        
         Auth.auth().signIn(withEmail: withEmail, password: password, completion: { (user, error) in
             if error == nil {
                 let userInfo = ["email": withEmail, "password": password]
@@ -173,7 +206,7 @@ class User: NSObject {
                     let email = value!["email"] as! String
                     let sn = value!["sn"] as! String
                     let strpID = value!["strp_customer_id"] as! String
-                    let usr = User(name: name, email: email, sn: sn, stripeID: strpID)
+                    let usr = GentsUser(name: name, email: email, sn: sn, stripeID: strpID)
                     
                     completion(usr)
                 }
@@ -194,7 +227,7 @@ class User: NSObject {
         }
     }
     
-    class func info(forUserID: String, completion: @escaping (User) -> Swift.Void) {
+    class func info(forUserID: String, completion: @escaping (GentsUser) -> Swift.Void) {
         Database.database().reference().child("users").child(forUserID).child("credentials").observeSingleEvent(of: .value, with: { (snapshot) in
             if let data = snapshot.value as? [String: String] {
                 let name = data["name"]!
@@ -203,7 +236,7 @@ class User: NSObject {
                 let link = URL.init(string: data["profilePicLink"]!)
                 URLSession.shared.dataTask(with: link!, completionHandler: { (data, response, error) in
                     if error == nil {
-                        let user = User.init(name: name, email: email, sn: forUserID, stripeID: strpID)
+                        let user = GentsUser.init(name: name, email: email, sn: forUserID, stripeID: strpID)
                         completion(user)
                     }
                 }).resume()
@@ -279,6 +312,8 @@ class User: NSObject {
         guard Auth.auth().currentUser != nil else {
             return nil
         }
+        
+        //Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("payments").keepSynced(true)
         
         return Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("payments").queryOrdered(byChild: "created")
     }
