@@ -21,7 +21,7 @@ class GentTests: XCTestCase {
         "sn" : "1234567890"
     ]
     
-    var usr : User?
+    var usr : GentsUser?
     
     override func setUp() {
         super.setUp()
@@ -31,9 +31,9 @@ class GentTests: XCTestCase {
         
         print(testName)
         
-        if testName == "-[GentTests testMakePayment]" || testName == "-[GentTests testGetPaymentsList]" {
+        if testName == "-[GentTests testMakePayment]" || testName == "-[GentTests testGetPaymentsList]" || testName == "-[GentTests testFirebaseOfflineSupport]" {
             let exp =  self.expectation(description: "user login")
-            User.loginUser(withEmail: userEmail, password: userPassword, completion: { [weak self] (usr) in
+            GentsUser.loginUser(withEmail: userEmail, password: userPassword, completion: { [weak self] (usr) in
                 
                 self?.usr = usr
                 exp.fulfill()
@@ -53,7 +53,7 @@ class GentTests: XCTestCase {
     func testRegisterUser() {
         let exp = expectation(description: "register")
         
-        User.registerUser(withName: userName, email: userEmail, password: userPassword, userData: userData) { isOK in
+        GentsUser.registerUser(withName: userName, email: userEmail, password: userPassword, userData: userData) { isOK in
             print("Register User = \(isOK)")
             if isOK == false {
                 XCTAssert(false)
@@ -75,7 +75,7 @@ class GentTests: XCTestCase {
     func testReRegisterUser() {
         let exp = expectation(description: "register")
         
-        User.registerUser(withName: userName, email: userEmail, password: userPassword, userData: userData) { isOK in
+        GentsUser.registerUser(withName: userName, email: userEmail, password: userPassword, userData: userData) { isOK in
             print("Register User = \(isOK)")
             if isOK == true {
                 XCTAssert(false)
@@ -96,7 +96,7 @@ class GentTests: XCTestCase {
     func testLoginUser() {
         let exp = self.expectation(description: "login")
         
-        User.loginUser(withEmail: userEmail, password: userPassword) { (user) in
+        GentsUser.loginUser(withEmail: userEmail, password: userPassword) { (user) in
             print("login user = \(String(describing: user))")
             if user == nil {
                 XCTAssert(false)
@@ -168,6 +168,30 @@ class GentTests: XCTestCase {
     
     func testFirebaseOfflineSupport() {
         
+        //turn wifi off first, can use "Network Link Conditioner"
+        
+        let exp = self.expectation(description: "get payment")
+        
+        let paymentsQuery = usr?.getPayments()
+        
+        paymentsQuery?.observeSingleEvent(of: .value, with: { (snap) in
+ 
+            if snap.value == nil {
+                print("testFirebaseOfflineSupport - failed =>")
+                XCTAssert(false)
+            }
+            
+            print(snap)
+            exp.fulfill()
+        })
+        
+        self.waitForExpectations(timeout: 30) { (err) in
+            if err != nil {
+                print("testFirebaseOfflineSupport - failed =>")
+                print(err as Any)
+                XCTAssert(false)
+            }
+        }
     }
     
     func testPerformanceExample() {
