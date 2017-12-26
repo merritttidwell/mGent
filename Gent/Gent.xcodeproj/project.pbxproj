@@ -27,6 +27,7 @@
 		8F2354601FCBBDB700731975 /* StripeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */; };
 		8F63AC7F1FD4B7E20032F72F /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 8F63AC7D1FD4B7E20032F72F /* readme.md */; };
 		8F63AC801FD4B7E20032F72F /* server.js in Resources */ = {isa = PBXBuildFile; fileRef = 8F63AC7E1FD4B7E20032F72F /* server.js */; };
+		8F86639D1FF318790020F2E8 /* Main_NewDesign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F86639F1FF318790020F2E8 /* Main_NewDesign.storyboard */; };
 		8FAA33761FCBCC2D00D9F304 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */; };
 		8FAA33781FCBDC1A00D9F304 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 8FAA33771FCBDC1A00D9F304 /* readme.md */; };
 		920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E97FE1F79E63C00D97658 /* AppDelegate.swift */; };
@@ -76,6 +77,7 @@
 		8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeAPIClient.swift; sourceTree = "<group>"; };
 		8F63AC7D1FD4B7E20032F72F /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		8F63AC7E1FD4B7E20032F72F /* server.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = server.js; sourceTree = "<group>"; };
+		8F86639E1FF318790020F2E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_NewDesign.storyboard; sourceTree = "<group>"; };
 		8FAA33771FCBDC1A00D9F304 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		918239316A00CA3B7082B5B6 /* Pods-Gent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gent.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gent/Pods-Gent.release.xcconfig"; sourceTree = "<group>"; };
 		920E97FB1F79E63C00D97658 /* Gent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gent.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,6 +171,15 @@
 			path = "Stripe NodeJS server";
 			sourceTree = "<group>";
 		};
+		8F86639C1FF3180E0020F2E8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				920E98041F79E63C00D97658 /* Main.storyboard */,
+				8F86639F1FF318790020F2E8 /* Main_NewDesign.storyboard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		920E97F21F79E63C00D97658 = {
 			isa = PBXGroup;
 			children = (
@@ -202,8 +213,8 @@
 				920E983C1F79EE3C00D97658 /* Chat */,
 				920E983B1F79EE3700D97658 /* Shop */,
 				920E98391F79EDF500D97658 /* MVP */,
+				8F86639C1FF3180E0020F2E8 /* UI */,
 				920E97FE1F79E63C00D97658 /* AppDelegate.swift */,
-				920E98041F79E63C00D97658 /* Main.storyboard */,
 				920E98071F79E63C00D97658 /* Assets.xcassets */,
 				920E98091F79E63C00D97658 /* LaunchScreen.storyboard */,
 				920E980C1F79E63C00D97658 /* Info.plist */,
@@ -403,6 +414,7 @@
 				8F63AC801FD4B7E20032F72F /* server.js in Resources */,
 				6B896D7E1F81875B0070DCA7 /* GoogleService-Info.plist in Resources */,
 				8F63AC7F1FD4B7E20032F72F /* readme.md in Resources */,
+				8F86639D1FF318790020F2E8 /* Main_NewDesign.storyboard in Resources */,
 				920E98081F79E63C00D97658 /* Assets.xcassets in Resources */,
 				920E98061F79E63C00D97658 /* Main.storyboard in Resources */,
 			);
@@ -660,6 +672,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8F86639F1FF318790020F2E8 /* Main_NewDesign.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F86639E1FF318790020F2E8 /* Base */,
+			);
+			name = Main_NewDesign.storyboard;
+			sourceTree = "<group>";
+		};
 		920E98041F79E63C00D97658 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
