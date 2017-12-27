@@ -28,6 +28,8 @@
 		8F63AC7F1FD4B7E20032F72F /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 8F63AC7D1FD4B7E20032F72F /* readme.md */; };
 		8F63AC801FD4B7E20032F72F /* server.js in Resources */ = {isa = PBXBuildFile; fileRef = 8F63AC7E1FD4B7E20032F72F /* server.js */; };
 		8F86639D1FF318790020F2E8 /* Main_NewDesign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F86639F1FF318790020F2E8 /* Main_NewDesign.storyboard */; };
+		8F8663A11FF4164E0020F2E8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920E980C1F79E63C00D97658 /* Info.plist */; };
+		8F8663A21FF416530020F2E8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920E980C1F79E63C00D97658 /* Info.plist */; };
 		8FAA33761FCBCC2D00D9F304 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */; };
 		8FAA33781FCBDC1A00D9F304 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 8FAA33771FCBDC1A00D9F304 /* readme.md */; };
 		920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E97FE1F79E63C00D97658 /* AppDelegate.swift */; };
@@ -174,10 +176,29 @@
 		8F86639C1FF3180E0020F2E8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				920E98041F79E63C00D97658 /* Main.storyboard */,
-				8F86639F1FF318790020F2E8 /* Main_NewDesign.storyboard */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		8F8663A31FF418A20020F2E8 /* Old UI */ = {
+			isa = PBXGroup;
+			children = (
+				6BA65A8F1F8180110099D60F /* BuyBack */,
+				6BA65A8A1F817F400099D60F /* News */,
+				920E983C1F79EE3C00D97658 /* Chat */,
+				920E983B1F79EE3700D97658 /* Shop */,
+				920E98391F79EDF500D97658 /* MVP */,
+				920E98041F79E63C00D97658 /* Main.storyboard */,
+			);
+			path = "Old UI";
+			sourceTree = "<group>";
+		};
+		8F8663A41FF418C60020F2E8 /* New UI */ = {
+			isa = PBXGroup;
+			children = (
+				8F86639F1FF318790020F2E8 /* Main_NewDesign.storyboard */,
+			);
+			path = "New UI";
 			sourceTree = "<group>";
 		};
 		920E97F21F79E63C00D97658 = {
@@ -205,14 +226,11 @@
 		920E97FD1F79E63C00D97658 /* Gent */ = {
 			isa = PBXGroup;
 			children = (
+				8F8663A41FF418C60020F2E8 /* New UI */,
+				8F8663A31FF418A20020F2E8 /* Old UI */,
 				8F63AC7C1FD4B7AE0032F72F /* Stripe NodeJS server */,
 				6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */,
 				2E1E391E1F9BF16300290A87 /* Model */,
-				6BA65A8F1F8180110099D60F /* BuyBack */,
-				6BA65A8A1F817F400099D60F /* News */,
-				920E983C1F79EE3C00D97658 /* Chat */,
-				920E983B1F79EE3700D97658 /* Shop */,
-				920E98391F79EDF500D97658 /* MVP */,
 				8F86639C1FF3180E0020F2E8 /* UI */,
 				920E97FE1F79E63C00D97658 /* AppDelegate.swift */,
 				920E98071F79E63C00D97658 /* Assets.xcassets */,
@@ -416,6 +434,7 @@
 				8F63AC7F1FD4B7E20032F72F /* readme.md in Resources */,
 				8F86639D1FF318790020F2E8 /* Main_NewDesign.storyboard in Resources */,
 				920E98081F79E63C00D97658 /* Assets.xcassets in Resources */,
+				8F8663A11FF4164E0020F2E8 /* Info.plist in Resources */,
 				920E98061F79E63C00D97658 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,6 +443,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F8663A21FF416530020F2E8 /* Info.plist in Resources */,
 				8FAA33761FCBCC2D00D9F304 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,6 +17,7 @@ class CreateAccountTableViewController: UITableViewController {
     var values = [String?]()
     var userData = [String: String]()
     
+    var usr : GentsUser?
     
     @IBOutlet weak var submitButton: UIButton!
     
@@ -29,7 +30,6 @@ class CreateAccountTableViewController: UITableViewController {
         formPlaceholders = ["John Smith","example@email.com","Enter Password","8585551234", "Verizon", "23425555", "iPhone 6s"]
         
         tableView.estimatedRowHeight = 30
-        
     }
     
   //   MARK: - Table view data source
@@ -66,8 +66,38 @@ class CreateAccountTableViewController: UITableViewController {
         let password = userData["password"]  ?? ""
         
         //User.registerUser(withName:name, email: email, password: password, userData: self.userData)
-        User.registerUser(withName: name, email: email, password: password, userData: self.userData) { (isOK)  in
+        /*User.registerUser(withName: name, email: email, password: password, userData: self.userData) { (isOK)  in
             print("Register new user = \(isOK)")
+        }*/
+        
+        //usr?.pay(amount: 200, host: self)
+        //usr?.payCtx?.requestPayment()
+        
+        if usr == nil {
+            
+        }
+        
+        GentsUser.loginUser(withEmail: "sam2@gmail.com", password: "Sam1234") { [weak self] (user) in
+            print("login user = \(String(describing: user))")
+            if user != nil {
+                self?.usr = user
+                
+                //user?.pay(amount: 200, description: "T", host: self)
+                /*user?.pay(amount: 310, description: "T!", host: self, completion: { (err) in
+                 
+                 print(err)
+                 })*/
+                
+                NSLog("LOGIN OK")
+                
+                let q = user?.getPayments()
+                
+                q?.observeSingleEvent(of: .value, with: { (snap) in
+                    print(snap)
+                })
+            } else {
+                NSLog("ERROR LOGIN")
+            }
         }
     }
 
