@@ -173,13 +173,6 @@
 			path = "Stripe NodeJS server";
 			sourceTree = "<group>";
 		};
-		8F86639C1FF3180E0020F2E8 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
 		8F8663A31FF418A20020F2E8 /* Old UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,7 +224,6 @@
 				8F63AC7C1FD4B7AE0032F72F /* Stripe NodeJS server */,
 				6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */,
 				2E1E391E1F9BF16300290A87 /* Model */,
-				8F86639C1FF3180E0020F2E8 /* UI */,
 				920E97FE1F79E63C00D97658 /* AppDelegate.swift */,
 				920E98071F79E63C00D97658 /* Assets.xcassets */,
 				920E98091F79E63C00D97658 /* LaunchScreen.storyboard */,
