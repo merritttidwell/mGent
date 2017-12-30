@@ -1,25 +1,19 @@
 //
-//  GInitViewController.swift
+//  GSignupViewController.swift
 //  Gent
 //
-//  Created by Ossama Mikhail on 12/28/17.
+//  Created by Ossama Mikhail on 12/30/17.
 //  Copyright © 2017 Christina Sund. All rights reserved.
 //
 
 import UIKit
 
-class GInitViewController: GUIViewController {
-    
-    @IBOutlet weak var signupLabel : UILabel?
-    @IBOutlet weak var saveLabel : UILabel?
+class GSignupViewController: GUIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        signupLabel?.text = "Sign up to MVP for better \(UIDevice.current.modelName) prices"
-        saveLabel?.text = "Save \(11)% on repairs, and get an extra \(22)% when you trade in your phone"
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,5 +31,4 @@ class GInitViewController: GUIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
