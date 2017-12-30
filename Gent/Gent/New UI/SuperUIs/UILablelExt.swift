@@ -14,7 +14,11 @@ extension UILabel {
         super.awakeFromNib()
         
         if self.font.familyName != UIGeneralSettings.labelFontFamilyName {
-            self.font = UIFont.init(name: UIGeneralSettings.labelFontFamilyName, size: self.font.pointSize)
+            if self.font.fontName.lowercased().hasSuffix("bold") {
+                self.font = UIFont.init(name: UIGeneralSettings.labelFontFamilyName + "-Bold", size: self.font.pointSize)
+            } else {
+                self.font = UIFont.init(name: UIGeneralSettings.labelFontFamilyName, size: self.font.pointSize)
+            }
         }
     }
 }
