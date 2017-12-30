@@ -11,6 +11,6 @@ import Foundation
 class UIGeneralSettings {
     
     //static let fontFamilyName = "Hoefler Text"
-    static let labelFontFamilyName = "Hoefler Text"//"Menlo"
-    static let buttonFontFamilyName = "Academy Engraved LET"
+    static let labelFontFamilyName = "Menlo"//"Hoefler Text"//"Menlo"
+    static let buttonFontFamilyName = "Hoefler Text"//"Academy Engraved LET"
 }
