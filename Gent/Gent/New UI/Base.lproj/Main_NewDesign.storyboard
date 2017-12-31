@@ -51,6 +51,9 @@
                                         <state key="normal" title="Sign in">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="PWa-KC-1Hf" kind="show" id="jg1-XJ-vaL"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbQ-We-TMG">
                                         <rect key="frame" x="0.0" y="492" width="382" height="70"/>
@@ -134,6 +137,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Y20-eT-Ben" id="h2X-ow-k5g"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fu-Vw-IQM" userLabel="LastName">
                                                 <rect key="frame" x="0.0" y="72" width="398" height="22.666666666666671"/>
@@ -146,6 +152,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Y20-eT-Ben" id="mcK-bk-r1I"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFp-hl-KUj" userLabel="Email">
                                                 <rect key="frame" x="0.0" y="144.33333333333331" width="398" height="22.666666666666657"/>
@@ -158,6 +167,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Y20-eT-Ben" id="ZyQ-13-vax"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3uy-y6-HLy" userLabel="Password">
                                                 <rect key="frame" x="0.0" y="216.33333333333331" width="398" height="22.666666666666657"/>
@@ -170,6 +182,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Y20-eT-Ben" id="Lsi-1e-f3H"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Re-Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vg-0U-iBT" userLabel="RePassword">
                                                 <rect key="frame" x="0.0" y="288.33333333333331" width="398" height="22.666666666666686"/>
@@ -182,6 +197,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Y20-eT-Ben" id="HXy-cj-wYh"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjR-Op-AR0" userLabel="Phone">
                                                 <rect key="frame" x="0.0" y="360.66666666666669" width="398" height="22.666666666666686"/>
@@ -194,6 +212,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Y20-eT-Ben" id="7S7-m0-aGK"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carrier" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HXE-EP-OAU">
                                                 <rect key="frame" x="0.0" y="432.66666666666663" width="398" height="22.666666666666686"/>
@@ -206,6 +227,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Y20-eT-Ben" id="VIf-Gz-X4g"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Serial" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZbJ-Pt-Sc5">
                                                 <rect key="frame" x="0.0" y="504.66666666666663" width="398" height="23"/>
@@ -218,6 +242,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Y20-eT-Ben" id="ufU-vg-GdV"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zeW-ho-kz7">
                                                 <rect key="frame" x="0.0" y="577" width="398" height="22.666666666666629"/>
@@ -230,6 +257,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Y20-eT-Ben" id="JmG-Zi-Wl2"/>
+                                                </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mh1-g6-qDR">
                                                 <rect key="frame" x="0.0" y="649" width="398" height="50"/>
@@ -238,6 +268,10 @@
                                                     <constraint firstAttribute="height" constant="50" id="Sje-uP-ivt"/>
                                                 </constraints>
                                                 <state key="normal" title="Sign up"/>
+                                                <connections>
+                                                    <action selector="doSignup" destination="Y20-eT-Ben" eventType="touchUpInside" id="QPk-a4-N9h"/>
+                                                    <segue destination="PWa-KC-1Hf" kind="show" id="lvK-kl-tJi"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -272,10 +306,78 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tYD-Bc-D6F"/>
                     </view>
+                    <connections>
+                        <outlet property="tfCarrier" destination="gpV-Cx-5gY" id="HOS-3d-hDC"/>
+                        <outlet property="tfEmail" destination="1qX-Hc-boj" id="sr6-5R-1zB"/>
+                        <outlet property="tfFirstName" destination="YTj-2n-cqN" id="MIb-d9-NOC"/>
+                        <outlet property="tfLastName" destination="vPz-sN-gNc" id="jAl-f4-aAg"/>
+                        <outlet property="tfModel" destination="Cz4-d3-QrT" id="Cs4-Kj-V7v"/>
+                        <outlet property="tfPassword" destination="tCo-Zq-6F3" id="p55-mj-DG9"/>
+                        <outlet property="tfPhoneNumber" destination="sEn-yV-N6u" id="Oec-WK-Mul"/>
+                        <outlet property="tfRePassword" destination="ShT-Zc-OHf" id="6Tp-Ea-0He"/>
+                        <outlet property="tfSerial" destination="yQz-nv-l41" id="iWG-5Z-toZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oi3-S0-pTO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1507.2463768115942" y="61.956521739130437"/>
+        </scene>
+        <!--MVP-->
+        <scene sceneID="GwH-7c-s8b">
+            <objects>
+                <viewController title="MVP" id="tYQ-YW-ZVJ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AeJ-jD-tF0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="FT1-Qc-YPd"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="MVP" id="sCi-3E-Z8w"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DAo-s8-WnF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2430" y="1284"/>
+        </scene>
+        <!--News-->
+        <scene sceneID="Uai-9q-uot">
+            <objects>
+                <viewController title="News" id="mWm-rH-bde" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JCa-CM-5cV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dUs-5a-20p">
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="NJa-En-A1A"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="News" id="0zf-dM-dhx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RlA-g8-Pvx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2428.985507246377" y="625.27173913043487"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="DSR-uG-2ox">
+            <objects>
+                <tabBarController id="PWa-KC-1Hf" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="u8a-BF-Mdx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="mWm-rH-bde" kind="relationship" relationship="viewControllers" id="wU2-Zc-TFR"/>
+                        <segue destination="tYQ-YW-ZVJ" kind="relationship" relationship="viewControllers" id="v67-O8-ExC"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s67-7T-NXs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1507" y="955"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZIA-Xg-DIG">
@@ -303,4 +405,7 @@
             <point key="canvasLocation" x="-255" y="64"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="jg1-XJ-vaL"/>
+    </inferredMetricsTieBreakers>
 </document>
