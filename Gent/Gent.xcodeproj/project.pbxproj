@@ -43,6 +43,7 @@
 		8FDE9B321FF8C23A00C3B8F6 /* OnScreenKBListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B301FF8C23A00C3B8F6 /* OnScreenKBListener.swift */; };
 		8FDE9B331FF8C23A00C3B8F6 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B311FF8C23A00C3B8F6 /* UIHelper.swift */; };
 		8FDE9B361FF8C8FF00C3B8F6 /* GNewsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B351FF8C8FF00C3B8F6 /* GNewsTabViewController.swift */; };
+		8FDE9B381FF8DCA300C3B8F6 /* GSigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B371FF8DCA300C3B8F6 /* GSigninViewController.swift */; };
 		920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E97FE1F79E63C00D97658 /* AppDelegate.swift */; };
 		920E98061F79E63C00D97658 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920E98041F79E63C00D97658 /* Main.storyboard */; };
 		920E98081F79E63C00D97658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 920E98071F79E63C00D97658 /* Assets.xcassets */; };
@@ -103,6 +104,7 @@
 		8FDE9B301FF8C23A00C3B8F6 /* OnScreenKBListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnScreenKBListener.swift; sourceTree = "<group>"; };
 		8FDE9B311FF8C23A00C3B8F6 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		8FDE9B351FF8C8FF00C3B8F6 /* GNewsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNewsTabViewController.swift; sourceTree = "<group>"; };
+		8FDE9B371FF8DCA300C3B8F6 /* GSigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSigninViewController.swift; sourceTree = "<group>"; };
 		918239316A00CA3B7082B5B6 /* Pods-Gent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gent.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gent/Pods-Gent.release.xcconfig"; sourceTree = "<group>"; };
 		920E97FB1F79E63C00D97658 /* Gent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		920E97FE1F79E63C00D97658 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -186,12 +188,13 @@
 			path = BuyBack;
 			sourceTree = "<group>";
 		};
-		8F5B1ACB1FF75FF900D11744 /* Signup */ = {
+		8F5B1ACB1FF75FF900D11744 /* Sign_up_in */ = {
 			isa = PBXGroup;
 			children = (
 				8F5B1ACC1FF7601300D11744 /* GSignupViewController.swift */,
+				8FDE9B371FF8DCA300C3B8F6 /* GSigninViewController.swift */,
 			);
-			path = Signup;
+			path = Sign_up_in;
 			sourceTree = "<group>";
 		};
 		8F63AC7C1FD4B7AE0032F72F /* Stripe NodeJS server */ = {
@@ -221,7 +224,7 @@
 			children = (
 				8F8663A61FF41A010020F2E8 /* SuperUIs_And_Extensions */,
 				8FB8A4FC1FF4DBDD00A849B3 /* Init */,
-				8F5B1ACB1FF75FF900D11744 /* Signup */,
+				8F5B1ACB1FF75FF900D11744 /* Sign_up_in */,
 				8FDE9B341FF8C8C800C3B8F6 /* News */,
 				8F86639F1FF318790020F2E8 /* Main_NewDesign.storyboard */,
 				8F703D8B1FF42F75006AB5EA /* UIGeneralSettings.swift */,
@@ -696,6 +699,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FDE9B381FF8DCA300C3B8F6 /* GSigninViewController.swift in Sources */,
 				8F2354601FCBBDB700731975 /* StripeAPIClient.swift in Sources */,
 				920E982F1F79EAF700D97658 /* MVPViewController.swift in Sources */,
 				8F5B1ACA1FF75B0F00D11744 /* GUIViewController.swift in Sources */,
