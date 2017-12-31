@@ -42,6 +42,7 @@
 		8FCEE09E1FF5413B009EF0AD /* UIDeviceExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCEE09D1FF5413B009EF0AD /* UIDeviceExt.swift */; };
 		8FDE9B321FF8C23A00C3B8F6 /* OnScreenKBListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B301FF8C23A00C3B8F6 /* OnScreenKBListener.swift */; };
 		8FDE9B331FF8C23A00C3B8F6 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B311FF8C23A00C3B8F6 /* UIHelper.swift */; };
+		8FDE9B361FF8C8FF00C3B8F6 /* GNewsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B351FF8C8FF00C3B8F6 /* GNewsTabViewController.swift */; };
 		920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E97FE1F79E63C00D97658 /* AppDelegate.swift */; };
 		920E98061F79E63C00D97658 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920E98041F79E63C00D97658 /* Main.storyboard */; };
 		920E98081F79E63C00D97658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 920E98071F79E63C00D97658 /* Assets.xcassets */; };
@@ -101,6 +102,7 @@
 		8FCEE09D1FF5413B009EF0AD /* UIDeviceExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExt.swift; sourceTree = "<group>"; };
 		8FDE9B301FF8C23A00C3B8F6 /* OnScreenKBListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnScreenKBListener.swift; sourceTree = "<group>"; };
 		8FDE9B311FF8C23A00C3B8F6 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		8FDE9B351FF8C8FF00C3B8F6 /* GNewsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNewsTabViewController.swift; sourceTree = "<group>"; };
 		918239316A00CA3B7082B5B6 /* Pods-Gent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gent.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gent/Pods-Gent.release.xcconfig"; sourceTree = "<group>"; };
 		920E97FB1F79E63C00D97658 /* Gent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		920E97FE1F79E63C00D97658 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -218,8 +220,9 @@
 			isa = PBXGroup;
 			children = (
 				8F8663A61FF41A010020F2E8 /* SuperUIs_And_Extensions */,
-				8F5B1ACB1FF75FF900D11744 /* Signup */,
 				8FB8A4FC1FF4DBDD00A849B3 /* Init */,
+				8F5B1ACB1FF75FF900D11744 /* Signup */,
+				8FDE9B341FF8C8C800C3B8F6 /* News */,
 				8F86639F1FF318790020F2E8 /* Main_NewDesign.storyboard */,
 				8F703D8B1FF42F75006AB5EA /* UIGeneralSettings.swift */,
 			);
@@ -246,6 +249,14 @@
 				8FCEE09D1FF5413B009EF0AD /* UIDeviceExt.swift */,
 			);
 			path = Init;
+			sourceTree = "<group>";
+		};
+		8FDE9B341FF8C8C800C3B8F6 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				8FDE9B351FF8C8FF00C3B8F6 /* GNewsTabViewController.swift */,
+			);
+			path = News;
 			sourceTree = "<group>";
 		};
 		920E97F21F79E63C00D97658 = {
@@ -689,6 +700,7 @@
 				920E982F1F79EAF700D97658 /* MVPViewController.swift in Sources */,
 				8F5B1ACA1FF75B0F00D11744 /* GUIViewController.swift in Sources */,
 				8FB8A4FE1FF4DC0300A849B3 /* GInitViewController.swift in Sources */,
+				8FDE9B361FF8C8FF00C3B8F6 /* GNewsTabViewController.swift in Sources */,
 				6B4DD7BA1F85DE4300D511B1 /* FormTableViewCell.swift in Sources */,
 				8FDE9B331FF8C23A00C3B8F6 /* UIHelper.swift in Sources */,
 				920E98371F79EB6D00D97658 /* ChatViewController.swift in Sources */,
