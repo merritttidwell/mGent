@@ -12,7 +12,12 @@ import Alamofire
 
 struct StripeAPIData {
     static let myServer = "http://localhost:3000"   //"https://gentsstripe.herokuapp.com"
+    
+#if DEBUG
     static let publishableKey = "pk_test_5MG4Sw3JfAGO39ujgbCYkqyD"
+#else
+    static let publishableKey = ""
+#endif
 }
 
 class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
