@@ -101,6 +101,8 @@ class GentTests: XCTestCase {
             if user == nil {
                 XCTAssert(false)
             }
+            print("user result =")
+            print(user!)
             exp.fulfill()
         }
         
