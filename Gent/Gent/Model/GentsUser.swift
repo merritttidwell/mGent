@@ -21,7 +21,7 @@ class GentsUser: NSObject {
     static let shared = GentsUser()
     
     //MARK: Properties
-    private var firebaseUser : User? = Auth.auth().currentUser
+    private(set) var firebaseUser : User? = Auth.auth().currentUser
     
     private(set) var name: String = ""
     private(set) var email: String = ""
