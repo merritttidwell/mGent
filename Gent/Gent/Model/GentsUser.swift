@@ -29,7 +29,7 @@ class GentsUser: NSObject {
     private(set) var phone: String = ""
     private(set) var sn: String = ""
     private(set) var strpCustomerID = ""
-    private(set) var payments : AnyObject?
+    private(set) var payments : [AnyObject]?
     
     //more props
     var customerCtx : STPCustomerContext? = nil
@@ -265,9 +265,22 @@ class GentsUser: NSObject {
             
             let name = value!["name"] as! String
             let email = value!["email"] as! String
+            let carrier = value!["carrier"] as! String
+            let model = value!["model"] as! String
+            let phone = value!["phone"] as! String
             let sn = value!["sn"] as! String
             let strpID = value!["strp_customer_id"] as! String
-            //let usr = GentsUser(name: name, email: email, sn: sn, stripeID: strpID)
+            let payments = value!["payments"] as! [AnyObject]
+            
+            self.name = name
+            self.email = email
+            self.carrier = carrier
+            self.model = model
+            self.phone = phone
+            self.sn = sn
+            
+            self.strpCustomerID = strpID
+            self.payments = payments
             
             completion(true)
         }
