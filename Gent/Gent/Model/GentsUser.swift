@@ -264,19 +264,14 @@ class GentsUser: NSObject {
                 return
             }
             
-            let name = value!["name"] as! String
-            let email = value!["email"] as! String
-            let carrier = value!["carrier"] as! String
-            let model = value!["model"] as! String
-            let phone = value!["phone"] as! String
-            let sn = value!["sn"] as! String
-            let strpID = value!["strp_customer_id"] as! String
+            let name = value!["name"] as? String ?? ""
+            let email = value!["email"] as? String ?? ""
+            let carrier = value!["carrier"] as? String ?? ""
+            let model = value!["model"] as? String ?? ""
+            let phone = value!["phone"] as? String ?? ""
+            let sn = value!["sn"] as? String ?? ""
+            let strpID = value!["strp_customer_id"] as? String ?? ""
             let paymentsRaw = value!["payments"] as Any?
-            
-            guard paymentsRaw != nil else {
-                completion(false)
-                return
-            }
             
             self.name = name
             self.email = email
@@ -286,7 +281,9 @@ class GentsUser: NSObject {
             self.sn = sn
             
             self.strpCustomerID = strpID
-            self.payments = JSON.init(rawValue: paymentsRaw!)
+            if paymentsRaw != nil {
+                self.payments = JSON.init(rawValue: paymentsRaw!)
+            }
             
             completion(true)
         }
