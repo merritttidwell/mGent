@@ -16,6 +16,27 @@ typealias completionSuccess = (_ isSuccessful: Bool) -> (Void)
 
 class GentsUser: NSObject {
     
+    //MARK: Shared user
+    static let shared = GentsUser()
+    
+    //MARK: Properties
+    private var firebaseUser : User? = Auth.auth().currentUser
+    
+    private(set) var name: String = ""
+    private(set) var email: String = ""
+    private(set) var carrier: String = ""
+    private(set) var model: String = ""
+    private(set) var phone: String = ""
+    private(set) var sn: String = ""
+    private(set) var strpCustomerID = ""
+    private(set) var payments : AnyObject?
+    
+    //more props
+    var customerCtx : STPCustomerContext? = nil
+    //var payCtx : STPPaymentContext?
+    
+    var payp = [payProcess]()
+    
     class payProcess : NSObject, STPPaymentContextDelegate {
         
         let amount : Int
@@ -108,16 +129,8 @@ class GentsUser: NSObject {
         }
     }
     
-    //MARK: Properties
-    let name: String
-    let email: String
-    let id: String
-    
-    var customerCtx : STPCustomerContext?
-    private(set) var strpCustomerID = ""
-    //var payCtx : STPPaymentContext?
-    
-    //MARK: Methods
+    //MARK: Class Methods
+    //should be instance func (remove class)
     class func registerUser(withName: String, email: String, password: String, userData:[String:String], completion: @escaping completionSuccess) {
         
         var userData = userData
@@ -160,66 +173,57 @@ class GentsUser: NSObject {
         }
     }
     
-    class func loginUser(withEmail: String, password: String, completion: @escaping (_ user: GentsUser?) -> Swift.Void) {
+    func loginUser(withEmail: String, password: String, completion: @escaping (_ user: GentsUser?) -> Swift.Void) {
         
-        let usr = Auth.auth().currentUser
-        
-        if usr != nil && usr?.email == withEmail {
-            
-            Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: DataEventType.value, with: { (snap) in
-                
-                let value = snap.value as? NSDictionary
-                
-                guard value != nil else {
+        func doLogin() {
+            Auth.auth().signIn(withEmail: withEmail, password: password, completion: { (user, error) in
+                if error == nil {
+                    //let userInfo = ["email": withEmail, "password": password]
+                    //UserDefaults.standard.set(userInfo, forKey: "userInformation")
+                    
+                    self.firebaseUser = Auth.auth().currentUser
+                    self.reloadUserData(completion: { (isOK) in
+                        if isOK {
+                            completion(self)
+                        } else {
+                            completion(nil)
+                        }
+                    })
+                } else {
+                    self.firebaseUser = nil
                     completion(nil)
-                    return
                 }
-                
-                let name = value!["name"] as? String
-                let sn = value!["sn"] as? String
-                let stripeID = value!["strp_customer_id"] as? String
-                
-                guard name != nil && sn != nil && stripeID != nil else {
-                    completion(nil)
-                    return
-                }
-                
-                completion(GentsUser.init(name: name!, email: (usr?.email)!, sn: sn!, stripeID: stripeID!))
             })
-            return
         }
         
-        Auth.auth().signIn(withEmail: withEmail, password: password, completion: { (user, error) in
-            if error == nil {
-                let userInfo = ["email": withEmail, "password": password]
-                UserDefaults.standard.set(userInfo, forKey: "userInformation")
-                
-                Database.database().reference().child("users").child((user?.uid)!).observeSingleEvent(of: .value) { snapshot in
-                    let value = snapshot.value as? NSDictionary
-                    
-                    guard value != nil else {
+        
+        if firebaseUser != nil {
+            if firebaseUser?.email == withEmail {
+                self.reloadUserData(completion: { (isOK) in
+                    if isOK {
+                        completion(self)
+                    } else {
+                        completion(nil)
+                    }
+                })
+            } else {
+                self.logOutUser(completion: { (isOK) in
+                    if !isOK {
                         completion(nil)
                         return
                     }
-                    
-                    let name = value!["name"] as! String
-                    let email = value!["email"] as! String
-                    let sn = value!["sn"] as! String
-                    let strpID = value!["strp_customer_id"] as! String
-                    let usr = GentsUser(name: name, email: email, sn: sn, stripeID: strpID)
-                    
-                    completion(usr)
-                }
-            } else {
-                completion(nil)
+                    doLogin()
+                })
             }
-        })
+        } else {
+            doLogin()
+        }
     }
     
     func logOutUser(completion: @escaping (Bool) -> Swift.Void) {
         do {
             try Auth.auth().signOut()
-            UserDefaults.standard.removeObject(forKey: "userInformation")
+            //UserDefaults.standard.removeObject(forKey: "userInformation")
             customerCtx?.clearCachedCustomer()
             completion(true)
         } catch _ {
@@ -227,70 +231,49 @@ class GentsUser: NSObject {
         }
     }
     
-    class func info(forUserID: String, completion: @escaping (GentsUser) -> Swift.Void) {
-        Database.database().reference().child("users").child(forUserID).child("credentials").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let data = snapshot.value as? [String: String] {
-                let name = data["name"]!
-                let email = data["email"]!
-                let strpID = data["strp_customer_id"]!
-                let link = URL.init(string: data["profilePicLink"]!)
-                URLSession.shared.dataTask(with: link!, completionHandler: { (data, response, error) in
-                    if error == nil {
-                        let user = GentsUser.init(name: name, email: email, sn: forUserID, stripeID: strpID)
-                        completion(user)
-                    }
-                }).resume()
-            }
-        })
-    }
-    
-//    class func downloadAllUsers(exceptID: String, completion: @escaping (User) -> Swift.Void) {
-//        Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
-//            let id = snapshot.key
-//            let data = snapshot.value as! [String: Any]
-//            let credentials = data["credentials"] as! [String: String]
-//            if id != exceptID {
-//                let name = credentials["name"]!
-//                let email = credentials["email"]!
-//                let link = URL.init(string: credentials["profilePicLink"]!)
-//                URLSession.shared.dataTask(with: link!, completionHandler: { (data, response, error) in
-//                    if error == nil {
-//                        let profilePic = UIImage.init(data: data!)
-//                        let user = User.init(name: name, email: email, id: id, profilePic: profilePic!)
-//                        completion(user)
-//                    }
-//                }).resume()
-//            }
-//        })
-//    }
-    
-    class func checkUserVerification(completion: @escaping (Bool) -> Swift.Void) {
-        Auth.auth().currentUser?.reload(completion: { (_) in
-            let status = (Auth.auth().currentUser?.isEmailVerified)!
+    func checkUserVerification(completion: @escaping (Bool) -> Swift.Void) {
+        firebaseUser?.reload(completion: { (_) in
+            let status = (self.firebaseUser?.isEmailVerified)!
             completion(status)
         })
     }
     
-    class func delete() {
-        Auth.auth().currentUser?.delete(completion: { (err) in
+    func delete() {
+        firebaseUser?.delete(completion: { (err) in
             print(err ?? "n/a")
         })
     }
     
-    //MARK: Inits
-    init(name: String, email: String, sn: String, stripeID: String) {
+    /*init(name: String, email: String, sn: String, stripeID: String) {
+        self.firebaseUser = nil
         self.name = name
         self.email = email
-        self.id = sn
         self.strpCustomerID = stripeID
         
         if strpCustomerID != "" {
             StripeAPIClient.sharedClient.cusID = strpCustomerID
             customerCtx = STPCustomerContext(keyProvider: StripeAPIClient.sharedClient)
         }
-    }
+    }*/
     
-    var payp = [payProcess]()
+    func reloadUserData(completion: @escaping (_ completedSuccessfully: Bool) -> (Swift.Void)) {
+        Database.database().reference().child("users").child((firebaseUser?.uid)!).observeSingleEvent(of: .value) { snapshot in
+            let value = snapshot.value as? NSDictionary
+            
+            guard value != nil else {
+                completion(false)
+                return
+            }
+            
+            let name = value!["name"] as! String
+            let email = value!["email"] as! String
+            let sn = value!["sn"] as! String
+            let strpID = value!["strp_customer_id"] as! String
+            //let usr = GentsUser(name: name, email: email, sn: sn, stripeID: strpID)
+            
+            completion(true)
+        }
+    }
     
     func pay(amount: Int, description: String, host: UIViewController? = nil, completion: STPErrorBlock? = nil) {
         guard customerCtx != nil else {
@@ -309,12 +292,64 @@ class GentsUser: NSObject {
     
     func getPayments() -> DatabaseQuery? {
         
-        guard Auth.auth().currentUser != nil else {
+        guard firebaseUser != nil else {
             return nil
         }
         
         //Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("payments").keepSynced(true)
         
-        return Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("payments").queryOrdered(byChild: "created")
+        return Database.database().reference().child("users").child(firebaseUser!.uid).child("payments").queryOrdered(byChild: "created")
     }
+    
+    //MARK: - DB connection listener
+    
+    static func connectionDetect() {
+        let connectedRef = Database.database().reference(withPath: ".info/connected")
+        connectedRef.observe(.value, with: { snapshot in
+            if let connected = snapshot.value as? Bool, connected {
+                print("Connected")
+            } else {
+                print("Not connected")
+            }
+        })
+    }
+    
+    //MARK: - Nothing
+
+    //    class func downloadAllUsers(exceptID: String, completion: @escaping (User) -> Swift.Void) {
+    //        Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+    //            let id = snapshot.key
+    //            let data = snapshot.value as! [String: Any]
+    //            let credentials = data["credentials"] as! [String: String]
+    //            if id != exceptID {
+    //                let name = credentials["name"]!
+    //                let email = credentials["email"]!
+    //                let link = URL.init(string: credentials["profilePicLink"]!)
+    //                URLSession.shared.dataTask(with: link!, completionHandler: { (data, response, error) in
+    //                    if error == nil {
+    //                        let profilePic = UIImage.init(data: data!)
+    //                        let user = User.init(name: name, email: email, id: id, profilePic: profilePic!)
+    //                        completion(user)
+    //                    }
+    //                }).resume()
+    //            }
+    //        })
+    //    }
+
+    /*class func info(forUserID: String, completion: @escaping (GentsUser) -> Swift.Void) {
+     Database.database().reference().child("users").child(forUserID).child("credentials").observeSingleEvent(of: .value, with: { (snapshot) in
+     if let data = snapshot.value as? [String: String] {
+     let name = data["name"]!
+     let email = data["email"]!
+     let strpID = data["strp_customer_id"]!
+     let link = URL.init(string: data["profilePicLink"]!)
+     URLSession.shared.dataTask(with: link!, completionHandler: { (data, response, error) in
+     if error == nil {
+     let user = GentsUser.init(name: name, email: email, sn: forUserID, stripeID: strpID)
+     completion(user)
+     }
+     }).resume()
+     }
+     })
+     }*/
 }
