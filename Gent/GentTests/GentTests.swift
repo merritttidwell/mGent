@@ -33,7 +33,7 @@ class GentTests: XCTestCase {
         
         if testName == "-[GentTests testMakePayment]" || testName == "-[GentTests testGetPaymentsList]" || testName == "-[GentTests testFirebaseOfflineSupport]" {
             let exp =  self.expectation(description: "user login")
-            GentsUser.loginUser(withEmail: userEmail, password: userPassword, completion: { [weak self] (usr) in
+            GentsUser.shared.loginUser(withEmail: userEmail, password: userPassword, completion: { [weak self] (usr) in
                 
                 self?.usr = usr
                 exp.fulfill()
@@ -96,7 +96,7 @@ class GentTests: XCTestCase {
     func testLoginUser() {
         let exp = self.expectation(description: "login")
         
-        GentsUser.loginUser(withEmail: userEmail, password: userPassword) { (user) in
+        GentsUser.shared.loginUser(withEmail: userEmail, password: userPassword) { (user) in
             print("login user = \(String(describing: user))")
             if user == nil {
                 XCTAssert(false)

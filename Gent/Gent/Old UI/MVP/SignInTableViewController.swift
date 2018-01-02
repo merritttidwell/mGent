@@ -58,7 +58,7 @@ class SignInTableViewController: UITableViewController {
         print("Submit Pressed")
         let email = emailTextField.text
         let password = passwordTextField.text
-        GentsUser.loginUser(withEmail: email!, password: password!) { (user) in
+        GentsUser.shared.loginUser(withEmail: email!, password: password!) { (user) in
             if ((user) != nil) {
                 
                 print("user logged in sucessfully")

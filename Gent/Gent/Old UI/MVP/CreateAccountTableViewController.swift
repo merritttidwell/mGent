@@ -77,7 +77,7 @@ class CreateAccountTableViewController: UITableViewController {
             
         }
         
-        GentsUser.loginUser(withEmail: "sam2@gmail.com", password: "Sam1234") { [weak self] (user) in
+        GentsUser.shared.loginUser(withEmail: "sam2@gmail.com", password: "Sam1234") { [weak self] (user) in
             print("login user = \(String(describing: user))")
             if user != nil {
                 self?.usr = user
