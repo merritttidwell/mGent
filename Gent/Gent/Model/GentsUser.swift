@@ -129,9 +129,7 @@ class GentsUser: NSObject {
         }
     }
     
-    //MARK: Class Methods
-    //should be instance func (remove class)
-    class func registerUser(withName: String, email: String, password: String, userData:[String:String], completion: @escaping completionSuccess) {
+    func registerUser(withName: String, email: String, password: String, userData:[String:String], completion: @escaping completionSuccess) {
         
         var userData = userData
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in

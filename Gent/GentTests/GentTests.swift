@@ -53,7 +53,7 @@ class GentTests: XCTestCase {
     func testRegisterUser() {
         let exp = expectation(description: "register")
         
-        GentsUser.registerUser(withName: userName, email: userEmail, password: userPassword, userData: userData) { isOK in
+        GentsUser.shared.registerUser(withName: userName, email: userEmail, password: userPassword, userData: userData) { isOK in
             print("Register User = \(isOK)")
             if isOK == false {
                 XCTAssert(false)
@@ -75,7 +75,7 @@ class GentTests: XCTestCase {
     func testReRegisterUser() {
         let exp = expectation(description: "register")
         
-        GentsUser.registerUser(withName: userName, email: userEmail, password: userPassword, userData: userData) { isOK in
+        GentsUser.shared.registerUser(withName: userName, email: userEmail, password: userPassword, userData: userData) { isOK in
             print("Register User = \(isOK)")
             if isOK == true {
                 XCTAssert(false)
