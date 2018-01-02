@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 import Stripe
 import Alamofire
+import SwiftyJSON
 
 typealias completionSuccess = (_ isSuccessful: Bool) -> (Void)
 
@@ -29,7 +30,7 @@ class GentsUser: NSObject {
     private(set) var phone: String = ""
     private(set) var sn: String = ""
     private(set) var strpCustomerID = ""
-    private(set) var payments : [AnyObject]?
+    private(set) var payments : JSON?
     
     //more props
     var customerCtx : STPCustomerContext? = nil
@@ -270,7 +271,12 @@ class GentsUser: NSObject {
             let phone = value!["phone"] as! String
             let sn = value!["sn"] as! String
             let strpID = value!["strp_customer_id"] as! String
-            let payments = value!["payments"] as! [AnyObject]
+            let paymentsRaw = value!["payments"] as Any?
+            
+            guard paymentsRaw != nil else {
+                completion(false)
+                return
+            }
             
             self.name = name
             self.email = email
@@ -280,7 +286,7 @@ class GentsUser: NSObject {
             self.sn = sn
             
             self.strpCustomerID = strpID
-            self.payments = payments
+            self.payments = JSON.init(rawValue: paymentsRaw!)
             
             completion(true)
         }
