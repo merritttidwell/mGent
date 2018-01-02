@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GNewsTabViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class GNewsTabViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var table: UITableView?
     
@@ -42,9 +42,13 @@ class GNewsTabViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
         
-        cell.textLabel?.text = "\(indexPath.row + 1)"
+        let title = cell.viewWithTag(1) as! UILabel
+        let date = cell.viewWithTag(2) as! UILabel
+        let post = cell.viewWithTag(3) as! UILabel
+        
+        title.text = "\(indexPath.row + 1)"
         
         return cell
     }
