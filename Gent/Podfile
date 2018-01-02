@@ -12,7 +12,8 @@ pod 'Firebase/Database'
 
 pod 'Stripe'
 pod 'Alamofire'
-pod 'KeychainSwift'
+
+pod 'SwiftyJSON'
 
   target 'GentTests' do
     inherit! :search_paths
@@ -23,7 +24,6 @@ pod 'KeychainSwift'
     
     pod 'Stripe'
     pod 'Alamofire'
-    pod 'KeychainSwift'
   end
 
   target 'GentUITests' do
