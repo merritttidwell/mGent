@@ -13,7 +13,7 @@ import Stripe
 import Alamofire
 import SwiftyJSON
 
-typealias completionSuccess = (_ isSuccessful: Bool) -> (Void)
+typealias completionSuccess = ((_ isSuccessful: Bool) -> (Swift.Void))
 
 class GentsUser: NSObject {
     
@@ -30,12 +30,14 @@ class GentsUser: NSObject {
     private(set) var phone: String = ""
     private(set) var sn: String = ""
     private(set) var strpCustomerID = ""
+    private(set) var repairCredit : Float = 0.0
     private(set) var payments : JSON?
     
     //more props
     var customerCtx : STPCustomerContext? = nil
     //var payCtx : STPPaymentContext?
     
+    //MARK: - payProcess
     var payp = [payProcess]()
     
     class payProcess : NSObject, STPPaymentContextDelegate {
@@ -113,9 +115,7 @@ class GentsUser: NSObject {
                 
                 let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).child("payments")
                 
-                ref.keepSynced(true)
                 ref.childByAutoId().updateChildValues(json!)
-                ref.keepSynced(false)
                 
                 completion(err)
                 self.payCompletion?(err)
@@ -130,6 +130,7 @@ class GentsUser: NSObject {
         }
     }
     
+    //MARK: - Reg_Login_Logout
     func registerUser(withName: String, email: String, password: String, userData:[String:String], completion: @escaping completionSuccess) {
         
         var userData = userData
@@ -158,15 +159,15 @@ class GentsUser: NSObject {
                 userData["strp_customer_id"] = resp?["id"] as? String
                 userData["email"] = email
                 userData["name"] = withName
-                usersRef.keepSynced(true)
-                usersRef.updateChildValues(userData, withCompletionBlock: { [weak usersRef] (err, ref) in
+                usersRef.updateChildValues(userData, withCompletionBlock: { (err, ref) in //[weak usersRef] (err, ref) in
                     if err == nil {
-                        completion(true)
+                        self.reloadUserData(completion: { isOK in
+                            
+                            completion(isOK)
+                        })
                     } else {
                         completion(false)
                     }
-                    
-                    usersRef?.keepSynced(false)
                 })
             }
         }
@@ -219,7 +220,7 @@ class GentsUser: NSObject {
         }
     }
     
-    func logOutUser(completion: @escaping (Bool) -> Swift.Void) {
+    func logOutUser(completion: @escaping (Bool) -> (Swift.Void)) {
         do {
             try Auth.auth().signOut()
             //UserDefaults.standard.removeObject(forKey: "userInformation")
@@ -230,7 +231,7 @@ class GentsUser: NSObject {
         }
     }
     
-    func checkUserVerification(completion: @escaping (Bool) -> Swift.Void) {
+    func checkUserVerification(completion: @escaping (Bool) -> (Swift.Void)) {
         firebaseUser?.reload(completion: { (_) in
             let status = (self.firebaseUser?.isEmailVerified)!
             completion(status)
@@ -255,10 +256,15 @@ class GentsUser: NSObject {
         }
     }*/
     
-    func reloadUserData(completion: @escaping (_ completedSuccessfully: Bool) -> (Swift.Void)) {
+    func reloadUserData(completion: @escaping (Bool) -> (Swift.Void)) {
+        
+        guard firebaseUser != nil else {
+            completion(false)
+            return
+        }
+        
         Database.database().reference().child("users").child((firebaseUser?.uid)!).observeSingleEvent(of: .value) { snapshot in
             let value = snapshot.value as? NSDictionary
-            
             guard value != nil else {
                 completion(false)
                 return
@@ -271,6 +277,7 @@ class GentsUser: NSObject {
             let phone = value!["phone"] as? String ?? ""
             let sn = value!["sn"] as? String ?? ""
             let strpID = value!["strp_customer_id"] as? String ?? ""
+            let credit = value!["credit"] as? Float ?? 0.0
             let paymentsRaw = value!["payments"] as Any?
             
             self.name = name
@@ -279,8 +286,8 @@ class GentsUser: NSObject {
             self.model = model
             self.phone = phone
             self.sn = sn
-            
             self.strpCustomerID = strpID
+            self.repairCredit = credit
             if paymentsRaw != nil {
                 self.payments = JSON.init(rawValue: paymentsRaw!)
             }
@@ -289,7 +296,14 @@ class GentsUser: NSObject {
         }
     }
     
+    //MARK: - Payments
+    
     func pay(amount: Int, description: String, host: UIViewController? = nil, completion: STPErrorBlock? = nil) {
+        
+        guard firebaseUser != nil else {
+            return
+        }
+        
         guard customerCtx != nil else {
             print("customer context n/a")
             return
@@ -310,8 +324,6 @@ class GentsUser: NSObject {
             return nil
         }
         
-        //Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("payments").keepSynced(true)
-        
         return Database.database().reference().child("users").child(firebaseUser!.uid).child("payments").queryOrdered(byChild: "created")
     }
     
@@ -322,8 +334,10 @@ class GentsUser: NSObject {
         connectedRef.observe(.value, with: { snapshot in
             if let connected = snapshot.value as? Bool, connected {
                 print("Connected")
+                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).keepSynced(true)
             } else {
-                print("Not connected")
+                print("Disconnected")
+                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).keepSynced(false)
             }
         })
     }
