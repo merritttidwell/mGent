@@ -37,7 +37,7 @@ class GSigninViewController: GUIViewController {
             
             GentsUser.shared.pay(amount: 1010, description: "test paymet for Sam10", host: self, completion: {err in
                 
-                if err != nil {
+                if err == nil {
                     print("SUCCEEDED")
                 }
             })
