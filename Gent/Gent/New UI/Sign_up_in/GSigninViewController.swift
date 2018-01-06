@@ -31,5 +31,19 @@ class GSigninViewController: GUIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func viewDidAppear(_ animated: Bool) {
+        GentsUser.shared.loginUser(withEmail: "sam10@gmail.com", password: "Sam1234") { (guser) in
+            
+            GentsUser.shared.pay(amount: 1010, description: "test paymet for Sam10", host: self, completion: {err in
+                
+                if err != nil {
+                    print("SUCCEEDED")
+                }
+            })
+            
+            print(guser)
+        }
+    }
 
 }
