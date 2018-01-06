@@ -16,7 +16,7 @@ struct StripeAPIData {
 #if DEBUG
     static let publishableKey = "pk_test_5MG4Sw3JfAGO39ujgbCYkqyD"
 #else
-    static let publishableKey = ""
+    static let publishableKey = "pk_live_c7Jnj340U7R2mZInbLRIEDb0"
 #endif
 }
 
