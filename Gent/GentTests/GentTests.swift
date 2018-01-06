@@ -11,8 +11,8 @@ import XCTest
 
 class GentTests: XCTestCase {
     
-    let userName = "Sam2"
-    let userEmail = "sam2@gmail.com"
+    let userName = "Sam10 Mikhail"
+    let userEmail = "sam10@gmail.com"
     let userPassword = "Sam1234"
     let userData = [
         "phone" : "6302460328",
@@ -116,6 +116,7 @@ class GentTests: XCTestCase {
     }
     
     func testMakePayment() {
+        //user payment method should be created first
         let exp = self.expectation(description: "make payment")
         
         let host = UIApplication.shared.keyWindow?.rootViewController
@@ -190,6 +191,29 @@ class GentTests: XCTestCase {
         self.waitForExpectations(timeout: 30) { (err) in
             if err != nil {
                 print("testFirebaseOfflineSupport - failed =>")
+                print(err as Any)
+                XCTAssert(false)
+            }
+        }
+    }
+    
+    func testGetGentsConfig() {
+        
+        let exp = self.expectation(description: "get payment")
+        
+        GentsConfig.shared.update { isOK in
+            
+            if !isOK {
+                print("testGetGentsConfig - failed =>")
+                XCTAssert(false)
+            }
+            
+            exp.fulfill()
+        }
+        
+        self.waitForExpectations(timeout: 30) { (err) in
+            if err != nil {
+                print("testGetGentsConfig - failed =>")
                 print(err as Any)
                 XCTAssert(false)
             }
