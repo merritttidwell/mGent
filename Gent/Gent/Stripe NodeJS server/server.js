@@ -1,8 +1,10 @@
 var http = require('http');
-var stripe = require("stripe")("sk_test_Qc3frsXwp1sA8KnQSXC1SU6i");
+var stripe = require("stripe")("sk_test_Qc3frsXwp1sA8KnQSXC1SU6i"); //sk_live_a1xXvLdotJMA96BQkAPYBmcm
 
 var prt = 3000;
 var server;
+
+console.log("Server Started...");
 
 server = http.createServer(function(req, resp) {
 
