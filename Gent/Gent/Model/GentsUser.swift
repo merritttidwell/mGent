@@ -292,6 +292,11 @@ class GentsUser: NSObject {
                 self.payments = JSON.init(rawValue: paymentsRaw!)
             }
             
+            if self.strpCustomerID != "" {
+                StripeAPIClient.sharedClient.cusID = self.strpCustomerID
+                self.customerCtx = STPCustomerContext(keyProvider: StripeAPIClient.sharedClient)
+            }
+            
             completion(true)
         }
     }
