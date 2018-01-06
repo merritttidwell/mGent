@@ -39,6 +39,8 @@
 		8FAA33781FCBDC1A00D9F304 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 8FAA33771FCBDC1A00D9F304 /* readme.md */; };
 		8FB8A4FB1FF43F7B00A849B3 /* UIButtonExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8A4FA1FF43F7B00A849B3 /* UIButtonExt.swift */; };
 		8FB8A4FE1FF4DC0300A849B3 /* GInitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8A4FD1FF4DC0300A849B3 /* GInitViewController.swift */; };
+		8FCBF1B2200131DA00C70ECE /* GentsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCBF1B1200131DA00C70ECE /* GentsConfig.swift */; };
+		8FCBF1B4200147A900C70ECE /* GoogleService-Info-ConfigDB.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8FCBF1B3200147A800C70ECE /* GoogleService-Info-ConfigDB.plist */; };
 		8FCEE09E1FF5413B009EF0AD /* UIDeviceExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCEE09D1FF5413B009EF0AD /* UIDeviceExt.swift */; };
 		8FDE9B321FF8C23A00C3B8F6 /* OnScreenKBListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B301FF8C23A00C3B8F6 /* OnScreenKBListener.swift */; };
 		8FDE9B331FF8C23A00C3B8F6 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B311FF8C23A00C3B8F6 /* UIHelper.swift */; };
@@ -101,6 +103,8 @@
 		8FAA33771FCBDC1A00D9F304 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		8FB8A4FA1FF43F7B00A849B3 /* UIButtonExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExt.swift; sourceTree = "<group>"; };
 		8FB8A4FD1FF4DC0300A849B3 /* GInitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GInitViewController.swift; sourceTree = "<group>"; };
+		8FCBF1B1200131DA00C70ECE /* GentsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentsConfig.swift; sourceTree = "<group>"; };
+		8FCBF1B3200147A800C70ECE /* GoogleService-Info-ConfigDB.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-ConfigDB.plist"; sourceTree = "<group>"; };
 		8FCEE09D1FF5413B009EF0AD /* UIDeviceExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExt.swift; sourceTree = "<group>"; };
 		8FDE9B301FF8C23A00C3B8F6 /* OnScreenKBListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnScreenKBListener.swift; sourceTree = "<group>"; };
 		8FDE9B311FF8C23A00C3B8F6 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 				8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */,
 				2E9CA28F1F9AC6680017D34B /* GentsViewController.swift */,
 				2E1E391C1F9BF15400290A87 /* GentsUser.swift */,
+				8FCBF1B1200131DA00C70ECE /* GentsConfig.swift */,
 				8FAA33771FCBDC1A00D9F304 /* readme.md */,
 			);
 			path = Model;
@@ -302,6 +307,7 @@
 				8F8663A31FF418A20020F2E8 /* Old UI */,
 				8F63AC7C1FD4B7AE0032F72F /* Stripe NodeJS server */,
 				6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */,
+				8FCBF1B3200147A800C70ECE /* GoogleService-Info-ConfigDB.plist */,
 				2E1E391E1F9BF16300290A87 /* Model */,
 				920E97FE1F79E63C00D97658 /* AppDelegate.swift */,
 				920E98071F79E63C00D97658 /* Assets.xcassets */,
@@ -505,6 +511,7 @@
 				8F63AC7F1FD4B7E20032F72F /* readme.md in Resources */,
 				8F86639D1FF318790020F2E8 /* Main_NewDesign.storyboard in Resources */,
 				920E98081F79E63C00D97658 /* Assets.xcassets in Resources */,
+				8FCBF1B4200147A900C70ECE /* GoogleService-Info-ConfigDB.plist in Resources */,
 				8F8663A11FF4164E0020F2E8 /* Info.plist in Resources */,
 				920E98061F79E63C00D97658 /* Main.storyboard in Resources */,
 			);
@@ -717,6 +724,7 @@
 				6B4DD7BA1F85DE4300D511B1 /* FormTableViewCell.swift in Sources */,
 				8FDE9B331FF8C23A00C3B8F6 /* UIHelper.swift in Sources */,
 				920E98371F79EB6D00D97658 /* ChatViewController.swift in Sources */,
+				8FCBF1B2200131DA00C70ECE /* GentsConfig.swift in Sources */,
 				6B1F239E1F9EE5A400B6F9D0 /* UnderConstruction.swift in Sources */,
 				920E98331F79EB4F00D97658 /* ShopViewController.swift in Sources */,
 				8FB8A4FB1FF43F7B00A849B3 /* UIButtonExt.swift in Sources */,
