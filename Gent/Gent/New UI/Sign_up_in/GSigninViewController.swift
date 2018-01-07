@@ -9,6 +9,9 @@
 import UIKit
 
 class GSigninViewController: GUIViewController {
+    
+    @IBOutlet weak var tfEmail : UITextField?
+    @IBOutlet weak var tfPassword : UITextField?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +24,31 @@ class GSigninViewController: GUIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Navigation
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        let grp = DispatchGroup()
+        grp.enter()
+        var isOK = false
+        
+        GentsUser.shared.logOutUser { ok1 in
+            
+            GentsUser.shared.loginUser(withEmail: "sam2@gmail.com", password: "Sam1234") { guser in
+                if guser != nil {
+                    isOK = true
+                }
+                
+                grp.leave()
+            }
+        }
+        
+        grp.wait()
+        
+        return isOK
+    }
 
     /*
-    // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
@@ -33,7 +57,7 @@ class GSigninViewController: GUIViewController {
     */
     
     override func viewDidAppear(_ animated: Bool) {
-        GentsUser.shared.loginUser(withEmail: "sam10@gmail.com", password: "Sam1234") { (guser) in
+        /*GentsUser.shared.loginUser(withEmail: "sam10@gmail.com", password: "Sam1234") { (guser) in
             
             GentsUser.shared.pay(amount: 1010, description: "test paymet for Sam10", host: self, completion: {err in
                 
@@ -43,7 +67,11 @@ class GSigninViewController: GUIViewController {
             })
             
             print(guser)
-        }
+        }*/
+    }
+    
+    @IBAction func doLogin() {
+        print("login")
     }
 
 }
