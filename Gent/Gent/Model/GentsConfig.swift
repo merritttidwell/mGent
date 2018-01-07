@@ -16,28 +16,43 @@ class GentsConfig: NSObject {
     var savePercent : Double?
     var extraPercent : Double?
     
-    class func firebaseConfigDataBase() -> Database {
+    class func firebaseConfigDataBase() -> Database? {
         
-        let options = FirebaseOptions.init(contentsOfFile: Bundle.main.path(forResource: "GoogleService-Info-ConfigDB", ofType: "plist")!)
+        var configApp = FirebaseApp.app(name: "configApp")
         
-        // Configure an alternative FIRApp.
-        FirebaseApp.configure(name: "configApp", options: options!)
-        
-        // Retrieve a previous created named app.
-        guard let configApp = FirebaseApp.app(name: "configApp")
-            else { assert(false, "Could not retrieve configApp") }
-        
+        if configApp == nil {
+            
+            let options = FirebaseOptions.init(contentsOfFile: Bundle.main.path(forResource: "GoogleService-Info-ConfigDB", ofType: "plist")!)
+            
+            // Configure an alternative FIRApp.
+            FirebaseApp.configure(name: "configApp", options: options!)
+            
+            // Retrieve a previous created named app.
+            configApp = FirebaseApp.app(name: "configApp")
+            guard configApp != nil else { assert(false, "Could not retrieve configApp"); return nil}
+        }
         
         // Retrieve a Real Time Database client configured against a specific app.
-        let configDB = Database.database(app: configApp)
-        
-        return configDB
+        return Database.database(app: configApp!)
     }
     
     func update(completion: @escaping (Bool) -> (Void)) {
-        GentsConfig.firebaseConfigDataBase().reference().child("SystemSetup").observeSingleEvent(of: .value) { dsnap in
+        GentsConfig.firebaseConfigDataBase()?.reference().child("SystemSetup").observeSingleEvent(of: .value) { dsnap in
             completion(true)
             print(dsnap.value)
         }
+    }
+    
+    static func connectionDetect() {
+        let connectedRef = firebaseConfigDataBase()?.reference(withPath: ".info/connected")
+        connectedRef?.observe(.value, with: { snapshot in
+            if let connected = snapshot.value as? Bool, connected {
+                print("Connected")
+                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).keepSynced(true)
+            } else {
+                print("Disconnected")
+                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).keepSynced(false)
+            }
+        })
     }
 }
