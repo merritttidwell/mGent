@@ -17,14 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Initialize Firebase
     override init() {
-        FirebaseApp.configure()
         STPPaymentConfiguration.shared().publishableKey = StripeAPIData.publishableKey
         
+        FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
-        GentsConfig.firebaseConfigDataBase()?.isPersistenceEnabled = true
+        //GentsUser.firebaseGentsDataBase()?.isPersistenceEnabled = true
+        
+        //GentsConfig.firebaseConfigDataBase()?.isPersistenceEnabled = true
         
         GentsUser.connectionDetect()
-        GentsConfig.connectionDetect()
+        //GentsConfig.connectionDetect()
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
