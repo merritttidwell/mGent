@@ -646,11 +646,11 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Wx-BG-cCd" userLabel="TF_Email">
+                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Wx-BG-cCd" userLabel="TF_Email">
                                         <rect key="frame" x="0.0" y="28.333333333333329" width="374" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="email"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoY-LT-Ld6">
                                         <rect key="frame" x="0.0" y="66.333333333333343" width="374" height="20.333333333333329"/>
@@ -658,11 +658,11 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dUI-gr-ig8" userLabel="TF_Password">
+                                    <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dUI-gr-ig8" userLabel="TF_Password">
                                         <rect key="frame" x="0.0" y="94.666666666666657" width="374" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHm-qg-L4a">
                                         <rect key="frame" x="0.0" y="132.66666666666666" width="374" height="50"/>
@@ -674,7 +674,8 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="PWa-KC-1Hf" kind="show" id="aa9-ts-AmV"/>
+                                            <action selector="doLogin" destination="CWF-rJ-AFt" eventType="touchUpInside" id="zcE-YB-t72"/>
+                                            <segue destination="PWa-KC-1Hf" kind="show" identifier="signin" id="aa9-ts-AmV"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -689,6 +690,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yuI-Gy-ZSP"/>
                     </view>
+                    <connections>
+                        <outlet property="tfEmail" destination="8Wx-BG-cCd" id="3WM-Fh-pv1"/>
+                        <outlet property="tfPassword" destination="dUI-gr-ig8" id="Eon-w5-eug"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q4X-aM-yYs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
