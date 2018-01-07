@@ -21,7 +21,7 @@ class GentsUser: NSObject {
     static let shared = GentsUser()
     
     //MARK: Properties
-    private(set) var firebaseUser : User? = Auth.auth().currentUser
+    //private(set) var firebaseUser : User? = firebaseGentsAuth()?.currentUser
     
     private(set) var name: String = ""
     private(set) var email: String = ""
@@ -113,9 +113,9 @@ class GentsUser: NSObject {
             
             StripeAPIClient.sharedClient.completeCharge(paymentResult, amount: paymentContext.paymentAmount, description: desc, shippingAddress: nil, shippingMethod: nil) { [unowned self] (json, err) in
                 
-                let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).child("payments")
+                let ref = firebaseGentsDataBase()?.reference().child("users").child((firebaseGentsAuth()?.currentUser?.uid)!).child("payments")
                 
-                ref.childByAutoId().updateChildValues(json!)
+                ref?.childByAutoId().updateChildValues(json!)
                 
                 completion(err)
                 self.payCompletion?(err)
@@ -130,11 +130,52 @@ class GentsUser: NSObject {
         }
     }
     
+    //MARK: - DB connection
+    class func firebaseGentsApp() -> FirebaseApp? {
+        
+        var app = FirebaseApp.app(name: "gentsApp")
+        
+        if app == nil {
+            
+            let options = FirebaseOptions.init(contentsOfFile: Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")!)
+            
+            // Configure an alternative FIRApp.
+            FirebaseApp.configure(name: "gentsApp", options: options!)
+            
+            // Retrieve a previous created named app.
+            app = FirebaseApp.app(name: "gentsApp")
+            guard app != nil else { assert(false, "Could not retrieve gentsApp"); return nil}
+        }
+        
+        return app
+    }
+    class func firebaseGentsDataBase() -> Database? {
+        
+        /*guard let app = firebaseGentsApp() else {
+            return nil
+        }
+        
+        return Database.database(app: app)*/
+        
+        return Database.database()
+    }
+    
+    class func firebaseGentsAuth() -> Auth? {
+        
+        /*guard let app = firebaseGentsApp() else {
+            return nil
+        }
+        
+        return Auth.auth(app: app)*/
+        
+        return Auth.auth()
+    }
+    
     //MARK: - Reg_Login_Logout
     func registerUser(withName: String, email: String, password: String, userData:[String:String], completion: @escaping completionSuccess) {
         
         var userData = userData
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+        GentsUser.firebaseGentsAuth()?.createUser(withEmail: email, password: password) { (user, error) in
             if error != nil {
                 print(error ?? "unknown error")
                 completion(false)
@@ -152,7 +193,7 @@ class GentsUser: NSObject {
                 
                 // Create database reference
                 var ref: DatabaseReference!
-                ref = Database.database().reference()
+                ref = GentsUser.firebaseGentsDataBase()?.reference()
                 
                 // Create users reference
                 let usersRef = ref.child("users").child(uuid)
@@ -176,12 +217,14 @@ class GentsUser: NSObject {
     func loginUser(withEmail: String, password: String, completion: @escaping (_ user: GentsUser?) -> Swift.Void) {
         
         func doLogin() {
-            Auth.auth().signIn(withEmail: withEmail, password: password, completion: { (user, error) in
+            let auth = GentsUser.firebaseGentsAuth()
+            
+            auth?.signIn(withEmail: withEmail, password: password, completion: { (user, error) in
                 if error == nil {
                     //let userInfo = ["email": withEmail, "password": password]
                     //UserDefaults.standard.set(userInfo, forKey: "userInformation")
                     
-                    self.firebaseUser = Auth.auth().currentUser
+                    //self.firebaseUser = GentsUser.firebaseGentsAuth()?.currentUser
                     self.reloadUserData(completion: { (isOK) in
                         if isOK {
                             completion(self)
@@ -190,15 +233,15 @@ class GentsUser: NSObject {
                         }
                     })
                 } else {
-                    self.firebaseUser = nil
+                    //self.firebaseUser = nil
                     completion(nil)
                 }
             })
         }
         
         
-        if firebaseUser != nil {
-            if firebaseUser?.email == withEmail {
+        if GentsUser.firebaseGentsAuth()?.currentUser != nil {
+            if GentsUser.firebaseGentsAuth()?.currentUser?.email == withEmail {
                 self.reloadUserData(completion: { (isOK) in
                     if isOK {
                         completion(self)
@@ -222,7 +265,7 @@ class GentsUser: NSObject {
     
     func logOutUser(completion: @escaping (Bool) -> (Swift.Void)) {
         do {
-            try Auth.auth().signOut()
+            try GentsUser.firebaseGentsAuth()?.signOut()
             //UserDefaults.standard.removeObject(forKey: "userInformation")
             customerCtx?.clearCachedCustomer()
             completion(true)
@@ -232,14 +275,14 @@ class GentsUser: NSObject {
     }
     
     func checkUserVerification(completion: @escaping (Bool) -> (Swift.Void)) {
-        firebaseUser?.reload(completion: { (_) in
-            let status = (self.firebaseUser?.isEmailVerified)!
+        GentsUser.firebaseGentsAuth()?.currentUser?.reload(completion: { (_) in
+            let status = (GentsUser.firebaseGentsAuth()?.currentUser?.isEmailVerified)!
             completion(status)
         })
     }
     
     func delete() {
-        firebaseUser?.delete(completion: { (err) in
+        GentsUser.firebaseGentsAuth()?.currentUser?.delete(completion: { (err) in
             print(err ?? "n/a")
         })
     }
@@ -258,12 +301,12 @@ class GentsUser: NSObject {
     
     func reloadUserData(completion: @escaping (Bool) -> (Swift.Void)) {
         
-        guard firebaseUser != nil else {
+        guard let cuser = GentsUser.firebaseGentsAuth()?.currentUser else {
             completion(false)
             return
         }
         
-        Database.database().reference().child("users").child((firebaseUser?.uid)!).observeSingleEvent(of: .value) { snapshot in
+        GentsUser.firebaseGentsDataBase()?.reference().child("users").child(cuser.uid).observeSingleEvent(of: .value) { snapshot in
             let value = snapshot.value as? NSDictionary
             guard value != nil else {
                 completion(false)
@@ -305,7 +348,7 @@ class GentsUser: NSObject {
     
     func pay(amount: Int, description: String, host: UIViewController? = nil, completion: STPErrorBlock? = nil) {
         
-        guard firebaseUser != nil else {
+        guard GentsUser.firebaseGentsAuth()?.currentUser != nil else {
             return
         }
         
@@ -325,24 +368,29 @@ class GentsUser: NSObject {
     
     func getPayments() -> DatabaseQuery? {
         
-        guard firebaseUser != nil else {
+        guard let cuser = GentsUser.firebaseGentsAuth()?.currentUser else {
             return nil
         }
         
-        return Database.database().reference().child("users").child(firebaseUser!.uid).child("payments").queryOrdered(byChild: "created")
+        return GentsUser.firebaseGentsDataBase()?.reference().child("users").child(cuser.uid).child("payments").queryOrdered(byChild: "created")
     }
     
     //MARK: - DB connection listener
     
     static func connectionDetect() {
-        let connectedRef = Database.database().reference(withPath: ".info/connected")
-        connectedRef.observe(.value, with: { snapshot in
+        let connectedRef = firebaseGentsDataBase()?.reference(withPath: ".info/connected")
+        
+        connectedRef?.observe(.value, with: { snapshot in
+            guard let cuser = firebaseGentsAuth()?.currentUser else {
+                return
+            }
+            
             if let connected = snapshot.value as? Bool, connected {
-                print("Connected")
-                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).keepSynced(true)
+                print("Gents-Connected")
+                firebaseGentsDataBase()?.reference().child("users").child(cuser.uid).keepSynced(true)
             } else {
-                print("Disconnected")
-                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).keepSynced(false)
+                print("Gents-Disconnected")
+                firebaseGentsDataBase()?.reference().child("users").child(cuser.uid).keepSynced(false)
             }
         })
     }
