@@ -16,11 +16,12 @@ class GentsConfig: NSObject {
     var savePercent : Double?
     var extraPercent : Double?
     
-    class func firebaseConfigDataBase() -> Database? {
+    //MARK: - DB connection
+    class func firebaseConfigApp() -> FirebaseApp? {
         
-        var configApp = FirebaseApp.app(name: "configApp")
+        var app = FirebaseApp.app(name: "configApp")
         
-        if configApp == nil {
+        if app == nil {
             
             let options = FirebaseOptions.init(contentsOfFile: Bundle.main.path(forResource: "GoogleService-Info-ConfigDB", ofType: "plist")!)
             
@@ -28,13 +29,33 @@ class GentsConfig: NSObject {
             FirebaseApp.configure(name: "configApp", options: options!)
             
             // Retrieve a previous created named app.
-            configApp = FirebaseApp.app(name: "configApp")
-            guard configApp != nil else { assert(false, "Could not retrieve configApp"); return nil}
+            app = FirebaseApp.app(name: "configApp")
+            guard app != nil else { assert(false, "Could not retrieve configApp"); return nil}
         }
         
-        // Retrieve a Real Time Database client configured against a specific app.
-        return Database.database(app: configApp!)
+        return app
     }
+    
+    class func firebaseConfigDataBase() -> Database? {
+        
+        guard let app = firebaseConfigApp() else {
+            return nil
+        }
+        
+        return Database.database(url: "https://gentconfig.firebaseio.com/")
+    }
+    
+    class func firebaseConfigAuth() -> Auth? {
+        
+        guard let app = firebaseConfigApp() else {
+            return nil
+        }
+        
+        //return Auth.auth(app: app)
+        return Auth.auth()
+    }
+    
+    //MARK: - updates
     
     func update(completion: @escaping (Bool) -> (Void)) {
         GentsConfig.firebaseConfigDataBase()?.reference().child("SystemSetup").observeSingleEvent(of: .value) { dsnap in
@@ -47,11 +68,11 @@ class GentsConfig: NSObject {
         let connectedRef = firebaseConfigDataBase()?.reference(withPath: ".info/connected")
         connectedRef?.observe(.value, with: { snapshot in
             if let connected = snapshot.value as? Bool, connected {
-                print("Connected")
-                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).keepSynced(true)
+                print("Config-Connected")
+                firebaseConfigDataBase()?.reference().keepSynced(true)
             } else {
-                print("Disconnected")
-                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).keepSynced(false)
+                print("Config-Disconnected")
+                firebaseConfigDataBase()?.reference().keepSynced(false)
             }
         })
     }
