@@ -21,8 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         STPPaymentConfiguration.shared().publishableKey = StripeAPIData.publishableKey
         
         Database.database().isPersistenceEnabled = true
+        GentsConfig.firebaseConfigDataBase()?.isPersistenceEnabled = true
         
         GentsUser.connectionDetect()
+        GentsConfig.connectionDetect()
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
