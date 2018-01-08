@@ -55,20 +55,14 @@ class GSigninViewController: GUIViewController {
         grp.enter()
         var isOK = false
         
-        GentsUser.shared.logOutUser { ok1 in
-            
-            if ok1 {
-                GentsUser.shared.loginUser(withEmail: "sam2@gmail.com", password: "Sam1234") { guser in
-                    if guser != nil {
-                        isOK = true
-                    }
-                    
-                    grp.leave()
-                }
+        GentsUser.shared.loginUser(withEmail: "sam2@gmail.com", password: "Sam1234") { guser in
+            if guser != nil {
+                isOK = true
             }
+            
+            grp.leave()
         }
         
-        //grp.wait()
         grp.notify(queue: .main) {
             if isOK {
                 
