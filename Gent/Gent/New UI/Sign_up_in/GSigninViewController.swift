@@ -55,7 +55,7 @@ class GSigninViewController: GUIViewController {
         grp.enter()
         var isOK = false
         
-        GentsUser.shared.loginUser(withEmail: "sam10@gmail.com", password: "Sam1234") { guser in
+        GentsUser.shared.loginUser(withEmail: tfEmail?.text ?? "", password: tfPassword?.text ?? "") { guser in
             if guser != nil {
                 isOK = true
             }
