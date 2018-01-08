@@ -264,6 +264,12 @@ class GentsUser: NSObject {
     }
     
     func logOutUser(completion: @escaping (Bool) -> (Swift.Void)) {
+        
+        guard GentsUser.firebaseGentsAuth()?.currentUser != nil else {
+            completion(true)
+            return
+        }
+        
         do {
             try GentsUser.firebaseGentsAuth()?.signOut()
             //UserDefaults.standard.removeObject(forKey: "userInformation")
