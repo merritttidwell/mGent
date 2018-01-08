@@ -266,6 +266,7 @@ class GentsUser: NSObject {
     func logOutUser(completion: @escaping (Bool) -> (Swift.Void)) {
         
         guard GentsUser.firebaseGentsAuth()?.currentUser != nil else {
+            customerCtx?.clearCachedCustomer()
             completion(true)
             return
         }
