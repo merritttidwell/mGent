@@ -24,31 +24,9 @@ class GSigninViewController: GUIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /*
     // MARK: - Navigation
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        
-        let grp = DispatchGroup()
-        grp.enter()
-        var isOK = false
-        
-        GentsUser.shared.logOutUser { ok1 in
-            
-            GentsUser.shared.loginUser(withEmail: "sam2@gmail.com", password: "Sam1234") { guser in
-                if guser != nil {
-                    isOK = true
-                }
-                
-                grp.leave()
-            }
-        }
-        
-        grp.wait()
-        
-        return isOK
-    }
-
-    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
@@ -72,6 +50,40 @@ class GSigninViewController: GUIViewController {
     
     @IBAction func doLogin() {
         print("login")
+        
+        let grp = DispatchGroup()
+        grp.enter()
+        var isOK = false
+        
+        GentsUser.shared.logOutUser { ok1 in
+            
+            if ok1 {
+                GentsUser.shared.loginUser(withEmail: "sam2@gmail.com", password: "Sam1234") { guser in
+                    if guser != nil {
+                        isOK = true
+                    }
+                    
+                    grp.leave()
+                }
+            }
+        }
+        
+        //grp.wait()
+        grp.notify(queue: .main) {
+            if isOK {
+                
+                print("login succeeded")
+                
+                let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "tabsController")
+                
+                //self.navigationController?.pushViewController(vc, animated: false)
+                
+                self.present(vc, animated: false, completion: nil)
+                
+                //self.performSegue(withIdentifier: "signin", sender: self)
+            }
+        }
     }
 
 }
