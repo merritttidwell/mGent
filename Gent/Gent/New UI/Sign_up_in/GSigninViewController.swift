@@ -55,7 +55,7 @@ class GSigninViewController: GUIViewController {
         grp.enter()
         var isOK = false
         
-        GentsUser.shared.loginUser(withEmail: "sam2@gmail.com", password: "Sam1234") { guser in
+        GentsUser.shared.loginUser(withEmail: "sam10@gmail.com", password: "Sam1234") { guser in
             if guser != nil {
                 isOK = true
             }
@@ -76,6 +76,8 @@ class GSigninViewController: GUIViewController {
                 self.present(vc, animated: false, completion: nil)
                 
                 //self.performSegue(withIdentifier: "signin", sender: self)
+            } else {
+                UIHelper.showAlertInView(self, msg: "Login Failed!\nPlease check email / password")
             }
         }
     }
