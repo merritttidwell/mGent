@@ -312,14 +312,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tYD-Bc-D6F"/>
                     </view>
-                    <connections>
-                        <outlet property="tfEmail" destination="1qX-Hc-boj" id="sr6-5R-1zB"/>
-                        <outlet property="tfFirstName" destination="YTj-2n-cqN" id="MIb-d9-NOC"/>
-                        <outlet property="tfLastName" destination="vPz-sN-gNc" id="jAl-f4-aAg"/>
-                        <outlet property="tfPassword" destination="tCo-Zq-6F3" id="p55-mj-DG9"/>
-                        <outlet property="tfRePassword" destination="ShT-Zc-OHf" id="6Tp-Ea-0He"/>
-                        <outlet property="tfSerial" destination="yQz-nv-l41" id="iWG-5Z-toZ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oi3-S0-pTO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
