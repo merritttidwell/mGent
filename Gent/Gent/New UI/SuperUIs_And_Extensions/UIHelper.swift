@@ -11,7 +11,7 @@ import UIKit
 
 internal class UIHelper {
     
-    static func showAlertInView(_ viewController: UIViewController,msg: String) {
+    static func showAlertInView(_ viewController: UIViewController, title: String = "Error", msg: String) {
         
         let alert = UIAlertController.init(title: "Error", message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction.init(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
