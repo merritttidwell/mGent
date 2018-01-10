@@ -28,9 +28,90 @@ class GentUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    /*func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }*/
+
+    func testSignup() {
+        XCUIApplication().buttons["Sign up to MVP"].tap()
+        
+        let elementsQuery = XCUIApplication().scrollViews.otherElements
+        let textField = elementsQuery.children(matching: .textField).element(boundBy: 0)
+        textField.tap()
+        textField.typeText("Ossama")
+        
+        let textField2 = elementsQuery.children(matching: .textField).element(boundBy: 1)
+        textField2.tap()
+        textField2.tap()
+        textField2.typeText("Mikhail")
+        
+        let textField3 = elementsQuery.children(matching: .textField).element(boundBy: 2)
+        textField3.tap()
+        textField3.tap()
+        textField3.typeText("sam@gmail.com")
+        
+        let textField4 = elementsQuery.children(matching: .textField).element(boundBy: 3)
+        textField4.tap()
+        textField4.tap()
+        textField4.typeText("Sam1234")
+        
+        let textField5 = elementsQuery.children(matching: .textField).element(boundBy: 4)
+        textField5.tap()
+        textField5.tap()
+        textField5.typeText("Sam1234")
+        
+        let textField6 = elementsQuery.children(matching: .textField).element(boundBy: 5)
+        textField6.tap()
+        textField6.tap()
+        textField6.typeText("6302460328")
+        textField6.swipeUp()
+        
+        let textField7 = elementsQuery.children(matching: .textField).element(boundBy: 6)
+        textField7.tap()
+        textField7.tap()
+        textField7.typeText("11223344")
+        elementsQuery.buttons["Sign up"].tap()
     }
     
+    func testSignupWrongPassword() {
+        XCUIApplication().buttons["Sign up to MVP"].tap()
+        
+        let elementsQuery = XCUIApplication().scrollViews.otherElements
+        let textField = elementsQuery.children(matching: .textField).element(boundBy: 0)
+        textField.tap()
+        textField.typeText("Ossama")
+        
+        let textField2 = elementsQuery.children(matching: .textField).element(boundBy: 1)
+        textField2.tap()
+        textField2.tap()
+        textField2.typeText("Mikhail")
+        
+        let textField3 = elementsQuery.children(matching: .textField).element(boundBy: 2)
+        textField3.tap()
+        textField3.tap()
+        textField3.typeText("sam@gmail.com")
+        
+        let textField4 = elementsQuery.children(matching: .textField).element(boundBy: 3)
+        textField4.tap()
+        textField4.tap()
+        textField4.typeText("Sam1234")
+        
+        let textField5 = elementsQuery.children(matching: .textField).element(boundBy: 4)
+        textField5.tap()
+        textField5.tap()
+        textField5.typeText("Sam12345")
+        
+        let textField6 = elementsQuery.children(matching: .textField).element(boundBy: 5)
+        textField6.tap()
+        textField6.tap()
+        textField6.typeText("6302460328")
+        textField6.swipeUp()
+        
+        let textField7 = elementsQuery.children(matching: .textField).element(boundBy: 6)
+        textField7.tap()
+        textField7.tap()
+        textField7.typeText("11223344")
+        elementsQuery.buttons["Sign up"].tap()
+    }
 }
