@@ -199,7 +199,12 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate {
         
         GentsUser.shared.registerUser(withName: name, email: email, password: pwd, userData: data) { isOK in
             
-            if !isOK {
+            if isOK {
+                let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "tabsController")
+                
+                self.present(vc, animated: false, completion: nil)
+            } else {
                 UIHelper.showAlertInView(self, msg: "Signup failed!")
             }
         }
