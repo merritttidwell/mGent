@@ -31,13 +31,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="1000" text="Sign up to MVP for better iPhone X prices" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2Y-94-MBk">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="79"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="116"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="1000" text="Save xx% on repairs, and get an extra xx% when you trade in your phone" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="84z-PC-17w">
-                                        <rect key="frame" x="0.0" y="99" width="382" height="283"/>
+                                        <rect key="frame" x="0.0" y="136" width="382" height="246"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -252,6 +252,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <state key="normal" title="Please select"/>
+                                                <connections>
+                                                    <action selector="selectCarrier" destination="Y20-eT-Ben" eventType="touchUpInside" id="dyF-AP-v53"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Serial" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZbJ-Pt-Sc5">
                                                 <rect key="frame" x="0.0" y="534.33333333333337" width="398" height="20.333333333333371"/>
@@ -285,6 +288,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <state key="normal" title="Default"/>
+                                                <connections>
+                                                    <action selector="selectModel" destination="Y20-eT-Ben" eventType="touchUpInside" id="0ZP-ht-7JK"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mh1-g6-qDR">
                                                 <rect key="frame" x="0.0" y="687" width="398" height="50"/>
@@ -785,6 +791,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="A6o-8d-qtq"/>
+        <segue reference="lvK-kl-tJi"/>
     </inferredMetricsTieBreakers>
 </document>
