@@ -42,7 +42,8 @@ class GentsConfig: NSObject {
             return nil
         }
         
-        return Database.database(url: "https://gentconfig.firebaseio.com/")
+        //return Database.database(url: "https://gentconfig.firebaseio.com/")
+        return Database.database(app: app)
     }
     
     class func firebaseConfigAuth() -> Auth? {
@@ -51,8 +52,8 @@ class GentsConfig: NSObject {
             return nil
         }
         
-        //return Auth.auth(app: app)
-        return Auth.auth()
+        return Auth.auth(app: app)
+        //return Auth.auth()
     }
     
     //MARK: - updates
@@ -64,7 +65,7 @@ class GentsConfig: NSObject {
         }
     }
     
-    static func connectionDetect() {
+    /*static func connectionDetect() {
         let connectedRef = firebaseConfigDataBase()?.reference(withPath: ".info/connected")
         connectedRef?.observe(.value, with: { snapshot in
             if let connected = snapshot.value as? Bool, connected {
@@ -75,5 +76,5 @@ class GentsConfig: NSObject {
                 firebaseConfigDataBase()?.reference().keepSynced(false)
             }
         })
-    }
+    }*/
 }
