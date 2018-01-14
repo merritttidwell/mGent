@@ -31,13 +31,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="1000" text="Sign up to MVP for better iPhone X prices" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2Y-94-MBk">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="116"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="79"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="1000" text="Save xx% on repairs, and get an extra xx% when you trade in your phone" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="84z-PC-17w">
-                                        <rect key="frame" x="0.0" y="136" width="382" height="246"/>
+                                        <rect key="frame" x="0.0" y="99" width="382" height="283"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -303,7 +303,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="doSignup" destination="Y20-eT-Ben" eventType="touchUpInside" id="QPk-a4-N9h"/>
-                                                    <segue destination="PWa-KC-1Hf" kind="show" id="lvK-kl-tJi"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -342,7 +341,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oi3-S0-pTO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1507.2463768115942" y="61.956521739130437"/>
+            <point key="canvasLocation" x="1545" y="63"/>
         </scene>
         <!--MVP-->
         <scene sceneID="GwH-7c-s8b">
@@ -790,7 +789,4 @@
             <point key="canvasLocation" x="3550.7246376811595" y="390.48913043478262"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="lvK-kl-tJi"/>
-    </inferredMetricsTieBreakers>
 </document>
