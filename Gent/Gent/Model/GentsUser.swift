@@ -382,6 +382,22 @@ class GentsUser: NSObject {
         return GentsUser.firebaseGentsDataBase()?.reference().child("users").child(cuser.uid).child("payments").queryOrdered(byChild: "created")
     }
     
+    //MARK: - posts
+    
+    func posts(completion: @escaping (_ json: JSON?)->(Void)) {
+        
+        GentsUser.firebaseGentsDataBase()?.reference().child("posts").observeSingleEvent(of: .value, with: { dsnap in
+            
+            let values = dsnap.value
+            guard values != nil else {
+                completion(nil)
+                return
+            }
+            let json = JSON(values!)
+            completion(json)
+        })
+    }
+    
     //MARK: - DB connection listener
     
     static func connectionDetect() {
