@@ -195,7 +195,7 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate {
             return
         }
         
-        let data = ["email" : email, "name" : name, "phone" : phoneNumber, "mode" : model, "sn" : serial, "carrier" : carrier]
+        let data = ["email" : email, "name" : name, "phone" : phoneNumber, "mode" : model, "sn" : serial, "carrier" : carrier, "credit" : "0"]
         
         GentsUser.shared.registerUser(withName: name, email: email, password: pwd, userData: data) { isOK in
             
