@@ -25,6 +25,12 @@
 		8F108C771FD4710F001B69CB /* GentsUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E391C1F9BF15400290A87 /* GentsUser.swift */; };
 		8F108C781FD47120001B69CB /* StripeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */; };
 		8F2354601FCBBDB700731975 /* StripeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */; };
+		8F595EDB200D1D3100B9A9AA /* reademe.md in Resources */ = {isa = PBXBuildFile; fileRef = 8F595ED4200D1D3100B9A9AA /* reademe.md */; };
+		8F595EDC200D1D3100B9A9AA /* .firebaserc in Resources */ = {isa = PBXBuildFile; fileRef = 8F595ED5200D1D3100B9A9AA /* .firebaserc */; };
+		8F595EDD200D1D3100B9A9AA /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 8F595ED7200D1D3100B9A9AA /* index.js */; };
+		8F595EDE200D1D3100B9A9AA /* package-lock.json in Resources */ = {isa = PBXBuildFile; fileRef = 8F595ED8200D1D3100B9A9AA /* package-lock.json */; };
+		8F595EDF200D1D3100B9A9AA /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = 8F595ED9200D1D3100B9A9AA /* package.json */; };
+		8F595EE0200D1D3100B9A9AA /* firebase.json in Resources */ = {isa = PBXBuildFile; fileRef = 8F595EDA200D1D3100B9A9AA /* firebase.json */; };
 		8F5B1AC61FF73AAD00D11744 /* UITextFieldExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5B1AC51FF73AAD00D11744 /* UITextFieldExt.swift */; };
 		8F5B1ACA1FF75B0F00D11744 /* GUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5B1AC91FF75B0F00D11744 /* GUIViewController.swift */; };
 		8F5B1ACD1FF7601300D11744 /* GSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5B1ACC1FF7601300D11744 /* GSignupViewController.swift */; };
@@ -92,6 +98,12 @@
 		6BD37E521F9C65E100EEFCCC /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		6BD37E531F9C65E100EEFCCC /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeAPIClient.swift; sourceTree = "<group>"; };
+		8F595ED4200D1D3100B9A9AA /* reademe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = reademe.md; sourceTree = "<group>"; };
+		8F595ED5200D1D3100B9A9AA /* .firebaserc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .firebaserc; sourceTree = "<group>"; };
+		8F595ED7200D1D3100B9A9AA /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		8F595ED8200D1D3100B9A9AA /* package-lock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "package-lock.json"; sourceTree = "<group>"; };
+		8F595ED9200D1D3100B9A9AA /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		8F595EDA200D1D3100B9A9AA /* firebase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firebase.json; sourceTree = "<group>"; };
 		8F5B1AC51FF73AAD00D11744 /* UITextFieldExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExt.swift; sourceTree = "<group>"; };
 		8F5B1AC91FF75B0F00D11744 /* GUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUIViewController.swift; sourceTree = "<group>"; };
 		8F5B1ACC1FF7601300D11744 /* GSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSignupViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +205,27 @@
 				6BA65A901F8180220099D60F /* BuyBackViewController.swift */,
 			);
 			path = BuyBack;
+			sourceTree = "<group>";
+		};
+		8F595ED3200D1D3100B9A9AA /* FB_Func */ = {
+			isa = PBXGroup;
+			children = (
+				8F595ED4200D1D3100B9A9AA /* reademe.md */,
+				8F595ED5200D1D3100B9A9AA /* .firebaserc */,
+				8F595ED6200D1D3100B9A9AA /* functions */,
+				8F595EDA200D1D3100B9A9AA /* firebase.json */,
+			);
+			path = FB_Func;
+			sourceTree = "<group>";
+		};
+		8F595ED6200D1D3100B9A9AA /* functions */ = {
+			isa = PBXGroup;
+			children = (
+				8F595ED7200D1D3100B9A9AA /* index.js */,
+				8F595ED8200D1D3100B9A9AA /* package-lock.json */,
+				8F595ED9200D1D3100B9A9AA /* package.json */,
+			);
+			path = functions;
 			sourceTree = "<group>";
 		};
 		8F5B1ACB1FF75FF900D11744 /* Sign_up_in */ = {
@@ -306,6 +339,7 @@
 				8F8663A41FF418C60020F2E8 /* New UI */,
 				8F8663A31FF418A20020F2E8 /* Old UI */,
 				8F63AC7C1FD4B7AE0032F72F /* Stripe NodeJS server */,
+				8F595ED3200D1D3100B9A9AA /* FB_Func */,
 				6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */,
 				8FCBF1B3200147A800C70ECE /* GoogleService-Info-ConfigDB.plist */,
 				2E1E391E1F9BF16300290A87 /* Model */,
@@ -503,15 +537,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F595EDF200D1D3100B9A9AA /* package.json in Resources */,
+				8F595EDC200D1D3100B9A9AA /* .firebaserc in Resources */,
+				8F595EDB200D1D3100B9A9AA /* reademe.md in Resources */,
+				8F595EDE200D1D3100B9A9AA /* package-lock.json in Resources */,
 				8FAA33781FCBDC1A00D9F304 /* readme.md in Resources */,
 				920E980B1F79E63C00D97658 /* LaunchScreen.storyboard in Resources */,
 				6B1F239C1F9EE46300B6F9D0 /* UnderConstruction.xib in Resources */,
+				8F595EE0200D1D3100B9A9AA /* firebase.json in Resources */,
 				8F63AC801FD4B7E20032F72F /* server.js in Resources */,
 				6B896D7E1F81875B0070DCA7 /* GoogleService-Info.plist in Resources */,
 				8F63AC7F1FD4B7E20032F72F /* readme.md in Resources */,
 				8F86639D1FF318790020F2E8 /* Main_NewDesign.storyboard in Resources */,
 				920E98081F79E63C00D97658 /* Assets.xcassets in Resources */,
 				8FCBF1B4200147A900C70ECE /* GoogleService-Info-ConfigDB.plist in Resources */,
+				8F595EDD200D1D3100B9A9AA /* index.js in Resources */,
 				8F8663A11FF4164E0020F2E8 /* Info.plist in Resources */,
 				920E98061F79E63C00D97658 /* Main.storyboard in Resources */,
 			);
