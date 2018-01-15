@@ -5,7 +5,9 @@
       // Add the following rewrites section *within* "hosting"
      "rewrites": [ {
         "source": "/bigben", "function": "bigben"
-      } ]
+      } , {
+        "source": "/trigger1", "function": "trigger1"
+      }]
   
     }
   }
