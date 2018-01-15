@@ -1,0 +1,11 @@
+{
+    "hosting": {
+      "public": "",
+  
+      // Add the following rewrites section *within* "hosting"
+     "rewrites": [ {
+        "source": "/bigben", "function": "bigben"
+      } ]
+  
+    }
+  }
