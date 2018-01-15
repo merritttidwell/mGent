@@ -11,7 +11,7 @@ import Stripe
 import Alamofire
 
 struct StripeAPIData {
-    static let myServer = "http://localhost:3000"   //"https://gentsstripe.herokuapp.com"
+    static let myServer = "https://us-central1-gent-53de7.cloudfunctions.net"   //"http://localhost:3000"
     
 #if DEBUG
     static let publishableKey = "pk_test_5MG4Sw3JfAGO39ujgbCYkqyD"
