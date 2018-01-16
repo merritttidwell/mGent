@@ -327,7 +327,7 @@ class GentsUser: NSObject {
             let phone = value!["phone"] as? String ?? ""
             let sn = value!["sn"] as? String ?? ""
             let strpID = value!["strp_customer_id"] as? String ?? ""
-            let credit = value!["credit"] as? Float ?? 0.0
+            let credit = Float.init(value!["credit"] as? String ?? "0.0") ?? 0.0
             let paymentsRaw = value!["payments"] as Any?
             
             self.name = name
