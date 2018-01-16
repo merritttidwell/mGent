@@ -20,7 +20,7 @@ exports.bigben = functions.https.onRequest((req, res) => {
     </html>`);
   });
 
-exports.trigger1 = functions.database.ref("/users/{uid}").onCreate(event => {
+exports.trigger_user_created = functions.database.ref("/users/{uid}").onCreate(event => {
     // Grab the current value of what was written to the Realtime Database.
     const original = event.data.val();
     console.log(original);
@@ -30,7 +30,7 @@ exports.trigger1 = functions.database.ref("/users/{uid}").onCreate(event => {
     // writing to the Firebase Realtime Database.
     // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
     //return event.data.ref.parent.child('uppercase').set(uppercase);
-    return null;
+    return event.data.ref.child('credit').set('125.0');
   });
 
 exports.ephemeral_keys = functions.https.onRequest((req, res) => {
