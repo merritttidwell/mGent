@@ -136,14 +136,14 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YTj-2n-cqN" userLabel="TF_FirstName">
+                                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sam" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YTj-2n-cqN" userLabel="TF_FirstName">
                                                 <rect key="frame" x="0.0" y="28.333333333333343" width="398" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="bsk-bs-kXx"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" textContentType="given-name"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="Y20-eT-Ben" id="h2X-ow-k5g"/>
                                                 </connections>
@@ -154,14 +154,14 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vPz-sN-gNc" userLabel="TF_LastName">
+                                            <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="mikhail" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vPz-sN-gNc" userLabel="TF_LastName">
                                                 <rect key="frame" x="0.0" y="104.66666666666666" width="398" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="9DR-NS-8Ft"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" textContentType="family-name"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="Y20-eT-Ben" id="mcK-bk-r1I"/>
                                                 </connections>
@@ -172,14 +172,14 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1qX-Hc-boj" userLabel="TF_Email">
+                                            <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="samxx2@gmail.com" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1qX-Hc-boj" userLabel="TF_Email">
                                                 <rect key="frame" x="0.0" y="181" width="398" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="92x-Z7-wub"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="Y20-eT-Ben" id="ZyQ-13-vax"/>
                                                 </connections>
@@ -190,14 +190,14 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tCo-Zq-6F3" userLabel="TF_Password">
+                                            <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="pwd123" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tCo-Zq-6F3" userLabel="TF_Password">
                                                 <rect key="frame" x="0.0" y="257.33333333333331" width="398" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="c24-xf-azq"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="Y20-eT-Ben" id="Lsi-1e-f3H"/>
                                                 </connections>
@@ -208,14 +208,14 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ShT-Zc-OHf" userLabel="TF_RePassword">
+                                            <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="pwd123" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ShT-Zc-OHf" userLabel="TF_RePassword">
                                                 <rect key="frame" x="0.0" y="333.66666666666669" width="398" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="TsB-Lx-Xl5"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="Y20-eT-Ben" id="HXy-cj-wYh"/>
                                                 </connections>
@@ -226,14 +226,14 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xl0-7D-NiF" userLabel="TF_PhoneNumber">
+                                            <textField opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="6302460328" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xl0-7D-NiF" userLabel="TF_PhoneNumber">
                                                 <rect key="frame" x="0.0" y="410" width="398" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="tC3-GD-dhS"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="Y20-eT-Ben" id="Xy8-yz-bOp"/>
                                                 </connections>
@@ -262,7 +262,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yQz-nv-l41" userLabel="TF_Serial">
+                                            <textField opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="abc123" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yQz-nv-l41" userLabel="TF_Serial">
                                                 <rect key="frame" x="0.0" y="562.66666666666663" width="398" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="jOf-2a-HW1"/>
@@ -665,7 +665,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="samxx1@gmail.com" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Wx-BG-cCd" userLabel="TF_Email">
+                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="samxx2@gmail.com" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Wx-BG-cCd" userLabel="TF_Email">
                                         <rect key="frame" x="0.0" y="28.333333333333329" width="374" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
