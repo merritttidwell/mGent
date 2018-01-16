@@ -8,7 +8,7 @@ var stripe = require("stripe")("sk_test_Qc3frsXwp1sA8KnQSXC1SU6i");
 //  response.send("Hello from Firebase!");
 // });
 
-exports.bigben = functions.https.onRequest((req, res) => {
+/*exports.bigben = functions.https.onRequest((req, res) => {
     const hours = (new Date().getHours() % 12) + 1 // london is UTC + 1hr;
     res.status(200).send(`<!doctype html>
       <head>
@@ -18,7 +18,7 @@ exports.bigben = functions.https.onRequest((req, res) => {
         ${'BONG '.repeat(hours)}
       </body>
     </html>`);
-  });
+  });*/
 
 exports.trigger_user_created = functions.database.ref("/users/{uid}").onCreate(event => {
     // Grab the current value of what was written to the Realtime Database.
