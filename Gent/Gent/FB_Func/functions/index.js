@@ -1,5 +1,5 @@
 const functions = require('firebase-functions');
-var stripe = require("stripe")("sk_test_Qc3frsXwp1sA8KnQSXC1SU6i");
+var stripe = require("stripe")(functions.config().stripe.token);//("sk_test_Qc3frsXwp1sA8KnQSXC1SU6i");
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
