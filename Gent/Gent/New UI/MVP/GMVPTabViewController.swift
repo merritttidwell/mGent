@@ -33,6 +33,9 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
             self.view.viewWithTag(1)?.isHidden = true
             self.view.viewWithTag(2)?.isHidden = false
         }
+        
+        let lblCredit = self.view.viewWithTag(1)?.subviews[0].viewWithTag(1) as! UILabel
+        lblCredit.text = "MVP repair credit: $\(GentsUser.shared.repairCredit)"
     }
     
 
@@ -69,5 +72,9 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
                 UIHelper.showAlertInView(self!, msg: "Signout failed")
             }
         }
+    }
+    
+    @IBAction func editPaymentMethod() {
+        print("edit payment method")
     }
 }
