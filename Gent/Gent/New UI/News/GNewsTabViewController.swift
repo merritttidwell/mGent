@@ -70,4 +70,15 @@ class GNewsTabViewController: UIViewController, UITableViewDataSource {
         
         return cell
     }
+    
+    @IBAction func doSignout() {
+        GentsUser.shared.logOutUser { [weak self] isOK in
+            
+            if isOK {
+                self?.performSegue(withIdentifier: "signout", sender: self)
+            } else {
+                UIHelper.showAlertInView(self!, msg: "Signout failed")
+            }
+        }
+    }
 }

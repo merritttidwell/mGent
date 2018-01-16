@@ -23,6 +23,18 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if GentsUser.firebaseGentsAuth()?.currentUser != nil {
+            self.view.viewWithTag(1)?.isHidden = false
+            self.view.viewWithTag(2)?.isHidden = true
+        } else {
+            self.view.viewWithTag(1)?.isHidden = true
+            self.view.viewWithTag(2)?.isHidden = false
+        }
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -46,5 +58,16 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
         cell.textLabel?.text = "Last payment $xx (xx/xx)"
         
         return cell
+    }
+    
+    @IBAction func doSignout() {
+        GentsUser.shared.logOutUser { [weak self] isOK in
+            
+            if isOK {
+                self?.performSegue(withIdentifier: "signout", sender: self)
+            } else {
+                UIHelper.showAlertInView(self!, msg: "Signout failed")
+            }
+        }
     }
 }
