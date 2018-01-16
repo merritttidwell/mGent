@@ -387,7 +387,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k6t-gm-usf">
+                                            <button opaque="NO" tag="2000" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k6t-gm-usf">
                                                 <rect key="frame" x="0.0" y="171.66666666666669" width="398" height="28.333333333333343"/>
                                                 <state key="normal">
                                                     <attributedString key="attributedTitle">
@@ -518,10 +518,18 @@
                         <viewLayoutGuide key="safeArea" id="FT1-Qc-YPd"/>
                     </view>
                     <navigationItem key="navigationItem" title="[ MobileGent ]" id="UJE-DT-a7v">
-                        <barButtonItem key="rightBarButtonItem" title="Signout" id="KLh-Cr-d0L"/>
+                        <barButtonItem key="rightBarButtonItem" title="Signout" id="KLh-Cr-d0L">
+                            <connections>
+                                <action selector="doSignout" destination="tYQ-YW-ZVJ" id="nVv-ai-5UA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="oXG-l5-upH" kind="unwind" identifier="signout" animates="NO" unwindAction="unwindToInitViewWithSegue:" id="Pco-DN-zM0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DAo-s8-WnF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="oXG-l5-upH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4567" y="390"/>
         </scene>
@@ -646,13 +654,19 @@
                         <viewLayoutGuide key="safeArea" id="NJa-En-A1A"/>
                     </view>
                     <navigationItem key="navigationItem" title="[ MobileGent ]" id="ebo-Ek-sYw">
-                        <barButtonItem key="rightBarButtonItem" title="Signout" id="4yn-LC-gH4"/>
+                        <barButtonItem key="rightBarButtonItem" title="Signout" id="4yn-LC-gH4">
+                            <connections>
+                                <action selector="doSignout" destination="mWm-rH-bde" id="h95-dh-WIt"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="table" destination="dUs-5a-20p" id="bU1-6e-uTI"/>
+                        <segue destination="zng-Dh-qCw" kind="unwind" identifier="signout" animates="NO" unwindAction="unwindToInitViewWithSegue:" id="p29-qA-1az"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RlA-g8-Pvx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="zng-Dh-qCw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4566.666666666667" y="-267.39130434782612"/>
         </scene>
