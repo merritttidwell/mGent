@@ -10,7 +10,11 @@ import UIKit
 
 class GMVPTabViewController: UIViewController, UITableViewDataSource {
     
-    @IBOutlet weak var table: UITableView?
+    //@IBOutlet weak var table: UITableView!
+    
+    @IBOutlet weak var lblCredit: UILabel!
+    @IBOutlet weak var lblCC: UILabel!
+    @IBOutlet weak var lblCCExpDate: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +38,13 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
             self.view.viewWithTag(2)?.isHidden = false
         }
         
-        let lblCredit = self.view.viewWithTag(1)?.subviews[0].viewWithTag(1) as! UILabel
+        //let lblCredit = self.view.viewWithTag(1)?.subviews[0].viewWithTag(1) as! UILabel
         lblCredit.text = "MVP repair credit: $\(GentsUser.shared.repairCredit)"
+        
+        //let lblCC = self.view.viewWithTag(1)?.subviews[0].viewWithTag(2) as! UILabel
+        lblCC.text = "1234-1234-1234-1234"
+        
+        lblCCExpDate.text = "11/22"
     }
     
 
