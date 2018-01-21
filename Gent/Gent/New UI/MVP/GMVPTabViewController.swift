@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Stripe
 
 class GMVPTabViewController: UIViewController, UITableViewDataSource {
     
@@ -16,10 +17,19 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var lblCC: UILabel!
     @IBOutlet weak var lblCCExpDate: UILabel!
 
+    var payctx :STPPaymentContext?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        guard GentsUser.shared.customerCtx != nil else {
+            payctx = nil
+            return
+        }
+        
+        payctx = STPPaymentContext(customerContext: GentsUser.shared.customerCtx!)
+        payctx?.hostViewController = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,18 +43,35 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
         if GentsUser.firebaseGentsAuth()?.currentUser != nil {
             self.view.viewWithTag(1)?.isHidden = false
             self.view.viewWithTag(2)?.isHidden = true
+            
+            lblCredit.text = "MVP repair credit: $\(GentsUser.shared.repairCredit)"
+            
+            self.updateCC()
         } else {
             self.view.viewWithTag(1)?.isHidden = true
             self.view.viewWithTag(2)?.isHidden = false
         }
-        
-        //let lblCredit = self.view.viewWithTag(1)?.subviews[0].viewWithTag(1) as! UILabel
-        lblCredit.text = "MVP repair credit: $\(GentsUser.shared.repairCredit)"
-        
-        //let lblCC = self.view.viewWithTag(1)?.subviews[0].viewWithTag(2) as! UILabel
-        lblCC.text = "1234-1234-1234-1234"
-        
-        lblCCExpDate.text = "11/22"
+    }
+    
+    private func updateCC() {
+        let cusCtx = GentsUser.shared.customerCtx
+        cusCtx?.retrieveCustomer({ [weak self] cus, err in
+            guard cus != nil && err == nil else {
+                return
+            }
+            
+            let card = cus?.defaultSource as? STPCard
+            print(card)
+            
+            guard let cc = card else {
+                self?.lblCC.text = "N/A"
+                self?.lblCCExpDate.text = "N/A"
+                return
+            }
+            
+            self?.lblCC.text = "xxxx-xxxx-xxxx-\((card?.last4)!)"
+            self?.lblCCExpDate.text = "\((card?.expMonth)!)/\((card?.expYear)!)"
+        })
     }
     
 
@@ -84,6 +111,13 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func editPaymentMethod() {
+        
         print("edit payment method")
+        
+        guard payctx != nil else {
+            return
+        }
+        
+        payctx?.presentPaymentMethodsViewController()
     }
 }
