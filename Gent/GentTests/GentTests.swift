@@ -12,8 +12,8 @@ import XCTest
 class GentTests: XCTestCase {
     
     let userName = "Sam10 Mikhail"
-    let userEmail = "sam10@gmail.com"
-    let userPassword = "Sam1234"
+    let userEmail = "samxx2@gmail.com"
+    let userPassword = "pwd123"
     let userData = [
         "phone" : "6302460328",
         "carrier" : "Sprint",
