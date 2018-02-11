@@ -234,6 +234,12 @@ class GentsUser: NSObject {
                     })
                 } else {
                     //self.firebaseUser = nil
+                    
+                    if self.strpCustomerID != "" {
+                        StripeAPIClient.sharedClient.cusID = self.strpCustomerID
+                        self.customerCtx = STPCustomerContext(keyProvider: StripeAPIClient.sharedClient)
+                    }
+                    
                     completion(nil)
                 }
             })
@@ -366,6 +372,9 @@ class GentsUser: NSObject {
             completion?(NSError(domain: "Payment", code: 2, userInfo: nil))
             return
         }
+        
+        customerCtx?.clearCachedCustomer()
+        customerCtx = STPCustomerContext(keyProvider: StripeAPIClient.sharedClient)
         
         customerCtx?.retrieveCustomer({ [weak self] (cust, err) in
             
