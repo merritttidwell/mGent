@@ -356,21 +356,38 @@ class GentsUser: NSObject {
     func pay(amount: Int, description: String, host: UIViewController? = nil, completion: STPErrorBlock? = nil) {
         
         guard GentsUser.firebaseGentsAuth()?.currentUser != nil else {
+            print("no valid user logged-in")
+            completion?(NSError(domain: "Payment", code: 1, userInfo: nil))
             return
         }
         
         guard customerCtx != nil else {
             print("customer context n/a")
+            completion?(NSError(domain: "Payment", code: 2, userInfo: nil))
             return
         }
         
-        payp = payp.filter { if !$0.isFulfilled { return true }; return false }
-        
-        let pp = payProcess(amount: amount, desc: description, customerContext: customerCtx!, payCompletion: completion)
-        pp.payCtx.hostViewController = host
-        payp.append(pp)
-        
-        pp.pay()
+        customerCtx?.retrieveCustomer({ [weak self] (cust, err) in
+            
+            guard cust != nil && err == nil else {
+                completion?(NSError(domain: "Payment", code: 3, userInfo: nil))
+                return
+            }
+            
+            let card = cust?.defaultSource as? STPCard
+            if card != nil {
+                self?.payp = (self?.payp.filter { if !$0.isFulfilled { return true }; return false })!
+                
+                let pp = payProcess(amount: amount, desc: description, customerContext: (self?.customerCtx)!, payCompletion: completion)
+                pp.payCtx.hostViewController = host
+                self?.payp.append(pp)
+                
+                pp.pay()
+            } else {
+                print("should add CC")
+                completion?(NSError(domain: "Payment", code: 4, userInfo: nil))
+            }
+        })
     }
     
     func getPayments() -> DatabaseQuery? {
