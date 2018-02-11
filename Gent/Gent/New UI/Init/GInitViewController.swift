@@ -22,10 +22,12 @@ class GInitViewController: GUIViewController {
         saveLabel?.text = "Save \(11)% on repairs, and get an extra \(22)% when you trade in your phone"
         
         if GentsUser.firebaseGentsAuth()?.currentUser != nil {
-            let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "tabsController")
-            
-            self.present(vc, animated: false, completion: nil)
+            GentsUser.shared.reloadUserData(completion: { isReloaded in
+                let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "tabsController")
+                
+                self.present(vc, animated: false, completion: nil)
+            })
         }
     }
 
