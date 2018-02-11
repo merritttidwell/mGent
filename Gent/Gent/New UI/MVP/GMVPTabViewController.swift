@@ -118,6 +118,20 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
             return
         }
         
-        payctx?.presentPaymentMethodsViewController()
+        GentsUser.shared.pay(amount: 100, description: "test1", host: self) { [unowned self] err in
+            print(err as Any)
+            
+            if err != nil {
+                
+                let e = err! as NSError
+                
+                if e.domain == "Payment" && e.code == 4 {
+                    DispatchQueue.main.async {
+                        //UIHelper.showAlertInView(self, msg: "Payment failed!\nPlease add payment card.")
+                        self.payctx?.presentPaymentMethodsViewController()
+                    }
+                }
+            }
+        }
     }
 }
