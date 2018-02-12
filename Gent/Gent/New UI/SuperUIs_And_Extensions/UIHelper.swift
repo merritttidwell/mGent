@@ -62,6 +62,26 @@ internal class UIHelper {
         return (components.year!, components.month!, components.day!, components.hour!, components.minute!, components.second!)
     }
     
+    class func getDateCompnents(date: Date) -> (year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) {
+        
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components([.day , .month , .year, .hour, .minute, .second], from: date)
+        
+        return (components.year!, components.month!, components.day!, components.hour!, components.minute!, components.second!)
+    }
+    
+    class func getDateCompnents(date: String) -> (year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
+        dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
+        let sdate = dateFormatter.date(from: date)!
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components([.day , .month , .year, .hour, .minute, .second], from: sdate)
+        
+        return (components.year!, components.month!, components.day!, components.hour!, components.minute!, components.second!)
+    }
+    
     class func convertDictionaryToString(_ dict: [String:AnyObject]) -> String? {
         
         var jsonData: Data?
@@ -84,5 +104,17 @@ internal class UIHelper {
             log = log + (">> " + logText + "\r\n")
             logView.text = log
         }
+    }
+    
+    class func UTCToLocal(time:Double) -> String {
+        
+        let date = Date(timeIntervalSince1970: time)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
+        dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
+        dateFormatter.timeZone = NSTimeZone.local
+        let localDate = dateFormatter.string(from: date)
+        
+        return localDate
     }
 }
