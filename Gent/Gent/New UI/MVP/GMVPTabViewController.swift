@@ -8,16 +8,19 @@
 
 import UIKit
 import Stripe
+import Firebase
+import SwiftyJSON
 
 class GMVPTabViewController: UIViewController, UITableViewDataSource {
     
-    //@IBOutlet weak var table: UITableView!
+    @IBOutlet weak var table: UITableView!
     
     @IBOutlet weak var lblCredit: UILabel!
     @IBOutlet weak var lblCC: UILabel!
     @IBOutlet weak var lblCCExpDate: UILabel!
 
-    var payctx :STPPaymentContext?
+    var payctx : STPPaymentContext?
+    var paymentList : [DataSnapshot]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +50,19 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
             lblCredit.text = "MVP repair credit: $\(GentsUser.shared.repairCredit)"
             
             self.updateCC()
+            
+            let query = GentsUser.shared.getPayments()
+            
+            guard query != nil else {
+                UIHelper.showAlertInView(self, msg: "Failed to retrieve payments!")
+                return
+            }
+            
+            query?.observeSingleEvent(of: .value, with: { [weak self] snapshot in
+                
+                self?.paymentList = snapshot.children.reversed() as? [DataSnapshot]
+                self?.table.reloadData()
+            })
         } else {
             self.view.viewWithTag(1)?.isHidden = true
             self.view.viewWithTag(2)?.isHidden = false
@@ -61,9 +77,9 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
             }
             
             let card = cus?.defaultSource as? STPCard
-            print(card)
+            print(card as Any)
             
-            guard let cc = card else {
+            guard card != nil else {
                 self?.lblCC.text = "N/A"
                 self?.lblCCExpDate.text = "N/A"
                 return
@@ -88,13 +104,29 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
     //MARK: UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if paymentList == nil {
+            return 0
+        }
+        return (paymentList?.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath)
         
-        cell.textLabel?.text = "Last payment $xx (xx/xx)"
+        let pay = paymentList![indexPath.row]
+        let amount = (pay.value as! NSDictionary)["amount"] as! Float / 100.0
+        let epoch = (pay.value as! NSDictionary)["created"] as! Double
+        let localTime = UIHelper.UTCToLocal(time: epoch)
+        
+        let comp = UIHelper.getDateCompnents(date: localTime)
+        
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "Last payment $\(amount) (\(comp.month)/\(comp.year))"
+        } else if indexPath.row == (paymentList?.count)! - 1 {
+            cell.textLabel?.text = "First payment $\(amount) (\(comp.month)/\(comp.year))"
+        } else {
+            cell.textLabel?.text = "Next payment $\(amount) (\(comp.month)/\(comp.year))"
+        }
         
         return cell
     }
