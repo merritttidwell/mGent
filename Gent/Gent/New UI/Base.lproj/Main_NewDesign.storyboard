@@ -564,6 +564,7 @@
                         <outlet property="lblCC" destination="Kmd-WO-HHq" id="mGe-aR-5M9"/>
                         <outlet property="lblCCExpDate" destination="gKa-aK-uc3" id="pwh-PQ-Nrx"/>
                         <outlet property="lblCredit" destination="2V5-LA-dZ8" id="XHe-jR-u89"/>
+                        <outlet property="table" destination="L4a-mL-K0Y" id="FXz-6D-y0A"/>
                         <segue destination="oXG-l5-upH" kind="unwind" identifier="signout" animates="NO" unwindAction="unwindToInitViewWithSegue:" id="Pco-DN-zM0"/>
                     </connections>
                 </viewController>
