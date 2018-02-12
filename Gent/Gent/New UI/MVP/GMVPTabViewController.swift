@@ -58,7 +58,7 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
                 return
             }
             
-            query?.observeSingleEvent(of: .value, with: { [weak self] snapshot in
+            query?.observe(.value, with: { [weak self] snapshot in
                 
                 self?.paymentList = snapshot.children.reversed() as? [DataSnapshot]
                 self?.table.reloadData()
