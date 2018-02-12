@@ -319,7 +319,7 @@ class GentsUser: NSObject {
             return
         }
         
-        GentsUser.firebaseGentsDataBase()?.reference().child("users").child(cuser.uid).observeSingleEvent(of: .value) { snapshot in
+        GentsUser.firebaseGentsDataBase()?.reference().child("users").child(cuser.uid).observe(.value) { snapshot in
             let value = snapshot.value as? NSDictionary
             guard value != nil else {
                 completion(false)
