@@ -118,7 +118,7 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
             return
         }
         
-        GentsUser.shared.pay(amount: 100, description: "test1", host: self) { [unowned self] err in
+        /*GentsUser.shared.pay(amount: 100, description: "test1", host: self) { [unowned self] err in
             print(err as Any)
             
             if err != nil {
@@ -132,6 +132,8 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
                     }
                 }
             }
-        }
+        }*/
+        
+        self.payctx?.presentPaymentMethodsViewController()
     }
 }
