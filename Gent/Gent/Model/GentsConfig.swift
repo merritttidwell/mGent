@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import SwiftyJSON
 
 class GentsConfig: NSObject {
     static let shared = GentsConfig()
@@ -63,6 +64,27 @@ class GentsConfig: NSObject {
             completion(true)
             print(dsnap.value)
         }
+    }
+    
+    class func getModelConfig(model: String? = nil, completed: @escaping (JSON?)->(Void)) {
+        
+        GentsConfig.firebaseConfigDataBase()?.reference().child("SystemSetup/Percents").observeSingleEvent(of: .value, with: { snap in
+            var model = model
+            let values = snap.value as! NSDictionary
+            var specs : [String:Any]?
+            if model == nil {
+                model = UIDevice.current.modelName.lowercased().replacingOccurrences(of: " ", with: "") as String
+            } else {
+                model = model?.lowercased().replacingOccurrences(of: " ", with: "")
+            }
+            for k in values.allKeys {
+                if (k as! String).lowercased() == model {
+                    specs = values.value(forKey: k as! String) as? [String : Any]
+                }
+            }
+            
+            completed(JSON(specs as Any))
+        })
     }
     
     /*static func connectionDetect() {
