@@ -154,46 +154,72 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate {
         
         let fname = (self.view.viewWithTag(1) as? UITextField)?.text ?? ""
         guard fname != "" else {
+            self.view.viewWithTag(1)?.layer.borderColor = UIColor.red.cgColor
+            UIHelper.showAlertInView(self, msg: "Please complete needed details")
             return
         }
+        self.view.viewWithTag(1)?.layer.borderColor = UIColor.black.cgColor
         
         let lname = (self.view.viewWithTag(2) as? UITextField)?.text ?? ""
         guard lname != "" else {
+            self.view.viewWithTag(2)?.layer.borderColor = UIColor.red.cgColor
+            UIHelper.showAlertInView(self, msg: "Please complete needed details")
             return
         }
+        self.view.viewWithTag(2)?.layer.borderColor = UIColor.black.cgColor
         
         let name = fname + " " + lname
         
         let email = (self.view.viewWithTag(3) as? UITextField)?.text ?? ""
         guard email != "" else {
+            self.view.viewWithTag(3)?.layer.borderColor = UIColor.red.cgColor
+            UIHelper.showAlertInView(self, msg: "Please complete needed details")
             return
         }
+        self.view.viewWithTag(3)?.layer.borderColor = UIColor.black.cgColor
         
         let pwd = (self.view.viewWithTag(4) as? UITextField)?.text ?? ""
         let repwd = (self.view.viewWithTag(5) as? UITextField)?.text ?? ""
         guard pwd != "" && pwd == repwd else {
+            self.view.viewWithTag(4)?.layer.borderColor = UIColor.red.cgColor
+            self.view.viewWithTag(5)?.layer.borderColor = UIColor.red.cgColor
+            UIHelper.showAlertInView(self, msg: "Please complete needed details")
             return
         }
+        self.view.viewWithTag(4)?.layer.borderColor = UIColor.black.cgColor
+        self.view.viewWithTag(5)?.layer.borderColor = UIColor.black.cgColor
         
         let phoneNumber = (self.view.viewWithTag(6) as? UITextField)?.text ?? ""
         guard phoneNumber != "" else {
+            self.view.viewWithTag(6)?.layer.borderColor = UIColor.red.cgColor
+            UIHelper.showAlertInView(self, msg: "Please complete needed details")
             return
         }
+        self.view.viewWithTag(6)?.layer.borderColor = UIColor.black.cgColor
         
         let carrier = (self.view.viewWithTag(1001) as? UIButton)?.currentTitle ?? ""
         guard carrier != "" && carrier.lowercased() != "please select" else {
+            self.view.viewWithTag(1001)?.layer.borderColor = UIColor.red.cgColor
+            UIHelper.showAlertInView(self, msg: "Please complete needed details")
             return
         }
+        self.view.viewWithTag(1001)?.layer.borderColor = UIColor.black.cgColor
         
         let serial = (self.view.viewWithTag(7) as? UITextField)?.text ?? ""
         guard serial != "" else {
+            self.view.viewWithTag(7)?.layer.borderColor = UIColor.red.cgColor
+            UIHelper.showAlertInView(self, msg: "Please complete needed details")
             return
         }
+        self.view.viewWithTag(7)?.layer.borderColor = UIColor.black.cgColor
         
         let model = (self.view.viewWithTag(1002) as? UIButton)?.currentTitle ?? ""
         guard model != "" && model.lowercased() != "default" else {
+            self.view.viewWithTag(1002)?.layer.borderColor = UIColor.red.cgColor
+            UIHelper.showAlertInView(self, msg: "Please complete needed details")
             return
         }
+        self.view.viewWithTag(1002)?.layer.borderColor = UIColor.black.cgColor
         
         let data = ["email" : email, "name" : name, "phone" : phoneNumber, "mode" : model, "sn" : serial, "carrier" : carrier, "credit" : "0"]
         
