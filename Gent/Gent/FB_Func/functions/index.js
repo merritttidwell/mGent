@@ -226,5 +226,8 @@ exports.subscribePlan = functions.https.onRequest((req, res) => {
       customer: cus,
       items: [{plan: 'GentsBasicPlan'}],
     });
+
+    res.status = 200
+    res.end(JSON.stringify(subscription));
   }
 })
