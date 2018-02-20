@@ -408,6 +408,14 @@ class GentsUser: NSObject {
         return GentsUser.firebaseGentsDataBase()?.reference().child("users").child(cuser.uid).child("payments").queryOrdered(byChild: "created")
     }
     
+    class func addPaymentCard(customerCtx: STPCustomerContext, host: UIViewController, delegate: STPPaymentContextDelegate?) {
+        
+        let payContext = STPPaymentContext.init(customerContext: customerCtx)
+        payContext.hostViewController = host
+        payContext.delegate = delegate
+        payContext.presentPaymentMethodsViewController()
+    }
+    
     //MARK: - posts
     
     func posts(completion: @escaping (_ json: JSON?)->(Void)) {
