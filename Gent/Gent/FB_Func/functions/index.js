@@ -182,7 +182,6 @@ exports.charge_prod = functions.https.onRequest((req,res) => {
 
 exports.charge_dev = functions.https.onRequest((req,res) => {
   if (req.method === "POST") {
-    console.log("charge");
     console.log(req.headers);
 
     cus = req.headers["cus"]
@@ -217,3 +216,15 @@ exports.charge_dev = functions.https.onRequest((req,res) => {
     });
   }
 });
+
+exports.subscribePlan = functions.https.onRequest((req, res) => {
+  if (req.method === "POST") {
+    console.log(req.headers);
+    cus = req.headers["cus"];
+
+    const subscription = stripe.subscriptions.create({
+      customer: cus,
+      items: [{plan: 'GentsBasicPlan'}],
+    });
+  }
+})
