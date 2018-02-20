@@ -408,9 +408,13 @@ class GentsUser: NSObject {
         return GentsUser.firebaseGentsDataBase()?.reference().child("users").child(cuser.uid).child("payments").queryOrdered(byChild: "created")
     }
     
-    class func addPaymentCard(customerCtx: STPCustomerContext, host: UIViewController, delegate: STPPaymentContextDelegate?) {
+    func addPaymentCard(host: UIViewController?, delegate: STPPaymentContextDelegate? = nil) {
         
-        let payContext = STPPaymentContext.init(customerContext: customerCtx)
+        guard customerCtx != nil && host != nil else {
+            return
+        }
+        
+        let payContext = STPPaymentContext.init(customerContext: customerCtx!)
         payContext.hostViewController = host
         payContext.delegate = delegate
         payContext.presentPaymentMethodsViewController()
