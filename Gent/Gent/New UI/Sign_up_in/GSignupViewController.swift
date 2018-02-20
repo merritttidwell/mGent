@@ -8,16 +8,23 @@
 
 import UIKit
 import SwiftyJSON
+import Stripe
 
-class GSignupViewController: GUIViewController, UITextFieldDelegate {
+class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentCardTextFieldDelegate {
     
     var alertController : UIAlertController?
     var isAlertControllerDisplayed = false
+    
+    var paymentCardTextField : STPPaymentCardTextField?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let cardView = self.view.viewWithTag(8)!
+        paymentCardTextField = STPPaymentCardTextField.init(frame: cardView.bounds)
+        paymentCardTextField?.delegate = self
+        cardView.addSubview(paymentCardTextField!)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,6 +42,22 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: STPPaymentCardTextFieldDelegate
+    
+    func paymentCardTextFieldDidBeginEditing(_ textField: STPPaymentCardTextField) {
+        UIHelper.animateViewUp(self.view, with: OnScreenKBListener.shared.keyboardHeight)
+    }
+    
+    func paymentCardTextFieldDidEndEditing(_ textField: STPPaymentCardTextField) {
+        UIHelper.animateViewDown(self.view)
+    }
+    
+    func paymentCardTextFieldDidChange(_ textField: STPPaymentCardTextField) {
+        // Toggle buy button state
+        let signupButton = self.view.viewWithTag(9) as! UIButton
+        signupButton.isEnabled = textField.isValid
     }
     
 
@@ -222,44 +245,48 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate {
         }
         self.view.viewWithTag(1002)?.layer.borderColor = UIColor.black.cgColor
         
-        let data = ["email" : email, "name" : name, "phone" : phoneNumber, "mode" : model, "sn" : serial, "carrier" : carrier, "credit" : "0"]
-        
-        GentsConfig.getPaymentValues { [weak self] json in
+        print(paymentCardTextField!.cardParams)
+        STPAPIClient.shared().createToken(withCard: paymentCardTextField!.cardParams, completion: { (ctok, err) in
             
-            guard json != nil else {
-                return
-            }
+            let data = ["email" : email, "name" : name, "phone" : phoneNumber, "mode" : model, "sn" : serial, "carrier" : carrier, "credit" : "0"]
             
-            let iPay = json!["initPayment"].float
-            let mPay = json!["monthlyPayment"].float
-            
-            guard iPay != nil && mPay != nil else {
-                return
-            }
-            
-            DispatchQueue.main.async {
+            GentsConfig.getPaymentValues { [weak self] json in
                 
-                let alert = UIAlertController.init(title: "Payment plan", message: "Dear customer, Kindly be informed that by signing-up with Mobile Gents, you will pay $\(iPay!) as initail payment and $\(mPay!) monthly", preferredStyle: .alert)
+                guard json != nil else {
+                    return
+                }
                 
-                alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: { action in
+                let iPay = json!["initPayment"].float
+                let mPay = json!["monthlyPayment"].float
+                
+                guard iPay != nil && mPay != nil else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
                     
-                    GentsUser.shared.registerUser(withName: name, email: email, password: pwd, userData: data) { isOK in
+                    let alert = UIAlertController.init(title: "Payment plan", message: "Dear customer, Kindly be informed that by signing-up with Mobile Gents, you will pay $\(iPay!) as initail payment and $\(mPay!) monthly", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: { action in
                         
-                        if isOK {
-                            let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
-                            let vc = sb.instantiateViewController(withIdentifier: "tabsController")
+                        GentsUser.shared.registerUser(withName: name, email: email, password: pwd, cardToken: ctok, userData: data) { isOK in
                             
-                            self?.present(vc, animated: false, completion: nil)
-                        } else {
-                            UIHelper.showAlertInView(self, msg: "Signup failed!")
+                            if isOK {
+                                let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
+                                let vc = sb.instantiateViewController(withIdentifier: "tabsController")
+                                
+                                self?.present(vc, animated: false, completion: nil)
+                            } else {
+                                UIHelper.showAlertInView(self, msg: "Signup failed!")
+                            }
                         }
-                    }
-                }))
-                
-                alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-                
-                self?.present(alert, animated: true, completion: nil)
+                    }))
+                    
+                    alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+                    
+                    self?.present(alert, animated: true, completion: nil)
+                }
             }
-        }
+        })
     }
 }
