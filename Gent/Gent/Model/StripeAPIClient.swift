@@ -57,15 +57,27 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
         }
     }
 
-    func createStripeCustomer(email: String, completion: @escaping STPJSONResponseCompletionBlock) {
-        #if PROD
-            let url = self.baseURL.appendingPathComponent("create_customer_prod")
-        #else
-            let url = self.baseURL.appendingPathComponent("create_customer_dev")
-        #endif
-        Alamofire.request(url, method: .post, headers: [
-            "email": email
-            ])
+    func createStripeCustomer(email: String, cardToken: STPToken? = nil,completion: @escaping STPJSONResponseCompletionBlock) {
+        var url : URL!
+        
+        if cardToken != nil {
+            #if PROD
+                url = self.baseURL.appendingPathComponent("create_customer_with_card_prod")
+            #else
+                url = self.baseURL.appendingPathComponent("create_customer_with_card_dev")
+            #endif
+        } else {
+            #if PROD
+                url = self.baseURL.appendingPathComponent("create_customer_prod")
+            #else
+                url = self.baseURL.appendingPathComponent("create_customer_dev")
+            #endif
+        }
+        var hdrs : [String: String] = ["email": email]
+        if cardToken != nil {
+            hdrs["cardToken"] = cardToken!.tokenId
+        }
+        Alamofire.request(url, method: .post, headers: hdrs)
             .validate(statusCode: 200..<300)
             .responseJSON { responseJSON in
                 switch responseJSON.result {
