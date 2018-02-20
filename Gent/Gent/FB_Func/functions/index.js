@@ -142,6 +142,52 @@ exports.create_customer_dev = functions.https.onRequest((req,res) => {
   }
 });
 
+exports.create_customer_with_card_dev = functions.https.onRequest((req,res) => {
+  if (req.method === "POST") {
+    console.log("createCustomerWithCard");
+    eid = req.headers["email"]
+    ctok = req.headers["cardToken"]
+    console.log(eid);
+
+    stripeDev.customers.create({
+      email: eid,
+      source: ctok
+    }, function(err, customer) {
+      //console.log(customer);
+      if (customer != null && err == null) {
+        res.status = 200
+        res.end(JSON.stringify({id: customer.id}));
+      } else {
+        res.status = 500
+        res.end();
+      }
+    });
+  }
+});
+
+exports.create_customer_with_card_prod = functions.https.onRequest((req,res) => {
+  if (req.method === "POST") {
+    console.log("createCustomerWithCard");
+    eid = req.headers["email"]
+    ctok = req.headers["cardToken"]
+    console.log(eid);
+
+    stripeProd.customers.create({
+      email: eid,
+      source: ctok
+    }, function(err, customer) {
+      //console.log(customer);
+      if (customer != null && err == null) {
+        res.status = 200
+        res.end(JSON.stringify({id: customer.id}));
+      } else {
+        res.status = 500
+        res.end();
+      }
+    });
+  }
+});
+
 exports.charge_prod = functions.https.onRequest((req,res) => {
   if (req.method === "POST") {
     console.log("charge");
