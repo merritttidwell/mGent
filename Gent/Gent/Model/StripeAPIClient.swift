@@ -9,6 +9,7 @@
 import Foundation
 import Stripe
 import Alamofire
+import SwiftyJSON
 
 struct StripeAPIData {
     static let myServer = "https://us-central1-gent-53de7.cloudfunctions.net"   //"http://localhost:3000"
@@ -107,6 +108,32 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
                     completion(json as? [AnyHashable : Any], nil)
                 case .failure(let error):
                     completion(nil, error)
+                }
+        }
+    }
+    
+    func subscribePlan(planID: String = "GentsBasicPlan", completion: @escaping (JSON?)->(Void)) {
+        
+        let url = self.baseURL.appendingPathComponent("subscribePlan")
+        
+        let params: [String: String] = [
+            "cus": cusID
+        ]
+        
+        Alamofire.request(url, method: .post, headers: params)
+            .validate(statusCode: 200..<300)
+            .responseString { response in
+                //print(response)
+                
+                switch response.result {
+                case .success:
+                    guard response.data != nil else {
+                        completion(nil)
+                        return
+                    }
+                    completion(try? JSON(data: response.data!))
+                case .failure:
+                    completion(nil)
                 }
         }
     }
