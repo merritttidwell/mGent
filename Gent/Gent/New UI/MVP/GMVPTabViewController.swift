@@ -19,20 +19,12 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var lblCC: UILabel!
     @IBOutlet weak var lblCCExpDate: UILabel!
 
-    var payctx : STPPaymentContext?
     var paymentList : [DataSnapshot]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        guard GentsUser.shared.customerCtx != nil else {
-            payctx = nil
-            return
-        }
-        
-        payctx = STPPaymentContext(customerContext: GentsUser.shared.customerCtx!)
-        payctx?.hostViewController = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -146,10 +138,6 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
         
         print("edit payment method")
         
-        guard payctx != nil else {
-            return
-        }
-        
         /*GentsUser.shared.pay(amount: 100, description: "test1", host: self) { [unowned self] err in
             print(err as Any)
             
@@ -166,6 +154,6 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
             }
         }*/
         
-        self.payctx?.presentPaymentMethodsViewController()
+        GentsUser.shared.addPaymentCard(host: self)
     }
 }
