@@ -87,6 +87,12 @@ class GentsConfig: NSObject {
         })
     }
     
+    class func getPaymentValues(completed: @escaping (JSON?)->(Void)) {
+        firebaseConfigDataBase()?.reference().child("SystemSetup/PaymentValues").observeSingleEvent(of: .value, with: { snap in
+            completed(JSON.init(snap.value as Any))
+        })
+    }
+    
     /*static func connectionDetect() {
         let connectedRef = firebaseConfigDataBase()?.reference(withPath: ".info/connected")
         connectedRef?.observe(.value, with: { snapshot in
