@@ -248,6 +248,11 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentC
         print(paymentCardTextField!.cardParams)
         STPAPIClient.shared().createToken(withCard: paymentCardTextField!.cardParams, completion: { (ctok, err) in
             
+            guard ctok != nil && err == nil else {
+                UIHelper.showAlertInView(self, msg: "Invalid payment card!")
+                return
+            }
+            
             let data = ["email" : email, "name" : name, "phone" : phoneNumber, "mode" : model, "sn" : serial, "carrier" : carrier, "credit" : "0"]
             
             GentsConfig.getPaymentValues { [weak self] json in
