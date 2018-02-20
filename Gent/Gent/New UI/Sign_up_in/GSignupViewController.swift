@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class GSignupViewController: GUIViewController, UITextFieldDelegate {
     
@@ -223,15 +224,41 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate {
         
         let data = ["email" : email, "name" : name, "phone" : phoneNumber, "mode" : model, "sn" : serial, "carrier" : carrier, "credit" : "0"]
         
-        GentsUser.shared.registerUser(withName: name, email: email, password: pwd, userData: data) { isOK in
+        GentsConfig.getPaymentValues { [weak self] json in
             
-            if isOK {
-                let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
-                let vc = sb.instantiateViewController(withIdentifier: "tabsController")
+            guard json != nil else {
+                return
+            }
+            
+            let iPay = json!["initPayment"].float
+            let mPay = json!["monthlyPayment"].float
+            
+            guard iPay != nil && mPay != nil else {
+                return
+            }
+            
+            DispatchQueue.main.async {
                 
-                self.present(vc, animated: false, completion: nil)
-            } else {
-                UIHelper.showAlertInView(self, msg: "Signup failed!")
+                let alert = UIAlertController.init(title: "Payment plan", message: "Dear customer, Kindly be informed that by signing-up with Mobile Gents, you will pay $\(iPay!) as initail payment and $\(mPay!) monthly", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: { action in
+                    
+                    GentsUser.shared.registerUser(withName: name, email: email, password: pwd, userData: data) { isOK in
+                        
+                        if isOK {
+                            let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
+                            let vc = sb.instantiateViewController(withIdentifier: "tabsController")
+                            
+                            self?.present(vc, animated: false, completion: nil)
+                        } else {
+                            UIHelper.showAlertInView(self, msg: "Signup failed!")
+                        }
+                    }
+                }))
+                
+                alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+                
+                self?.present(alert, animated: true, completion: nil)
             }
         }
     }
