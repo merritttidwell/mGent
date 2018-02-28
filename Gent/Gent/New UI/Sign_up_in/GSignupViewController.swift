@@ -274,7 +274,10 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentC
                     
                     alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: { action in
                         
-                        GentsUser.shared.registerUser(withName: name, email: email, password: pwd, cardToken: ctok, userData: data) { isOK in
+                        let iCharge = Int(iPay! * 100)
+                        let mCharge = Int(mPay! * 100)
+                        
+                        GentsUser.shared.registerUser(withName: name, email: email, password: pwd, cardToken: ctok, initCharge: iCharge, monthCharge: mCharge, userData: data) { isOK in
                             
                             if isOK {
                                 let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
