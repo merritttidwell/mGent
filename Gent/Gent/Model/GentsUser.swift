@@ -408,6 +408,24 @@ class GentsUser: NSObject {
         return GentsUser.firebaseGentsDataBase()?.reference().child("users").child(cuser.uid).child("payments").queryOrdered(byChild: "created")
     }
     
+    func getPayments(completed: @escaping (JSON?)->()) {
+        guard GentsUser.firebaseGentsAuth()?.currentUser != nil && strpCustomerID != "" else {
+            completed(nil)
+            return
+        }
+        
+        Alamofire.request(StripeAPIData.myServer + "/charges_retrieve_dev", method: .get, headers:["cusID": strpCustomerID]).validate().responseJSON { resp in
+            
+            switch resp.result {
+            case .success:
+                let json = try? JSON.init(data: resp.data!)
+                completed(json)
+            case .failure:
+                completed(nil)
+            }
+        }
+    }
+    
     func addPaymentCard(host: UIViewController?, delegate: STPPaymentContextDelegate? = nil) {
         
         guard customerCtx != nil && host != nil else {

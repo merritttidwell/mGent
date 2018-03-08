@@ -19,7 +19,7 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var lblCC: UILabel!
     @IBOutlet weak var lblCCExpDate: UILabel!
 
-    var paymentList : [DataSnapshot]?
+    var paymentList : [JSON]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,16 +43,8 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
             
             self.updateCC()
             
-            let query = GentsUser.shared.getPayments()
-            
-            guard query != nil else {
-                UIHelper.showAlertInView(self, msg: "Failed to retrieve payments!")
-                return
-            }
-            
-            query?.observe(.value, with: { [weak self] snapshot in
-                
-                self?.paymentList = snapshot.children.reversed() as? [DataSnapshot]
+            GentsUser.shared.getPayments(completed: { [weak self] json in
+                self?.paymentList = json?["data"].array
                 self?.table.reloadData()
             })
         } else {
@@ -106,8 +98,8 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath)
         
         let pay = paymentList![indexPath.row]
-        let amount = (pay.value as! NSDictionary)["amount"] as! Float / 100.0
-        let epoch = (pay.value as! NSDictionary)["created"] as! Double
+        let amount = pay["amount"].floatValue / 100.0
+        let epoch = pay["created"].doubleValue
         let localTime = UIHelper.UTCToLocal(time: epoch)
         
         let comp = UIHelper.getDateCompnents(date: localTime)
