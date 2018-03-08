@@ -246,16 +246,12 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentC
         self.view.viewWithTag(1002)?.layer.borderColor = UIColor.black.cgColor
         
         print(paymentCardTextField!.cardParams)
-        
-        let srcParams = STPSourceParams.cardParams(withCard: paymentCardTextField!.cardParams)
-        STPAPIClient.shared().createSource(with: srcParams) { (source, err) in
+        STPAPIClient.shared().createToken(withCard: paymentCardTextField!.cardParams, completion: { (ctok, err) in
             
-            guard source != nil && err == nil else {
+            guard ctok != nil && err == nil else {
                 UIHelper.showAlertInView(self, msg: "Invalid payment card!")
                 return
             }
-            
-            let srcID = source?.stripeID
             
             let data = ["email" : email, "name" : name, "phone" : phoneNumber, "mode" : model, "sn" : serial, "carrier" : carrier, "credit" : "0"]
             
@@ -281,7 +277,7 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentC
                         let iCharge = Int(iPay! * 100)
                         let mCharge = Int(mPay! * 100)
                         
-                        GentsUser.shared.registerUser(withName: name, email: email, password: pwd, cardSourceID: srcID, initCharge: iCharge, monthCharge: mCharge, userData: data) { isOK in
+                        GentsUser.shared.registerUser(withName: name, email: email, password: pwd, cardToken: ctok, initCharge: iCharge, monthCharge: mCharge, userData: data) { isOK in
                             
                             if isOK {
                                 let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
@@ -299,6 +295,6 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentC
                     self?.present(alert, animated: true, completion: nil)
                 }
             }
-        }
+        })
     }
 }
