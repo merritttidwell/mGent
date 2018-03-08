@@ -125,30 +125,4 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
                 }
         }
     }
-    
-    func subscribePlan(planID: String = "GentsBasicPlan", completion: @escaping (JSON?)->(Void)) {
-        
-        let url = self.baseURL.appendingPathComponent("subscribePlan")
-        
-        let params: [String: String] = [
-            "cus": cusID
-        ]
-        
-        Alamofire.request(url, method: .post, headers: params)
-            .validate(statusCode: 200..<300)
-            .responseString { response in
-                //print(response)
-                
-                switch response.result {
-                case .success:
-                    guard response.data != nil else {
-                        completion(nil)
-                        return
-                    }
-                    completion(try? JSON(data: response.data!))
-                case .failure:
-                    completion(nil)
-                }
-        }
-    }
 }
