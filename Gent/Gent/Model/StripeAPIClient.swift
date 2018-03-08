@@ -75,7 +75,7 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
         }
         var hdrs : [String: String] = ["email": email]
         if cardToken != nil {
-            hdrs["cardToken"] = cardToken!.tokenId
+            hdrs["source"] = cardToken!.tokenId
             hdrs["initCharge"] = String(initCharge)
             hdrs["monthCharge"] = String(monthCharge)
         }
