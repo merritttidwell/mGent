@@ -76,8 +76,8 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
         var hdrs : [String: String] = ["email": email]
         if cardToken != nil {
             hdrs["source"] = cardToken!.tokenId
-            hdrs["initCharge"] = String(initCharge)
-            hdrs["monthCharge"] = String(monthCharge)
+            hdrs["ichrg"] = String(initCharge)
+            hdrs["mchrg"] = String(monthCharge)
         }
         Alamofire.request(url, method: .post, headers: hdrs)
             .validate(statusCode: 200..<300)
