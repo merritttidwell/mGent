@@ -25,6 +25,9 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentC
         paymentCardTextField = STPPaymentCardTextField.init(frame: cardView.bounds)
         paymentCardTextField?.delegate = self
         cardView.addSubview(paymentCardTextField!)
+        
+        let btn = self.view.viewWithTag(1002) as! UIButton
+        btn.setTitle(UIDevice.current.modelName, for: .normal)
     }
     
     override func viewDidAppear(_ animated: Bool) {
