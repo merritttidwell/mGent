@@ -44,9 +44,12 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentC
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: STPPaymentCardTextFieldDelegate
+    // MARK: - STPPaymentCardTextFieldDelegate
     
     func paymentCardTextFieldDidBeginEditing(_ textField: STPPaymentCardTextField) {
+        OnScreenKBListener.shared.start({ notf in
+            UIHelper.animateViewUp(self.view, with: OnScreenKBListener.shared.keyboardHeight)
+        })
         UIHelper.animateViewUp(self.view, with: OnScreenKBListener.shared.keyboardHeight)
     }
     
