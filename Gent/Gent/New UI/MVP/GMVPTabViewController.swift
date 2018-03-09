@@ -148,4 +148,22 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
         
         GentsUser.shared.addPaymentCard(host: self)
     }
+    
+    @IBAction func login() {
+        let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "signin")
+        
+        self.navigationController?.pushViewController(vc, animated: false)
+        
+        //self.present(vc, animated: false, completion: nil)
+    }
+    
+    @IBAction func signup() {
+        let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "signup")
+        
+        self.navigationController?.pushViewController(vc, animated: false)
+        
+        //self.present(vc, animated: false, completion: nil)
+    }
 }

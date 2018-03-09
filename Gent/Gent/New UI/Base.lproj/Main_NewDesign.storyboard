@@ -119,7 +119,7 @@
         <!--signup-->
         <scene sceneID="Hkh-5h-PWB">
             <objects>
-                <viewController title="signup" id="Y20-eT-Ben" customClass="GSignupViewController" customModule="Gent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signup" title="signup" id="Y20-eT-Ben" customClass="GSignupViewController" customModule="Gent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jrB-tj-apb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -501,13 +501,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="398" height="563"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="1000" text="Sign up to MVP for better iPhone 8 Plus prices" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ql-nZ-4eb">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="134"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="398" height="88"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="1000" text="Save 11% on repairs, and get an extra 22% when you trade in your phone" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hF0-Wg-3jA">
-                                                <rect key="frame" x="0.0" y="154" width="398" height="229"/>
+                                                <rect key="frame" x="0.0" y="108" width="398" height="275"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -522,6 +522,9 @@
                                                 <state key="normal" title="Sign in">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="login" destination="tYQ-YW-ZVJ" eventType="touchUpInside" id="hFy-d3-YLT"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQ1-eG-0k6">
                                                 <rect key="frame" x="0.0" y="493" width="398" height="70"/>
@@ -533,6 +536,9 @@
                                                 <state key="normal" title="Sign up to MVP">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="signup" destination="tYQ-YW-ZVJ" eventType="touchUpInside" id="g59-0m-dny"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -737,7 +743,7 @@
         <!--Signin-->
         <scene sceneID="H75-dr-fuR">
             <objects>
-                <viewController title="Signin" id="CWF-rJ-AFt" customClass="GSigninViewController" customModule="Gent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signin" title="Signin" id="CWF-rJ-AFt" customClass="GSigninViewController" customModule="Gent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cww-gd-xSJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
