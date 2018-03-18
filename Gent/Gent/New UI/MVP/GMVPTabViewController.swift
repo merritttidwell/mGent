@@ -15,17 +15,46 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var table: UITableView!
     
+    @IBOutlet weak var signOutButton: UIBarButtonItem!
+    
     @IBOutlet weak var lblCredit: UILabel!
     @IBOutlet weak var lblCC: UILabel!
     @IBOutlet weak var lblCCExpDate: UILabel!
 
+    @IBOutlet weak var saveLabel: UILabel!
+    @IBOutlet weak var signupLabel: UILabel!
+    
     var paymentList : [JSON]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper_edit_shield.png")!)
 
-        // Do any additional setup after loading the view.
+        if GentsUser.firebaseGentsAuth()?.currentUser == nil {
+            self.navigationItem.rightBarButtonItem = nil
+        }else {
+            self.navigationItem.rightBarButtonItem = self.signOutButton
+        }
+        
+        
+        GentsConfig.getModelConfig(completed: { specs -> (Void) in
+            DispatchQueue.main.async { [weak self] in
+                
+                self?.signupLabel?.text = "Sign up to MVP for better \(UIDevice.current.modelName) prices"
+                
+                guard specs != nil else {
+                    self?.saveLabel?.text = "Save on repairs, and get money back when you trade in your phone"
+                    return
+                }
+                
+                self?.saveLabel?.text = "Save \(String(describing: specs!["save"]))% on repairs, and get an extra \(String(describing: specs!["extra"]))% when you trade in your phone"
+                
+            }
+        })
+        
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -74,16 +103,6 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
         })
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     //MARK: UITableViewDataSource
     
@@ -155,7 +174,7 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
         
         self.navigationController?.pushViewController(vc, animated: false)
         
-        //self.present(vc, animated: false, completion: nil)
+//        self.present(vc, animated: false, completion: nil)
     }
     
     @IBAction func signup() {

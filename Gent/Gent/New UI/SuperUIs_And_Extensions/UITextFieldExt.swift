@@ -14,6 +14,6 @@ extension UITextField {
         super.awakeFromNib()
         
         self.layer.borderColor = UIColor.black.cgColor
-        self.layer.borderWidth = 3
+       // self.layer.borderWidth = 1
     }
 }

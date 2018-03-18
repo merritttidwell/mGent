@@ -17,16 +17,12 @@ extension UIButton {
             self.titleLabel?.font = UIFont.init(name: UIGeneralSettings.buttonFontFamilyName, size: self.titleLabel!.font.pointSize)
         }
         
-        if self.tag < 2000 {
-            
-            if self.tag < 1000 {
-                self.layer.shadowColor = UIColor.black.cgColor
-                self.layer.shadowOffset = CGSize.init(width: 5, height: 5)
-                self.layer.shadowOpacity = 1
-            } else {
-                self.layer.borderColor = UIColor.black.cgColor
-                self.layer.borderWidth = 3
-            }
+        if self.tag < 100 {
+            self.layer.cornerRadius = 5
+            self.clipsToBounds = true
+            self.layer.borderColor = UIColor.black.cgColor
+            self.layer.borderWidth = 2
+          
         }
     }
 }

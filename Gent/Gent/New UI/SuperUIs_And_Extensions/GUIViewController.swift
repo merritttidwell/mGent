@@ -12,7 +12,7 @@ class GUIViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "[ MobileGent ]"
+        self.title = "MobileGent"
         self.navigationItem.backBarButtonItem = UIBarButtonItem.init(title: "", style: .plain, target: nil, action: nil)
     }
 }

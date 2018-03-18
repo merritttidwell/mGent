@@ -11,13 +11,20 @@ import SwiftyJSON
 
 class GNewsTabViewController: UIViewController, UITableViewDataSource {
     
+
     @IBOutlet weak var table: UITableView?
+    @IBOutlet weak var signOutButton: UIBarButtonItem!
     var postsJson : JSON? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if GentsUser.firebaseGentsAuth()?.currentUser == nil {
+            self.navigationItem.rightBarButtonItem = nil
+        }else {
+            self.navigationItem.rightBarButtonItem = self.signOutButton
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,15 +47,6 @@ class GNewsTabViewController: UIViewController, UITableViewDataSource {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     //MARK: - UITablewViewDataSource
     
