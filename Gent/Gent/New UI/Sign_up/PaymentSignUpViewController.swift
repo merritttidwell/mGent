@@ -138,7 +138,7 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
                             let iCharge = Int(iPay! * 100)
                             let mCharge = Int(mPay! * 100)
                             
-                            GentsUser.shared.registerUser(withName: self!.name, email: self!.email, password: self!.pwd, cardToken: ctok, initCharge: iCharge, monthCharge: mCharge, userData: self!.userData) { isOK in
+                            GentsUser.shared.registerUser(withName: self!.name, email: self!.email, password: self!.pwd, cardToken: ctok, initCharge: iCharge, monthCharge: mCharge, userData: self!.userData) { isOK, Error in
                                 
                                 if isOK {
                                     let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
@@ -147,8 +147,9 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
                                     self?.present(vc, animated: false, completion: nil)
                                 } else {
                                     self?.activityIndicator.stopAnimating()
-
-                                    UIHelper.showAlertInView(self, msg: "Signup failed!")
+                                    let err = Error?.localizedDescription  ?? "nothing"
+                                    
+                                    UIHelper.showAlertInView(self, msg: err)
                                 }
                             }
                         }))

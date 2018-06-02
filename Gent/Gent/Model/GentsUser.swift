@@ -13,7 +13,7 @@ import Stripe
 import Alamofire
 import SwiftyJSON
 
-typealias completionSuccess = ((_ isSuccessful: Bool) -> (Swift.Void))
+typealias completionSuccess = ((_ isSuccessful: Bool, Error?) -> (Swift.Void))
 
 class GentsUser: NSObject {
     
@@ -178,7 +178,7 @@ class GentsUser: NSObject {
         GentsUser.firebaseGentsAuth()?.createUser(withEmail: email, password: password) { (user, error) in
             if error != nil {
                 print(error ?? "unknown error")
-                completion(false)
+                completion(false, error)
                 return
             }
             
@@ -187,7 +187,7 @@ class GentsUser: NSObject {
             StripeAPIClient.sharedClient.createStripeCustomer(email: email, cardToken: cardToken, initCharge: initCharge, monthCharge: monthCharge) { resp, err in
                 
                 guard err == nil else {
-                    completion(false)
+                    completion(false, err)
                     return
                 }
                 
@@ -204,10 +204,10 @@ class GentsUser: NSObject {
                     if err == nil {
                         self.reloadUserData(completion: { isOK in
                             
-                            completion(isOK)
+                            completion(isOK, nil)
                         })
                     } else {
-                        completion(false)
+                        completion(false, err)
                     }
                 })
             }
