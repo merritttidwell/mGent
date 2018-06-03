@@ -31,12 +31,13 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
         
         readUserDefaults()
 
+
         
-        paymentCardTextField = STPPaymentCardTextField.init(frame: cardView.bounds)
+         paymentCardTextField = STPPaymentCardTextField.init(frame: CGRect(x: 10, y: 0, width: view.frame.width - 20, height: 44))
         paymentCardTextField?.delegate = self
+     
         cardView.addSubview(paymentCardTextField!)
-        
-        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,7 +87,7 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
     
     
     // MARK: - STPPaymentCardTextFieldDelegate
-    
+   /*
     func paymentCardTextFieldDidBeginEditing(_ textField: STPPaymentCardTextField) {
         OnScreenKBListener.shared.start({ notf in
             UIHelper.animateViewUp(self.view, with: OnScreenKBListener.shared.keyboardHeight)
@@ -97,7 +98,7 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
     func paymentCardTextFieldDidEndEditing(_ textField: STPPaymentCardTextField) {
         UIHelper.animateViewDown(self.view)
     }
-    
+    */
     func paymentCardTextFieldDidChange(_ textField: STPPaymentCardTextField) {
         // Toggle buy button state
         signUpButton.isEnabled = textField.isValid
