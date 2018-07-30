@@ -13,11 +13,13 @@ class PhoneDetailsSignUpViewController: UIViewController {
     var alertController : UIAlertController?
     var isAlertControllerDisplayed = false
     var userInfoDict = [String: String] ()
+    var deviceName = String()
     
     @IBOutlet weak var phoneNumberView: UIView!
     @IBOutlet weak var carrierView: UIView!
     @IBOutlet weak var serialView: UIView!
     @IBOutlet weak var modelView: UIView!
+    @IBOutlet weak var nickNameView: UIView!
     
     @IBOutlet weak var modelButton: UIButton!
     @IBOutlet weak var carrierButton: UIButton!
@@ -25,14 +27,29 @@ class PhoneDetailsSignUpViewController: UIViewController {
     @IBOutlet weak var phoneNumberTF: UITextField!
     @IBOutlet weak var serialNumberTF: UITextField!
     
+    @IBOutlet weak var nickNameTF: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if GentsUser.firebaseGentsAuth()?.currentUser == nil {
+           
+            
+            nickNameView.isHidden = true
+                
+        }
+        
+        
+        
         modelButton?.setTitle(UIDevice.current.modelName, for: .normal)
    
         phoneNumberView.addBottomBorderWithColor(color: .lightGray, width: 1)
         carrierView.addBottomBorderWithColor(color: .lightGray, width: 1)
         serialView.addBottomBorderWithColor(color: .lightGray, width: 1)
         modelView.addBottomBorderWithColor(color: .lightGray, width: 1)
+    
+        
     
     }
     
@@ -148,29 +165,53 @@ class PhoneDetailsSignUpViewController: UIViewController {
         }
         
         
+        self.deviceName = nickNameTF.text ?? "Main"
+       
+        
+        
         userInfoDict["carrier"] = carrier
         userInfoDict["model"] = modelButton.titleLabel?.text
         userInfoDict["phoneNumber"] = phoneNumber
         userInfoDict["serialNumber"] = serialNumber
+        userInfoDict["deviceName"] = self.deviceName
         
         return true
         
     }
     
     func saveValues(values : [String: String]) {
-        
-        let userDefaults = UserDefaults.standard
+
         
         for (k,v) in values {
-            
+            let userDefaults = UserDefaults.standard
+
             userDefaults.setValue(v, forKey: k)
             
         }
         
     }
     
-    
+    //really should be renamed to add phone details
     @IBAction private func showPayment() {
+        
+        if GentsUser.firebaseGentsAuth()?.currentUser != nil {
+            //do all the logic for adding a line
+            
+            if checkFieldsValid() {
+                
+                let device = Device(deviceName: self.deviceName, deviceInfo: userInfoDict)
+                GentsUser.shared.addDevice(device: device, completion: { (isOk, err) -> (Void) in
+                    //handle error
+                })
+                
+            }
+          
+            
+        
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        
         
         if checkFieldsValid()  {
             

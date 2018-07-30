@@ -21,37 +21,25 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var lblCC: UILabel!
     @IBOutlet weak var lblCCExpDate: UILabel!
 
-    @IBOutlet weak var saveLabel: UILabel!
-    @IBOutlet weak var signupLabel: UILabel!
-    
+ 
     var paymentList : [JSON]?
+    var deviceDictionary : [String: String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper_edit_shield.png")!)
-
-        if GentsUser.firebaseGentsAuth()?.currentUser == nil {
-            self.navigationItem.rightBarButtonItem = nil
-        }else {
-            self.navigationItem.rightBarButtonItem = self.signOutButton
+        print(deviceDictionary)
+        
+        
+        if deviceDictionary != nil {
+            self.title = deviceDictionary!["deviceName"] as? String
         }
         
+        self.title = "Main"
+    
         
-        GentsConfig.getModelConfig(completed: { specs -> (Void) in
-            DispatchQueue.main.async { [weak self] in
-                
-                self?.signupLabel?.text = "Sign up to MVP for better \(UIDevice.current.modelName) prices"
-                
-                guard specs != nil else {
-                    self?.saveLabel?.text = "Save on repairs, and get money back when you trade in your phone"
-                    return
-                }
-                
-                self?.saveLabel?.text = "Save \(String(describing: specs!["save"]))% on repairs, and get an extra \(String(describing: specs!["extra"]))% when you trade in your phone"
-                
-            }
-        })
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper_edit_shield.png")!)
+   
         
     }
     
@@ -68,7 +56,6 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
             self.view.viewWithTag(1)?.isHidden = false
             self.view.viewWithTag(2)?.isHidden = true
             
-            lblCredit.text = "MVP repair credit: $\(GentsUser.shared.repairCredit)"
             
             self.updateCC()
             
@@ -149,40 +136,8 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
         
         print("edit payment method")
         
-        /*GentsUser.shared.pay(amount: 100, description: "test1", host: self) { [unowned self] err in
-            print(err as Any)
-            
-            if err != nil {
-                
-                let e = err! as NSError
-                
-                if e.domain == "Payment" && e.code == 4 {
-                    DispatchQueue.main.async {
-                        //UIHelper.showAlertInView(self, msg: "Payment failed!\nPlease add payment card.")
-                        self.payctx?.presentPaymentMethodsViewController()
-                    }
-                }
-            }
-        }*/
         
         GentsUser.shared.addPaymentCard(host: self)
     }
     
-    @IBAction func login() {
-        let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "signin")
-        
-        self.navigationController?.pushViewController(vc, animated: false)
-        
-//        self.present(vc, animated: false, completion: nil)
-    }
-    
-    @IBAction func signup() {
-        let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "signup")
-        
-        self.navigationController?.pushViewController(vc, animated: false)
-        
-        //self.present(vc, animated: false, completion: nil)
-    }
 }

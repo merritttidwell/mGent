@@ -26,6 +26,7 @@ class GentsUser: NSObject {
     private(set) var name: String = ""
     private(set) var email: String = ""
     private(set) var carrier: String = ""
+    private(set) var devices: NSMutableArray = []
     private(set) var model: String = ""
     private(set) var phone: String = ""
     private(set) var sn: String = ""
@@ -170,6 +171,44 @@ class GentsUser: NSObject {
         
         return Auth.auth()
     }
+    
+    //MARK: - Add A Device
+    
+    func addDevice(device: Device, completion: @escaping completionSuccess) {
+       
+        
+        let deviceDict = device.nsDictionary
+        
+        let currentUser =  GentsUser.firebaseGentsAuth()?.currentUser  ?? nil
+
+        
+        // Create database reference
+        var ref: DatabaseReference!
+        ref = GentsUser.firebaseGentsDataBase()?.reference()
+        
+        guard let uuid = currentUser?.uid else {return}
+        
+        let usersRef = ref.child("users").child(uuid)
+        var userData = [String: Any]()
+       
+        self.devices.add(deviceDict)
+        
+        userData["devices"] = self.devices
+        usersRef.updateChildValues(userData, withCompletionBlock: { (err, ref) in //[weak usersRef] (err, ref) in
+            if err == nil {
+                self.reloadUserData(completion: { isOK in
+                    
+                    completion(isOK, nil)
+                })
+            } else {
+                completion(false, err)
+            }
+        })
+        
+
+    }
+    
+    
     
     //MARK: - Reg_Login_Logout
     func registerUser(withName: String, email: String, password: String, cardToken: STPToken? = nil, initCharge: Int, monthCharge: Int, userData:[String:String], completion: @escaping completionSuccess) {
@@ -329,6 +368,7 @@ class GentsUser: NSObject {
             let name = value!["name"] as? String ?? ""
             let email = value!["email"] as? String ?? ""
             let carrier = value!["carrier"] as? String ?? ""
+            let devices = value!["devices"] as? NSArray ?? []
             let model = value!["model"] as? String ?? ""
             let phone = value!["phone"] as? String ?? ""
             let sn = value!["sn"] as? String ?? ""
@@ -344,6 +384,10 @@ class GentsUser: NSObject {
             self.sn = sn
             self.strpCustomerID = strpID
             self.repairCredit = credit
+            
+            let newArray = NSMutableArray(array: devices)
+            self.devices = newArray
+            
             if paymentsRaw != nil {
                 self.payments = JSON.init(rawValue: paymentsRaw!)
             }

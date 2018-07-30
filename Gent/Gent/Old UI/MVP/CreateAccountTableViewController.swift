@@ -15,7 +15,7 @@ class CreateAccountTableViewController: UITableViewController {
     var formLabels = [String]()
     var formPlaceholders = [String]()
     var values = [String?]()
-    var userData = [String: String]()
+    var userData = [String: Any]()
     
     var usr : GentsUser?
     

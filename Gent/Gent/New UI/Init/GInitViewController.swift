@@ -19,6 +19,8 @@ class GInitViewController: GUIViewController {
     @IBOutlet weak var signInButton: UIButton!
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
+        
+        
         let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "tabsController")
 
