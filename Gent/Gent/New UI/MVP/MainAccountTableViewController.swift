@@ -19,13 +19,11 @@ class MainAccountTableViewController: UITableViewController {
             self.dismiss(animated: true) {
                 
                 let vc = UIStoryboard(name: "Main_NewDesign", bundle: nil).instantiateViewController(withIdentifier: "signup") as UIViewController
-                
-                
+                self.present(vc, animated: true, completion: nil)
+               
             }
             
-             let vc = UIStoryboard(name: "Main_NewDesign", bundle: nil).instantiateViewController(withIdentifier: "notSignedInVC") as? NotSignedInViewController
-            
-            self.present(vc!, animated: true, completion: nil)
+      
             
         }
         

@@ -9,16 +9,17 @@
 import UIKit
 import SwiftyJSON
 
-class GNewsTabViewController: UIViewController, UITableViewDataSource {
+class GNewsTabViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
 
     @IBOutlet weak var table: UITableView?
     @IBOutlet weak var signOutButton: UIBarButtonItem!
     var postsJson : JSON? = nil
+    var textBody = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if GentsUser.firebaseGentsAuth()?.currentUser == nil {
             self.navigationItem.rightBarButtonItem = nil
         }else {
@@ -37,8 +38,8 @@ class GNewsTabViewController: UIViewController, UITableViewDataSource {
         
         GentsUser.shared.posts { [weak self] json in
             if json != nil {
-                print(json)
-                self?.postsJson = JSON(json)
+                print(json ?? "")
+                self?.postsJson = JSON(json ?? "")
                 DispatchQueue.main.async {
                     self?.table?.reloadData()
                 }
@@ -60,14 +61,25 @@ class GNewsTabViewController: UIViewController, UITableViewDataSource {
         
         let title = cell.viewWithTag(1) as! UILabel
         let date = cell.viewWithTag(2) as! UILabel
-        let post = cell.viewWithTag(3) as! UILabel
         
         title.text = postsJson?.arrayValue[indexPath.row]["title"].string
         date.text = postsJson?.arrayValue[indexPath.row]["date"].string
-        post.text = postsJson?.arrayValue[indexPath.row]["body"].string
+        
+        textBody = (postsJson?.arrayValue[indexPath.row]["body"].string)!
         
         return cell
     }
+   
+ 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+
+            let vc = segue.destination as? NewsDetailViewController
+            vc?.body = textBody
+
+        }
+    }
+    
     
     @IBAction func doSignout() {
         GentsUser.shared.logOutUser { [weak self] isOK in

@@ -73,7 +73,7 @@ class GentsUser: NSObject {
             config.appleMerchantIdentifier = nil
             config.companyName = "The Mobile Gents"
             config.requiredBillingAddressFields = STPBillingAddressFields.full
-            config.requiredShippingAddressFields = PKAddressField.all
+         //   config.requiredShippingAddressFields = STPContactField.all
             config.shippingType = STPShippingType.shipping
             config.additionalPaymentMethods = .all
             
@@ -221,7 +221,7 @@ class GentsUser: NSObject {
                 return
             }
             
-            guard let uuid = user?.uid else {return}
+            guard let uuid = user?.user.uid else {return}
             
             StripeAPIClient.sharedClient.createStripeCustomer(email: email, cardToken: cardToken, initCharge: initCharge, monthCharge: monthCharge) { resp, err in
                 
