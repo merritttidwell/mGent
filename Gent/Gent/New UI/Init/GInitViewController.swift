@@ -25,9 +25,9 @@ class GInitViewController: GUIViewController {
         let vc = sb.instantiateViewController(withIdentifier: "tabsController")
 
         self.present(vc, animated: true, completion: nil)
-
     
     }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
     

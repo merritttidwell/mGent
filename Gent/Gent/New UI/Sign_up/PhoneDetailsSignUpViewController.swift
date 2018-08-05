@@ -35,21 +35,16 @@ class PhoneDetailsSignUpViewController: UIViewController {
         
         if GentsUser.firebaseGentsAuth()?.currentUser == nil {
            
-            
             nickNameView.isHidden = true
                 
         }
-        
-        
-        
+
         modelButton?.setTitle(UIDevice.current.modelName, for: .normal)
    
         phoneNumberView.addBottomBorderWithColor(color: .lightGray, width: 1)
         carrierView.addBottomBorderWithColor(color: .lightGray, width: 1)
         serialView.addBottomBorderWithColor(color: .lightGray, width: 1)
         modelView.addBottomBorderWithColor(color: .lightGray, width: 1)
-    
-        
     
     }
     
@@ -164,10 +159,7 @@ class PhoneDetailsSignUpViewController: UIViewController {
             return false
         }
         
-        
         self.deviceName = nickNameTF.text ?? "Main"
-       
-        
         
         userInfoDict["carrier"] = carrier
         userInfoDict["model"] = modelButton.titleLabel?.text
@@ -200,6 +192,7 @@ class PhoneDetailsSignUpViewController: UIViewController {
             if checkFieldsValid() {
                 
                 let device = Device(deviceName: self.deviceName, deviceInfo: userInfoDict)
+                               
                 GentsUser.shared.addDevice(device: device, completion: { (isOk, err) -> (Void) in
                     //handle error
                 })

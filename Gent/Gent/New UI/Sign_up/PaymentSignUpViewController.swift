@@ -22,22 +22,43 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
     var pwd = String()
     var userData = [String: String] ()
     
+    var initalPayment = Float ()
+    var monthlyPayment = Float ()
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
+        
+        GentsConfig.getPaymentValues { [weak self] json in
+            
+            guard json != nil else {
+                return
+            }
+            
+            self?.initalPayment = json!["initPayment"].float!
+            self?.monthlyPayment = json!["monthlyPayment"].float!
+            
+            guard self?.initalPayment != nil && self?.monthlyPayment != nil else {
+                return
+            }
+        }
+        
+       
         self.activityIndicator.isHidden = true
         
         readUserDefaults()
-
-
-        
+      
          paymentCardTextField = STPPaymentCardTextField.init(frame: CGRect(x: 10, y: 0, width: view.frame.width - 20, height: 44))
         paymentCardTextField?.delegate = self
      
         cardView.addSubview(paymentCardTextField!)
 
+        
+        showPaymentAlert()
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -104,6 +125,33 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
         signUpButton.isEnabled = textField.isValid
     }
     
+    func showPaymentAlert() {
+        
+        let message = "Dear customer, Kindly be informed that by signing-up with Mobile Gents, you will pay $\(initalPayment) as initial payment and $\(monthlyPayment) monthly"
+        
+        let alertController = UIAlertController(title: "One More Step", message: message, preferredStyle: .alert)
+        
+        
+        let okAction = UIAlertAction(title: "Yes!", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            
+             self.navigationController?.popToRootViewController(animated: true)
+        }
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+       
+    }
+    
+    
+    
     @IBAction private func signUp() {
         print(paymentCardTextField!.cardParams)
 
@@ -129,15 +177,15 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
 
                     DispatchQueue.main.async {
                         
-                        let alert = UIAlertController.init(title: "Payment plan", message: "Dear customer, Kindly be informed that by signing-up with Mobile Gents, you will pay $\(iPay!) as initial payment and $\(mPay!) monthly", preferredStyle: .alert)
-
-                        alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: { action in
-                            self?.activityIndicator.isHidden = false
-                            self?.activityIndicator.startAnimating()
-
+//                        let alert = UIAlertController.init(title: "Payment plan", message: "Dear customer, Kindly be informed that by signing-up with Mobile Gents, you will pay $\(iPay!) as initial payment and $\(mPay!) monthly", preferredStyle: .alert)
+//
+//                        alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: { action in
+//                            self?.activityIndicator.isHidden = false
+//                            self?.activityIndicator.startAnimating()
+                        
                             
-                            let iCharge = Int(iPay! * 100)
-                            let mCharge = Int(mPay! * 100)
+                            let iCharge = Int((self?.initalPayment)! * 100)
+                            let mCharge = Int((self?.monthlyPayment)! * 100)
                             
                             GentsUser.shared.registerUser(withName: self!.name, email: self!.email, password: self!.pwd, cardToken: ctok, initCharge: iCharge, monthCharge: mCharge, userData: self!.userData) { isOK, Error in
                                 
@@ -150,15 +198,27 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
                                     self?.activityIndicator.stopAnimating()
                                     let err = Error?.localizedDescription  ?? "nothing"
                                     
-                                    UIHelper.showAlertInView(self, msg: err)
+                                    
+                                    let alertController = UIAlertController(title: "Error", message: err, preferredStyle: .alert)
+
+                                
+                                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+                                        UIAlertAction in
+                
+                                        self?.navigationController?.popToRootViewController(animated: true)
+                                    }
+                                    
+                                    alertController.addAction(okAction)
+                                    
+                                    self?.present(alertController, animated: true, completion: nil)
+                                
                                 }
                             }
-                        }))
+                        
 
-                        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+                    //    alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
                         
                         
-                        self?.present(alert, animated: true, completion: nil)
                         self?.activityIndicator.isHidden = false
 
                     }

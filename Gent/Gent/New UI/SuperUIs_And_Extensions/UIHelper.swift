@@ -15,6 +15,8 @@ internal class UIHelper {
         
         let alert = UIAlertController.init(title: "Error", message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction.init(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+       
+        
         viewController?.present(alert, animated: false, completion: nil)
     }
     

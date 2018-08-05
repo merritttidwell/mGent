@@ -18,7 +18,6 @@
 		22FFDCE0210EB7C50062BC2B /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FFDCDF210EB7C50062BC2B /* NewsDetailViewController.swift */; };
 		2E1E391D1F9BF15400290A87 /* GentsUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E391C1F9BF15400290A87 /* GentsUser.swift */; };
 		2E9CA2901F9AC6680017D34B /* GentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9CA28F1F9AC6680017D34B /* GentsViewController.swift */; };
-		433A10A149F72DCD3A4E9CCE /* Pods_GentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A662339FF991BFC0808AFCA /* Pods_GentUITests.framework */; };
 		6B1F239C1F9EE46300B6F9D0 /* UnderConstruction.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B1F239B1F9EE46300B6F9D0 /* UnderConstruction.xib */; };
 		6B1F239E1F9EE5A400B6F9D0 /* UnderConstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1F239D1F9EE5A400B6F9D0 /* UnderConstruction.swift */; };
 		6B4DD7B81F85DE1C00D511B1 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */; };
@@ -30,18 +29,13 @@
 		6BD37E541F9C65E100EEFCCC /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD37E511F9C65E000EEFCCC /* NewsTableViewController.swift */; };
 		6BD37E551F9C65E100EEFCCC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD37E521F9C65E100EEFCCC /* Post.swift */; };
 		6BD37E561F9C65E100EEFCCC /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD37E531F9C65E100EEFCCC /* NewsTableViewCell.swift */; };
-		768441104A8ED4E7ACAD7684 /* Pods_GentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89D8BF4798AEA47C2374CD4 /* Pods_GentTests.framework */; };
-		8F108C771FD4710F001B69CB /* GentsUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E391C1F9BF15400290A87 /* GentsUser.swift */; };
-		8F108C781FD47120001B69CB /* StripeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */; };
 		8F2354601FCBBDB700731975 /* StripeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F23545F1FCBBDB700731975 /* StripeAPIClient.swift */; };
 		8F5B1AC61FF73AAD00D11744 /* UITextFieldExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5B1AC51FF73AAD00D11744 /* UITextFieldExt.swift */; };
 		8F5B1ACA1FF75B0F00D11744 /* GUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5B1AC91FF75B0F00D11744 /* GUIViewController.swift */; };
 		8F703D8C1FF42F75006AB5EA /* UIGeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F703D8B1FF42F75006AB5EA /* UIGeneralSettings.swift */; };
 		8F86639D1FF318790020F2E8 /* Main_NewDesign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F86639F1FF318790020F2E8 /* Main_NewDesign.storyboard */; };
 		8F8663A11FF4164E0020F2E8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920E980C1F79E63C00D97658 /* Info.plist */; };
-		8F8663A21FF416530020F2E8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920E980C1F79E63C00D97658 /* Info.plist */; };
 		8F8663A81FF41A360020F2E8 /* UILablelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8663A71FF41A360020F2E8 /* UILablelExt.swift */; };
-		8FAA33761FCBCC2D00D9F304 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */; };
 		8FAA33781FCBDC1A00D9F304 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 8FAA33771FCBDC1A00D9F304 /* readme.md */; };
 		8FB8A4FB1FF43F7B00A849B3 /* UIButtonExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8A4FA1FF43F7B00A849B3 /* UIButtonExt.swift */; };
 		8FB8A4FE1FF4DC0300A849B3 /* GInitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB8A4FD1FF4DC0300A849B3 /* GInitViewController.swift */; };
@@ -57,30 +51,11 @@
 		920E98061F79E63C00D97658 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920E98041F79E63C00D97658 /* Main.storyboard */; };
 		920E98081F79E63C00D97658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 920E98071F79E63C00D97658 /* Assets.xcassets */; };
 		920E980B1F79E63C00D97658 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920E98091F79E63C00D97658 /* LaunchScreen.storyboard */; };
-		920E98161F79E63C00D97658 /* GentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E98151F79E63C00D97658 /* GentTests.swift */; };
-		920E98211F79E63C00D97658 /* GentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E98201F79E63C00D97658 /* GentUITests.swift */; };
 		920E982F1F79EAF700D97658 /* MVPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E982E1F79EAF700D97658 /* MVPViewController.swift */; };
 		920E98331F79EB4F00D97658 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E98321F79EB4F00D97658 /* ShopViewController.swift */; };
 		920E98371F79EB6D00D97658 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E98361F79EB6D00D97658 /* ChatViewController.swift */; };
 		96F57739DE753670D4663E26 /* Pods_Gent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56A61D98F162B4A7D1DC41A /* Pods_Gent.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		920E98121F79E63C00D97658 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 920E97F31F79E63C00D97658 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 920E97FA1F79E63C00D97658;
-			remoteInfo = Gent;
-		};
-		920E981D1F79E63C00D97658 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 920E97F31F79E63C00D97658 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 920E97FA1F79E63C00D97658;
-			remoteInfo = Gent;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0A662339FF991BFC0808AFCA /* Pods_GentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,19 +105,15 @@
 		920E98071F79E63C00D97658 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		920E980A1F79E63C00D97658 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		920E980C1F79E63C00D97658 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		920E98111F79E63C00D97658 /* GentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		920E98151F79E63C00D97658 /* GentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentTests.swift; sourceTree = "<group>"; };
 		920E98171F79E63C00D97658 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		920E981C1F79E63C00D97658 /* GentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		920E98201F79E63C00D97658 /* GentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentUITests.swift; sourceTree = "<group>"; };
 		920E98221F79E63C00D97658 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		920E982E1F79EAF700D97658 /* MVPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVPViewController.swift; sourceTree = "<group>"; };
 		920E98321F79EB4F00D97658 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		920E98361F79EB6D00D97658 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		92D8B0500A6E9A15EB37875E /* Pods-GentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GentTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GentTests/Pods-GentTests.release.xcconfig"; sourceTree = "<group>"; };
-		9DBE64A92AB2AF89C62DFE8F /* Pods-GentUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GentUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GentUITests/Pods-GentUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A89D8BF4798AEA47C2374CD4 /* Pods_GentTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GentTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB8BC798F113B4701823A28F /* Pods-GentUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GentUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GentUITests/Pods-GentUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CCE594876F3702BA283D9321 /* Pods-Gent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gent/Pods-Gent.debug.xcconfig"; sourceTree = "<group>"; };
 		E1F579E9A9EC4D283A5F821B /* Pods-GentTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GentTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GentTests/Pods-GentTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E56A61D98F162B4A7D1DC41A /* Pods_Gent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,22 +125,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				96F57739DE753670D4663E26 /* Pods_Gent.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		920E980E1F79E63C00D97658 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				768441104A8ED4E7ACAD7684 /* Pods_GentTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		920E98191F79E63C00D97658 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				433A10A149F72DCD3A4E9CCE /* Pods_GentUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,8 +268,6 @@
 			isa = PBXGroup;
 			children = (
 				920E97FB1F79E63C00D97658 /* Gent.app */,
-				920E98111F79E63C00D97658 /* GentTests.xctest */,
-				920E981C1F79E63C00D97658 /* GentUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -399,8 +352,6 @@
 				918239316A00CA3B7082B5B6 /* Pods-Gent.release.xcconfig */,
 				E1F579E9A9EC4D283A5F821B /* Pods-GentTests.debug.xcconfig */,
 				92D8B0500A6E9A15EB37875E /* Pods-GentTests.release.xcconfig */,
-				BB8BC798F113B4701823A28F /* Pods-GentUITests.debug.xcconfig */,
-				9DBE64A92AB2AF89C62DFE8F /* Pods-GentUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -417,6 +368,7 @@
 				920E97F81F79E63C00D97658 /* Frameworks */,
 				920E97F91F79E63C00D97658 /* Resources */,
 				E97A5D0C021E6607774EC61D /* [CP] Embed Pods Frameworks */,
+				ABC5BBB783425640678F4D18 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -426,45 +378,6 @@
 			productName = Gent;
 			productReference = 920E97FB1F79E63C00D97658 /* Gent.app */;
 			productType = "com.apple.product-type.application";
-		};
-		920E98101F79E63C00D97658 /* GentTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 920E98281F79E63C00D97658 /* Build configuration list for PBXNativeTarget "GentTests" */;
-			buildPhases = (
-				49B7E5D8E2966D63BB0C2B1E /* [CP] Check Pods Manifest.lock */,
-				920E980D1F79E63C00D97658 /* Sources */,
-				920E980E1F79E63C00D97658 /* Frameworks */,
-				920E980F1F79E63C00D97658 /* Resources */,
-				36A5F6254E467507E64096A1 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				920E98131F79E63C00D97658 /* PBXTargetDependency */,
-			);
-			name = GentTests;
-			productName = GentTests;
-			productReference = 920E98111F79E63C00D97658 /* GentTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		920E981B1F79E63C00D97658 /* GentUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 920E982B1F79E63C00D97658 /* Build configuration list for PBXNativeTarget "GentUITests" */;
-			buildPhases = (
-				EE56D827B9E299057E7A918C /* [CP] Check Pods Manifest.lock */,
-				920E98181F79E63C00D97658 /* Sources */,
-				920E98191F79E63C00D97658 /* Frameworks */,
-				920E981A1F79E63C00D97658 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				920E981E1F79E63C00D97658 /* PBXTargetDependency */,
-			);
-			name = GentUITests;
-			productName = GentUITests;
-			productReference = 920E981C1F79E63C00D97658 /* GentUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -479,16 +392,6 @@
 					920E97FA1F79E63C00D97658 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
-					};
-					920E98101F79E63C00D97658 = {
-						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 920E97FA1F79E63C00D97658;
-					};
-					920E981B1F79E63C00D97658 = {
-						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 920E97FA1F79E63C00D97658;
 					};
 				};
 			};
@@ -506,8 +409,6 @@
 			projectRoot = "";
 			targets = (
 				920E97FA1F79E63C00D97658 /* Gent */,
-				920E98101F79E63C00D97658 /* GentTests */,
-				920E981B1F79E63C00D97658 /* GentUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -529,69 +430,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		920E980F1F79E63C00D97658 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8F8663A21FF416530020F2E8 /* Info.plist in Resources */,
-				8FAA33761FCBCC2D00D9F304 /* GoogleService-Info.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		920E981A1F79E63C00D97658 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		36A5F6254E467507E64096A1 /* [CP] Embed Pods Frameworks */ = {
+		ABC5BBB783425640678F4D18 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GentTests/Pods-GentTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GentTests/Pods-GentTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		49B7E5D8E2966D63BB0C2B1E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GentTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gent/Pods-Gent-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D8CAB6F496CF840F6982D091 /* [CP] Check Pods Manifest.lock */ = {
@@ -644,24 +498,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gent/Pods-Gent-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EE56D827B9E299057E7A918C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GentUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -710,38 +546,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		920E980D1F79E63C00D97658 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8F108C781FD47120001B69CB /* StripeAPIClient.swift in Sources */,
-				920E98161F79E63C00D97658 /* GentTests.swift in Sources */,
-				8F108C771FD4710F001B69CB /* GentsUser.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		920E98181F79E63C00D97658 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				920E98211F79E63C00D97658 /* GentUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		920E98131F79E63C00D97658 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 920E97FA1F79E63C00D97658 /* Gent */;
-			targetProxy = 920E98121F79E63C00D97658 /* PBXContainerItemProxy */;
-		};
-		920E981E1F79E63C00D97658 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 920E97FA1F79E63C00D97658 /* Gent */;
-			targetProxy = 920E981D1F79E63C00D97658 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8F86639F1FF318790020F2E8 /* Main_NewDesign.storyboard */ = {
@@ -887,6 +692,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 27VHD5Y3B8;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuthInterop\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleAppMeasurement\"",
+				);
 				INFOPLIST_FILE = Gent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEV";
@@ -909,6 +724,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 27VHD5Y3B8;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuthInterop\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleAppMeasurement\"",
+				);
 				INFOPLIST_FILE = Gent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D PROD";
@@ -918,108 +743,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		920E98291F79E63C00D97658 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1F579E9A9EC4D283A5F821B /* Pods-GentTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = GentTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-l\"c++\"",
-					"-l\"sqlite3\"",
-					"-l\"z\"",
-					"-framework",
-					"\"Alamofire\"",
-					"-framework",
-					"\"CFNetwork\"",
-					"-l\"icucore\"",
-					"-framework",
-					"\"GTMSessionFetcher\"",
-					"-framework",
-					"\"GoogleToolboxForMac\"",
-					"-framework",
-					"\"SafariServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"StoreKit\"",
-					"-framework",
-					"\"Stripe\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-framework",
-					"\"leveldb\"",
-					"-framework",
-					"\"nanopb\"",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.christinasund.GentTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gent.app/Gent";
-			};
-			name = Debug;
-		};
-		920E982A1F79E63C00D97658 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92D8B0500A6E9A15EB37875E /* Pods-GentTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = GentTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.christinasund.GentTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gent.app/Gent";
-			};
-			name = Release;
-		};
-		920E982C1F79E63C00D97658 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB8BC798F113B4701823A28F /* Pods-GentUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GentUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.christinasund.GentUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Gent;
-			};
-			name = Debug;
-		};
-		920E982D1F79E63C00D97658 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9DBE64A92AB2AF89C62DFE8F /* Pods-GentUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GentUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.christinasund.GentUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Gent;
 			};
 			name = Release;
 		};
@@ -1040,24 +763,6 @@
 			buildConfigurations = (
 				920E98261F79E63C00D97658 /* Debug */,
 				920E98271F79E63C00D97658 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		920E98281F79E63C00D97658 /* Build configuration list for PBXNativeTarget "GentTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				920E98291F79E63C00D97658 /* Debug */,
-				920E982A1F79E63C00D97658 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		920E982B1F79E63C00D97658 /* Build configuration list for PBXNativeTarget "GentUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				920E982C1F79E63C00D97658 /* Debug */,
-				920E982D1F79E63C00D97658 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
