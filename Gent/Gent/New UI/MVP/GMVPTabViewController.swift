@@ -33,12 +33,14 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
         
         if deviceDictionary != nil {
             self.title = deviceDictionary!["deviceName"] as? String
+        }else {
+            self.title = "Main"
+            
         }
         
-        self.title = "Main"
     
         
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper_edit_shield.png")!)
+     //   self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper_edit_shield.png")!)
    
         
     }

@@ -29,6 +29,7 @@ class PhoneDetailsSignUpViewController: UIViewController {
     
     @IBOutlet weak var nickNameTF: UITextField!
     
+    @IBOutlet weak var addPhoneDetailsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +37,12 @@ class PhoneDetailsSignUpViewController: UIViewController {
         if GentsUser.firebaseGentsAuth()?.currentUser == nil {
            
             nickNameView.isHidden = true
-                
+            addPhoneDetailsButton.setTitle("Add Main Device", for: .normal)
+
+        } else {
+            
+            self.title = "Add New Device"
+            addPhoneDetailsButton.setTitle("Add Device", for: .normal)
         }
 
         modelButton?.setTitle(UIDevice.current.modelName, for: .normal)
@@ -187,8 +193,8 @@ class PhoneDetailsSignUpViewController: UIViewController {
     @IBAction private func showPayment() {
         
         if GentsUser.firebaseGentsAuth()?.currentUser != nil {
-            //do all the logic for adding a line
-            
+            // TODO: Ossama is the best!!!! do all the logic for adding a line
+        
             if checkFieldsValid() {
                 
                 let device = Device(deviceName: self.deviceName, deviceInfo: userInfoDict)
@@ -199,7 +205,6 @@ class PhoneDetailsSignUpViewController: UIViewController {
                 
             }
           
-            
         
             self.navigationController?.popViewController(animated: true)
             return
