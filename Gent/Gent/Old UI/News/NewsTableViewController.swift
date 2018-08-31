@@ -36,7 +36,7 @@ class NewsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath) as! NewsTableViewCell
 
-        let ref = Database.database().reference()
+        let ref = FIRDatabase.database().reference()
         let posts = ref.child("posts")
         let row = indexPath.row
         

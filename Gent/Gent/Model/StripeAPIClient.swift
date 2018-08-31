@@ -49,12 +49,14 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
             .responseJSON { responseJSON in
                 switch responseJSON.result {
                 case .success(let json):
+                    print(json)
                     self.ephemeralKey = json as! [String : AnyObject]
                     completion(json as? [String: AnyObject], nil)
                 case .failure(let error):
                     completion(nil, error)
                 }
         }
+    
     }
 
     func createStripeCustomer(email: String, cardToken: STPToken? = nil, initCharge: Int, monthCharge: Int, completion: @escaping STPJSONResponseCompletionBlock) {
@@ -84,12 +86,39 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
             .responseJSON { responseJSON in
                 switch responseJSON.result {
                 case .success(let json):
+                    print(json)
                     completion(json as? [String: AnyObject], nil)
                 case .failure(let error):
                     completion(nil, error)
                 }
         }
     }
+    
+  
+    func addSubscription(stripeCutomerId: String , completion: @escaping STPJSONResponseCompletionBlock) {
+        var url : URL!
+        
+            #if PROD
+            url = self.baseURL.appendingPathComponent("create_sub_prod")
+            #else
+            url = self.baseURL.appendingPathComponent("create_sub_dev")
+            #endif
+       
+        let parameters : [String: String] = ["customerId": stripeCutomerId]
+    
+      
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    let json = try? JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+                    completion(json as? [String: AnyObject], nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }        
+    }
+    
     
     func completeCharge(_ result: STPPaymentResult,
                         amount: Int,
@@ -110,7 +139,6 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
             "desc": description
         ]
         
-        //params["shipping"] = STPAddress.shippingInfoForCharge(with: shippingAddress, shippingMethod: shippingMethod) as AnyObject
         Alamofire.request(url, method: .post, headers: params)
             .validate(statusCode: 200..<300)
             .responseString { response in
@@ -119,10 +147,34 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
                 switch response.result {
                 case .success:
                     let json = try? JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+                   
                     completion(json as? [AnyHashable : Any], nil)
                 case .failure(let error):
                     completion(nil, error)
                 }
         }
     }
+
+
+    func listInvoicesSubscription(subscriptionId: String,  completion: @escaping STPJSONResponseCompletionBlock) {
+        #if PROD
+        let url = self.baseURL.appendingPathComponent("list_invoices_prod")
+        #else
+        let url = self.baseURL.appendingPathComponent("list_invoices_dev")
+        #endif
+    
+        let parameters : [String: String] = ["subscriptionId": subscriptionId]
+    
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    let json = try? JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+                    completion(json as? [AnyHashable : Any], nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }  
+    }
+
 }

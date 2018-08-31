@@ -4,20 +4,14 @@
 target 'Gent' do
   use_frameworks!
 
-
-
-  # Pods for Gent
-pod 'Firebase'
-pod 'Firebase/Auth'
-pod 'Firebase/Database'
+# Pods for Gent
+pod 'Firebase/Core', '~> 3.15.0'
+pod 'Firebase/Database', '~> 3.15.0'
+pod 'Firebase/Auth', '~> 3.15.0'
 pod 'Stripe'
 pod 'Alamofire'
 pod 'SwiftyJSON'
-
 pod 'ReachabilitySwift'
 
-  target 'GentTests' do
-    inherit! :search_paths
-     end
 end
 

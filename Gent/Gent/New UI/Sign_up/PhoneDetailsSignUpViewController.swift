@@ -30,9 +30,13 @@ class PhoneDetailsSignUpViewController: UIViewController {
     @IBOutlet weak var nickNameTF: UITextField!
     
     @IBOutlet weak var addPhoneDetailsButton: UIButton!
+    @IBOutlet weak var activityView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.activityView.isHidden = true
+
         
         if GentsUser.firebaseGentsAuth()?.currentUser == nil {
            
@@ -192,37 +196,75 @@ class PhoneDetailsSignUpViewController: UIViewController {
     //really should be renamed to add phone details
     @IBAction private func showPayment() {
         
-        if GentsUser.firebaseGentsAuth()?.currentUser != nil {
-            // TODO: Ossama is the best!!!! do all the logic for adding a line
-        
-            if checkFieldsValid() {
-                
-                let device = Device(deviceName: self.deviceName, deviceInfo: userInfoDict)
-                               
-                GentsUser.shared.addDevice(device: device, completion: { (isOk, err) -> (Void) in
-                    //handle error
-                })
-                
-            }
-          
-        
-            self.navigationController?.popViewController(animated: true)
+        if checkFieldsValid() != true {
+            
+            ///show invlaid field alert
             return
         }
         
-        
-        if checkFieldsValid()  {
-            
+        if (GentsUser.firebaseGentsAuth()?.currentUser != nil){
+            showAddDevicePaymentAlert()
+            return
+        }else{
+
             saveValues(values: userInfoDict)
             
             self.performSegue(withIdentifier: "showPayment", sender: nil)
             
-        }else {
+            }
             
-            return
+        }
+
+    func addDeviceAndSubscription() {
+
+            self.activityView.startAnimating()
+        
+            userInfoDict["deviceCredit"] = "140"
+            let device = Device(deviceName: self.deviceName, deviceInfo: userInfoDict)
+            
+            GentsUser.shared.addDevice(device: device, completion: { (isOk, err) -> (Void) in
+                if (isOk) {
+                    self.activityView.stopAnimating()
+                    self.navigationController?.popToRootViewController(animated: true)
+
+                }else {
+                    
+                    
+                    //shower error
+                    self.activityView.stopAnimating()
+
+                }
+           
+            })
+        
+    }
+    
+    
+    
+    func showAddDevicePaymentAlert() {
+        
+        let message = "Dear customer, Kindly be informed that by adding a new device with Mobile Gents, you will pay $\(40) as initial payment and $\(6) monthly with the credit card on file"
+        
+        let alertController = UIAlertController(title: "Add a Device", message: message, preferredStyle: .alert)
+        
+        
+        let okAction = UIAlertAction(title: "Yes!", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            
+            self.addDeviceAndSubscription()
             
         }
         
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
         
     }
     

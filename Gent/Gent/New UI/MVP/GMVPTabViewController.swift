@@ -21,27 +21,28 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var lblCC: UILabel!
     @IBOutlet weak var lblCCExpDate: UILabel!
 
- 
+    @IBOutlet weak var deviceCreditLabel: UILabel!
+    
     var paymentList : [JSON]?
     var deviceDictionary : [String: String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(deviceDictionary)
-        
+        var creditString: String
+        var credit: String
         
         if deviceDictionary != nil {
-            self.title = deviceDictionary!["deviceName"] as? String
+            self.title = deviceDictionary!["deviceName"]
+             credit  = (deviceDictionary!["deviceCredit"])!
+             creditString = "MVP Credit $\(credit)"
         }else {
             self.title = "Main"
-            
+             credit = String(GentsUser.shared.repairCredit)
+             creditString = "MVP Credit $\(credit)"
         }
-        
     
-        
-     //   self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper_edit_shield.png")!)
-   
+        self.deviceCreditLabel.text = creditString
         
     }
     
@@ -58,9 +59,9 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
             self.view.viewWithTag(1)?.isHidden = false
             self.view.viewWithTag(2)?.isHidden = true
             
-            
             self.updateCC()
             
+   
             GentsUser.shared.getPayments(completed: { [weak self] json in
                 self?.paymentList = json?["data"].array
                 self?.table.reloadData()
@@ -70,6 +71,7 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
             self.view.viewWithTag(2)?.isHidden = false
         }
     }
+    
     
     private func updateCC() {
         let cusCtx = GentsUser.shared.customerCtx
@@ -99,7 +101,10 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
         if paymentList == nil {
             return 0
         }
-        return (paymentList?.count)!
+    
+        return 1
+        
+        //    return (paymentList?.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,14 +116,15 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
         let localTime = UIHelper.UTCToLocal(time: epoch)
         
         let comp = UIHelper.getDateCompnents(date: localTime)
+    
+        ///more work here
         
         if indexPath.row == 0 {
-            cell.textLabel?.text = "Last payment $\(amount) (\(comp.month)/\(comp.year))"
-        } else if indexPath.row == (paymentList?.count)! - 1 {
-            cell.textLabel?.text = "First payment $\(amount) (\(comp.month)/\(comp.year))"
+            cell.textLabel?.text = "Paid $\(amount) on (\(comp.month)/\(comp.year))"
         } else {
-            cell.textLabel?.text = "Next payment $\(amount) (\(comp.month)/\(comp.year))"
+           // cell.textLabel?.text = "Next payment of $\(amount) due (\(comp.month)/\(comp.year))"
         }
+        
         
         return cell
     }

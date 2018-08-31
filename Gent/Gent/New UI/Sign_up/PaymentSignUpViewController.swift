@@ -37,8 +37,10 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
                 return
             }
             
-            self?.initalPayment = json!["initPayment"].float!
-            self?.monthlyPayment = json!["monthlyPayment"].float!
+            //fix later
+            
+           // self?.initalPayment = json!["initPayment"].float!
+           // self?.monthlyPayment = json!["monthlyPayment"].float!
             
             guard self?.initalPayment != nil && self?.monthlyPayment != nil else {
                 return
@@ -104,6 +106,7 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
         }
         
         
+        
     }
     
     
@@ -127,7 +130,7 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
     
     func showPaymentAlert() {
         
-        let message = "Dear customer, Kindly be informed that by signing-up with Mobile Gents, you will pay $\(initalPayment) as initial payment and $\(monthlyPayment) monthly"
+        let message = "Dear customer, Kindly be informed that by signing-up with Mobile Gents, you will pay $\(40) as initial payment and $\(6) monthly"
         
         let alertController = UIAlertController(title: "One More Step", message: message, preferredStyle: .alert)
         
@@ -177,15 +180,13 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
 
                     DispatchQueue.main.async {
                         
-//                        let alert = UIAlertController.init(title: "Payment plan", message: "Dear customer, Kindly be informed that by signing-up with Mobile Gents, you will pay $\(iPay!) as initial payment and $\(mPay!) monthly", preferredStyle: .alert)
-//
-//                        alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: { action in
-//                            self?.activityIndicator.isHidden = false
-//                            self?.activityIndicator.startAnimating()
-                        
-                            
+
+                                                    
                             let iCharge = Int((self?.initalPayment)! * 100)
                             let mCharge = Int((self?.monthlyPayment)! * 100)
+                        
+                        //need to bring this into firebase
+                        self?.userData["mainDeviceCredit"] = "140"
                             
                             GentsUser.shared.registerUser(withName: self!.name, email: self!.email, password: self!.pwd, cardToken: ctok, initCharge: iCharge, monthCharge: mCharge, userData: self!.userData) { isOK, Error in
                                 

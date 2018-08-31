@@ -18,42 +18,43 @@ class GentsConfig: NSObject {
     var extraPercent : Double?
     
     //MARK: - DB connection
-    class func firebaseConfigApp() -> FirebaseApp? {
+
+    class func firebaseConfigApp() -> FIRApp? {
         
-        var app = FirebaseApp.app(name: "configApp")
+        var app = FIRApp(named: "configApp")
         
         if app == nil {
             
-            let options = FirebaseOptions.init(contentsOfFile: Bundle.main.path(forResource: "GoogleService-Info-ConfigDB", ofType: "plist")!)
+            let options = FIROptions.init(contentsOfFile: Bundle.main.path(forResource: "GoogleService-Info-ConfigDB", ofType: "plist")!)
             
             // Configure an alternative FIRApp.
-            FirebaseApp.configure(name: "configApp", options: options!)
+            FIRApp.configure(withName: "configApp", options: options!)
             
             // Retrieve a previous created named app.
-            app = FirebaseApp.app(name: "configApp")
+            app = FIRApp(named: "configApp")
             guard app != nil else { assert(false, "Could not retrieve configApp"); return nil}
         }
         
         return app
     }
     
-    class func firebaseConfigDataBase() -> Database? {
+    class func firebaseConfigDataBase() -> FIRDatabase? {
         
         guard let app = firebaseConfigApp() else {
             return nil
         }
         
         //return Database.database(url: "https://gentconfig.firebaseio.com/")
-        return Database.database(app: app)
+        return FIRDatabase.database(app: app)
     }
     
-    class func firebaseConfigAuth() -> Auth? {
+    class func firebaseConfigAuth() -> FIRAuth? {
         
         guard let app = firebaseConfigApp() else {
             return nil
         }
         
-        return Auth.auth(app: app)
+        return FIRAuth.auth()
         //return Auth.auth()
     }
     
