@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainAccountTableViewController: UITableViewController {
+class MainAccountTableViewController: GUITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

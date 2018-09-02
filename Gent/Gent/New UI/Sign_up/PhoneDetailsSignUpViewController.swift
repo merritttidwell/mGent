@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhoneDetailsSignUpViewController: UIViewController {
+class PhoneDetailsSignUpViewController: GUIViewController {
 
     var alertController : UIAlertController?
     var isAlertControllerDisplayed = false
@@ -222,7 +222,7 @@ class PhoneDetailsSignUpViewController: UIViewController {
             userInfoDict["deviceCredit"] = "140"
             let device = Device(deviceName: self.deviceName, deviceInfo: userInfoDict)
             
-            GentsUser.shared.addDevice(device: device, completion: { (isOk, err) -> (Void) in
+        GentsUser.shared.addDevice(device: device, initCharge: 4000, completion: { (isOk, err) -> (Void) in
                 if (isOk) {
                     self.activityView.stopAnimating()
                     self.navigationController?.popToRootViewController(animated: true)

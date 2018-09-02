@@ -54,7 +54,10 @@ class GInitViewController: GUIViewController {
                         return
                     }
                     
-                    self?.saveLabel?.text = "Save \(String(describing: specs!["save"]))% on repairs, and get an extra \(String(describing: specs!["extra"]))% when you trade in your phone"
+                    self?.saveLabel?.text = "Save \(35)% on repairs, and get an extra \(25)% when you trade in your phone"
+                    
+                    
+                  //  self?.saveLabel?.text = "Save \(String(describing: specs!["save"]))% on repairs, and get an extra \(String(describing: specs!["extra"]))% when you trade in your phone"
                 
                 }
             })

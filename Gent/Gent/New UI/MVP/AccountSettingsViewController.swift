@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountSettingsViewController: UIViewController {
+class AccountSettingsViewController: GUIViewController {
 
     @IBOutlet weak var emailTF: UITextField!
     override func viewDidLoad() {

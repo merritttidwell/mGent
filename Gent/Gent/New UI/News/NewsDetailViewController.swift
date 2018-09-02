@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsDetailViewController: UIViewController {
+class NewsDetailViewController: GUIViewController {
 
     @IBOutlet weak var newsTV: UITextView!
     var body = String()

@@ -95,7 +95,7 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
     }
     
   
-    func addSubscription(stripeCutomerId: String , completion: @escaping STPJSONResponseCompletionBlock) {
+    func addSubscription(stripeCutomerId: String, initCharge: Int, completion: @escaping STPJSONResponseCompletionBlock) {
         var url : URL!
         
             #if PROD
@@ -104,7 +104,8 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
             url = self.baseURL.appendingPathComponent("create_sub_dev")
             #endif
        
-        let parameters : [String: String] = ["customerId": stripeCutomerId]
+        let parameters : [String: String] = ["customerId": stripeCutomerId,
+                                             "iCharg": String(initCharge)]
     
       
         Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
@@ -165,16 +166,40 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
     
         let parameters : [String: String] = ["subscriptionId": subscriptionId]
     
+      
+        
         Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseJSON { response in
-                switch response.result {
-                case .success:
-                    let json = try? JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    completion(json as? [AnyHashable : Any], nil)
-                case .failure(let error):
-                    completion(nil, error)
+                
+                guard response.result.error == nil else {
+                    completion(nil, response.result.error)
+                    return
                 }
-        }  
+                if let value = response.result.value {
+                    let result = JSON(value)
+                    if response.response!.statusCode == 200 {
+                        
+                        let jsonResult = result.arrayObject
+                        completion(jsonResult![0] as? [String : Any], nil)
+                    }
+                    else {
+                        completion(nil, nil)
+                    }
+                }
+                
+//                switch response.result {
+//
+//                case .success:
+//                    let json = try? JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+//
+//
+//
+//                    completion(json as? [AnyHashable : Any], nil)
+//
+//                case .failure(let error):
+//                    completion(nil, error)
+//                }
+        }
     }
 
 }

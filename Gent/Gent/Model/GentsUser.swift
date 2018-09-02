@@ -31,6 +31,7 @@ class GentsUser: NSObject {
     private(set) var phone: String = ""
     private(set) var sn: String = ""
     private(set) var strpCustomerID = ""
+    private(set) var mainSubscriptionID = ""
     private(set) var repairCredit = ""
     private(set) var payments : JSON?
     
@@ -174,18 +175,17 @@ class GentsUser: NSObject {
     
     //MARK: - Add A Device
     
-    func addDevice( device: Device, completion: @escaping completionSuccess ) {
+    func addDevice( device: Device, initCharge: Int, completion: @escaping completionSuccess ) {
         
         if GentsUser.firebaseGentsAuth()?.currentUser == nil {
             return
         }
        
         
-        StripeAPIClient.sharedClient.addSubscription(stripeCutomerId: self.strpCustomerID) { (resp, err) in
+        StripeAPIClient.sharedClient.addSubscription(stripeCutomerId: self.strpCustomerID, initCharge: initCharge  ) { (resp, err) in
             if err == nil {
-              //  let id = resp?["id"] as! String
-              //  device.deviceDictionary["subscriptionId"] = id
-                
+                let id = resp?["id"] as! String
+                device.deviceDictionary["subscriptionId"] = id
                 self.updateDatabaseDevice(device: device, completion: { (isOk, err) -> (Void) in
                     if isOk {
                         
@@ -196,6 +196,27 @@ class GentsUser: NSObject {
             }else{
                 completion(false, err)
                 return
+            }
+            
+        }
+        
+    }
+    
+    
+    func listInvoicesForSubscription(subscriptionID: String,completion: @escaping STPJSONResponseCompletionBlock ) {
+        
+        if GentsUser.firebaseGentsAuth()?.currentUser == nil {
+            return
+        }
+        
+        StripeAPIClient.sharedClient.listInvoicesSubscription(subscriptionId: subscriptionID) { (resp, err) in
+            if err == nil {
+                
+               print(resp)
+                completion(resp, nil)
+
+            }else {
+                completion(nil,err)
             }
             
         }
@@ -262,7 +283,8 @@ class GentsUser: NSObject {
                 
                 // Create users reference
                 let usersRef = ref.child("users").child(uuid)
-                userData["strp_customer_id"] = resp?["id"] as? String
+                userData["strp_customer_id"] = resp?["customer"] as? String
+                userData["mainSubID"] = resp?["id"] as? String
                 userData["email"] = email
                 userData["name"] = withName
                 usersRef.updateChildValues(userData, withCompletionBlock: { (err, ref) in //[weak usersRef] (err, ref) in
@@ -401,6 +423,8 @@ class GentsUser: NSObject {
             let strpID = value!["strp_customer_id"] as? String ?? ""
             let paymentsRaw = value!["payments"] as Any?
             let mainCredit = value!["mainDeviceCredit"] as? String
+            let mainSubId = value!["mainSubID"] as? String
+            
             
             self.name = name
             self.email = email
@@ -410,6 +434,7 @@ class GentsUser: NSObject {
             self.sn = sn
             self.strpCustomerID = strpID
             self.repairCredit = mainCredit ?? ""
+            self.mainSubscriptionID = mainSubId ?? ""
             
             let newArray = NSMutableArray(array: devices)
             self.devices = newArray
@@ -496,6 +521,9 @@ class GentsUser: NSObject {
             }
         }
     }
+    
+    
+    
     
     func addPaymentCard(host: UIViewController?, delegate: STPPaymentContextDelegate? = nil) {
         

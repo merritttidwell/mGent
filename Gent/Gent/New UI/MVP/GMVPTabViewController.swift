@@ -25,6 +25,8 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
     
     var paymentList : [JSON]?
     var deviceDictionary : [String: String]?
+    var lastPaymentDate =  String()
+    var lastPaymentAmount = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,15 +63,45 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
             
             self.updateCC()
             
-   
-            GentsUser.shared.getPayments(completed: { [weak self] json in
-                self?.paymentList = json?["data"].array
-                self?.table.reloadData()
-            })
-        } else {
-            self.view.viewWithTag(1)?.isHidden = true
-            self.view.viewWithTag(2)?.isHidden = false
+            var subscriptionID = String()
+            
+            if deviceDictionary == nil {
+
+                 subscriptionID = GentsUser.shared.mainSubscriptionID
+                
+            } else {
+                
+                subscriptionID = deviceDictionary!["subscriptionId"]!
+
+            }
+
+         
+            GentsUser.shared.listInvoicesForSubscription(subscriptionID: subscriptionID) { (json, err) in
+                let jsonData = JSON(json!)
+                let date = NSDate(timeIntervalSince1970: TimeInterval(jsonData["date"].intValue))
+                let dayTimePeriodFormatter = DateFormatter()
+                dayTimePeriodFormatter.dateFormat = "MMM dd YYYY"
+
+                self.lastPaymentDate = dayTimePeriodFormatter.string(from: date as Date)
+                self.lastPaymentAmount = jsonData["amount_due"].intValue/100
+             
+                self.table.reloadData()
+
+            }
+            
+    
+         
+            
+//            GentsUser.shared.getPayments(subscriptionID: subscriptionID, completed: { [weak self] json in
+//                self?.paymentList = json?["data"].array
+//                self?.table.reloadData()
+//            })
+//        } else {
+//            self.view.viewWithTag(1)?.isHidden = true
+//            self.view.viewWithTag(2)?.isHidden = false
+//        }
         }
+        
     }
     
     
@@ -98,9 +130,7 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
     //MARK: UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if paymentList == nil {
-            return 0
-        }
+      
     
         return 1
         
@@ -110,17 +140,17 @@ class GMVPTabViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath)
         
-        let pay = paymentList![indexPath.row]
-        let amount = pay["amount"].floatValue / 100.0
-        let epoch = pay["created"].doubleValue
-        let localTime = UIHelper.UTCToLocal(time: epoch)
+       // let pay = paymentList![indexPath.row]
+       // let amount = pay["amount"].floatValue / 100.0
+        //let epoch = pay["created"].doubleValue
+        //let localTime = UIHelper.UTCToLocal(time: epoch)
         
-        let comp = UIHelper.getDateCompnents(date: localTime)
+        //let comp = UIHelper.getDateCompnents(date: localTime)
     
         ///more work here
         
         if indexPath.row == 0 {
-            cell.textLabel?.text = "Paid $\(amount) on (\(comp.month)/\(comp.year))"
+            cell.textLabel?.text = "Paid $\(lastPaymentAmount).00 on \(lastPaymentDate)"
         } else {
            // cell.textLabel?.text = "Next payment of $\(amount) due (\(comp.month)/\(comp.year))"
         }

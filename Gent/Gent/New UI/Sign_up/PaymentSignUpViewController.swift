@@ -10,7 +10,7 @@ import UIKit
 import Stripe
 
 
-class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDelegate {
+class PaymentSignUpViewController: GUIViewController, STPPaymentCardTextFieldDelegate {
 
     var paymentCardTextField : STPPaymentCardTextField?
     @IBOutlet weak var cardView: UIView!
@@ -39,8 +39,8 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
             
             //fix later
             
-           // self?.initalPayment = json!["initPayment"].float!
-           // self?.monthlyPayment = json!["monthlyPayment"].float!
+            self?.initalPayment = json!["initPayment"].float!
+            self?.monthlyPayment = json!["monthlyPayment"].float!
             
             guard self?.initalPayment != nil && self?.monthlyPayment != nil else {
                 return
@@ -180,8 +180,6 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
 
                     DispatchQueue.main.async {
                         
-
-                                                    
                             let iCharge = Int((self?.initalPayment)! * 100)
                             let mCharge = Int((self?.monthlyPayment)! * 100)
                         
@@ -215,9 +213,6 @@ class PaymentSignUpViewController: UIViewController, STPPaymentCardTextFieldDele
                                 
                                 }
                             }
-                        
-
-                    //    alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
                         
                         
                         self?.activityIndicator.isHidden = false

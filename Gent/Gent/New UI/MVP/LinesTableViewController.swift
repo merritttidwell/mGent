@@ -8,14 +8,15 @@
 
 import UIKit
 
-class LinesTableViewController: UITableViewController {
+class LinesTableViewController: GUITableViewController {
 
     var deviceDictionary = [String : String] ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         print(GentsUser.shared.devices)
         
         

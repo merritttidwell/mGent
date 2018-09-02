@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2240C894210E8F0B006E2777 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240C893210E8F0B006E2777 /* AccountSettingsViewController.swift */; };
+		224107D42138E78C008C91EC /* GoogleService-Info-ConfigDB.plist in Resources */ = {isa = PBXBuildFile; fileRef = 224107D32138E78C008C91EC /* GoogleService-Info-ConfigDB.plist */; };
 		22732BDE20ED50D200580111 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22732BDD20ED50D200580111 /* Device.swift */; };
 		22B9F94020C390EB001AB859 /* MainAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9F93F20C390EB001AB859 /* MainAccountTableViewController.swift */; };
 		22B9F94220C44F37001AB859 /* LinesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9F94120C44F37001AB859 /* LinesTableViewController.swift */; };
@@ -18,7 +19,6 @@
 		22FFDCE0210EB7C50062BC2B /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FFDCDF210EB7C50062BC2B /* NewsDetailViewController.swift */; };
 		2E1E391D1F9BF15400290A87 /* GentsUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E391C1F9BF15400290A87 /* GentsUser.swift */; };
 		2E9CA2901F9AC6680017D34B /* GentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9CA28F1F9AC6680017D34B /* GentsViewController.swift */; };
-		3C0AA3C72134CE5D00F59423 /* GoogleService-Info-ConfigDB.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C0AA3C62134CE5C00F59423 /* GoogleService-Info-ConfigDB.plist */; };
 		6B1F239C1F9EE46300B6F9D0 /* UnderConstruction.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B1F239B1F9EE46300B6F9D0 /* UnderConstruction.xib */; };
 		6B1F239E1F9EE5A400B6F9D0 /* UnderConstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1F239D1F9EE5A400B6F9D0 /* UnderConstruction.swift */; };
 		6B4DD7B81F85DE1C00D511B1 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */; };
@@ -60,6 +60,7 @@
 /* Begin PBXFileReference section */
 		0A662339FF991BFC0808AFCA /* Pods_GentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2240C893210E8F0B006E2777 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
+		224107D32138E78C008C91EC /* GoogleService-Info-ConfigDB.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-ConfigDB.plist"; sourceTree = "<group>"; };
 		22732BDD20ED50D200580111 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		22B9F93F20C390EB001AB859 /* MainAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAccountTableViewController.swift; sourceTree = "<group>"; };
 		22B9F94120C44F37001AB859 /* LinesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesTableViewController.swift; sourceTree = "<group>"; };
@@ -70,7 +71,6 @@
 		22FFDCDF210EB7C50062BC2B /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		2E1E391C1F9BF15400290A87 /* GentsUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentsUser.swift; sourceTree = "<group>"; };
 		2E9CA28F1F9AC6680017D34B /* GentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentsViewController.swift; sourceTree = "<group>"; };
-		3C0AA3C62134CE5C00F59423 /* GoogleService-Info-ConfigDB.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info-ConfigDB.plist"; path = "../../../../Downloads/GoogleService-Info-ConfigDB.plist"; sourceTree = "<group>"; };
 		6B1F239B1F9EE46300B6F9D0 /* UnderConstruction.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnderConstruction.xib; sourceTree = "<group>"; };
 		6B1F239D1F9EE5A400B6F9D0 /* UnderConstruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderConstruction.swift; sourceTree = "<group>"; };
 		6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTableViewController.swift; sourceTree = "<group>"; };
@@ -278,7 +278,7 @@
 				8F8663A41FF418C60020F2E8 /* New UI */,
 				8F8663A31FF418A20020F2E8 /* Old UI */,
 				6B896D7D1F81875B0070DCA7 /* GoogleService-Info.plist */,
-				3C0AA3C62134CE5C00F59423 /* GoogleService-Info-ConfigDB.plist */,
+				224107D32138E78C008C91EC /* GoogleService-Info-ConfigDB.plist */,
 				2E1E391E1F9BF16300290A87 /* Model */,
 				920E97FE1F79E63C00D97658 /* AppDelegate.swift */,
 				920E98071F79E63C00D97658 /* Assets.xcassets */,
@@ -368,7 +368,6 @@
 				920E97F81F79E63C00D97658 /* Frameworks */,
 				920E97F91F79E63C00D97658 /* Resources */,
 				E97A5D0C021E6607774EC61D /* [CP] Embed Pods Frameworks */,
-				ABC5BBB783425640678F4D18 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -392,6 +391,14 @@
 					920E97FA1F79E63C00D97658 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplePay = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -419,12 +426,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FAA33781FCBDC1A00D9F304 /* readme.md in Resources */,
+				224107D42138E78C008C91EC /* GoogleService-Info-ConfigDB.plist in Resources */,
 				920E980B1F79E63C00D97658 /* LaunchScreen.storyboard in Resources */,
 				6B1F239C1F9EE46300B6F9D0 /* UnderConstruction.xib in Resources */,
 				6B896D7E1F81875B0070DCA7 /* GoogleService-Info.plist in Resources */,
 				8F86639D1FF318790020F2E8 /* Main_NewDesign.storyboard in Resources */,
 				920E98081F79E63C00D97658 /* Assets.xcassets in Resources */,
-				3C0AA3C72134CE5D00F59423 /* GoogleService-Info-ConfigDB.plist in Resources */,
 				8F8663A11FF4164E0020F2E8 /* Info.plist in Resources */,
 				920E98061F79E63C00D97658 /* Main.storyboard in Resources */,
 			);
@@ -433,21 +440,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		ABC5BBB783425640678F4D18 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gent/Pods-Gent-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D8CAB6F496CF840F6982D091 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -685,9 +677,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 27VHD5Y3B8;
+				DEVELOPMENT_TEAM = BG3P7CFKTA;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
@@ -701,7 +694,7 @@
 				INFOPLIST_FILE = Gent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEV";
-				PRODUCT_BUNDLE_IDENTIFIER = com.themobilegents.gent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.themobilegents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -719,7 +712,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 27VHD5Y3B8;
+				DEVELOPMENT_TEAM = BG3P7CFKTA;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
@@ -733,7 +726,7 @@
 				INFOPLIST_FILE = Gent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D PROD";
-				PRODUCT_BUNDLE_IDENTIFIER = com.themobilegents.gent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.themobilegents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
