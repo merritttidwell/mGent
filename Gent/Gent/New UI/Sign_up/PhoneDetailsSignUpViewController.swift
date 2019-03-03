@@ -203,7 +203,6 @@ class PhoneDetailsSignUpViewController: GUIViewController {
         }
         
         if (GentsUser.firebaseGentsAuth()?.currentUser != nil){
-            showAddDevicePaymentAlert()
             return
         }else{
 
@@ -239,34 +238,6 @@ class PhoneDetailsSignUpViewController: GUIViewController {
         
     }
     
-    
-    
-    func showAddDevicePaymentAlert() {
-        
-        let message = "Dear customer, Kindly be informed that by adding a new device with Mobile Gents, you will pay $\(40) as initial payment and $\(6) monthly with the credit card on file"
-        
-        let alertController = UIAlertController(title: "Add a Device", message: message, preferredStyle: .alert)
-        
-        
-        let okAction = UIAlertAction(title: "Yes!", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-            
-            self.addDeviceAndSubscription()
-            
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-            
-            self.navigationController?.popToRootViewController(animated: true)
-        }
-        
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
-        
-        self.present(alertController, animated: true, completion: nil)
-        
-    }
     
 
 }

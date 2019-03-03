@@ -259,7 +259,7 @@ class GentsUser: NSObject {
 
     
     //MARK: - Reg_Login_Logout
-    func registerUser(withName: String, email: String, password: String, cardToken: STPToken? = nil, initCharge: Int, monthCharge: Int, userData:[String:String], completion: @escaping completionSuccess) {
+    func registerUser(withName: String, email: String, password: String, cardToken: STPToken? = nil, monthCharge: Int, userData:[String:String], completion: @escaping completionSuccess) {
         
         var userData = userData
         GentsUser.firebaseGentsAuth()?.createUser(withEmail: email, password: password) { (user, error) in
@@ -271,7 +271,7 @@ class GentsUser: NSObject {
             
             guard let uuid = user?.uid else {return}
             
-            StripeAPIClient.sharedClient.createStripeCustomer(email: email, cardToken: cardToken, initCharge: initCharge, monthCharge: monthCharge) { resp, err in
+            StripeAPIClient.sharedClient.createStripeCustomer(email: email, cardToken: cardToken, monthCharge: monthCharge) { resp, err in
                 
                 guard err == nil else {
                     completion(false, err)

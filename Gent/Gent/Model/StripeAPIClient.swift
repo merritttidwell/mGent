@@ -59,7 +59,7 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
     
     }
 
-    func createStripeCustomer(email: String, cardToken: STPToken? = nil, initCharge: Int, monthCharge: Int, completion: @escaping STPJSONResponseCompletionBlock) {
+    func createStripeCustomer(email: String, cardToken: STPToken? = nil, monthCharge: Int, completion: @escaping STPJSONResponseCompletionBlock) {
         var url : URL!
         
         if cardToken != nil {
@@ -69,16 +69,16 @@ class StripeAPIClient: NSObject, STPEphemeralKeyProvider {
                 url = self.baseURL.appendingPathComponent("create_customer_with_card_dev")
             #endif
         } else {
-            #if PROD
-                url = self.baseURL.appendingPathComponent("create_customer_prod")
-            #else
-                url = self.baseURL.appendingPathComponent("create_customer_dev")
-            #endif
+//            #if PROD
+//                url = self.baseURL.appendingPathComponent("create_customer_prod")
+//            #else
+//                url = self.baseURL.appendingPathComponent("create_customer_dev")
+//            #endif
         }
         var hdrs : [String: String] = ["email": email]
         if cardToken != nil {
             hdrs["source"] = cardToken!.tokenId
-            hdrs["ichrg"] = String(initCharge)
+         //   hdrs["ichrg"] = String(initCharge)
             hdrs["mchrg"] = String(monthCharge)
         }
         Alamofire.request(url, method: .post, headers: hdrs)

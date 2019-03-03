@@ -91,19 +91,22 @@ class PaymentSignUpViewController: GUIViewController, STPPaymentCardTextFieldDel
         if let tmodel = defaults.string(forKey: "model") {
             userData["model"] = tmodel
         }
+
+        //removed since we are just collecting model
         
-        if let tserial = defaults.string(forKey: "serialNumber"){
-            userData["serial"] = tserial
-            
-        }
         
-        if let tcarrier = defaults.string(forKey: "carrier"){
-            userData["carrier"] = tcarrier
-        }
-        
-        if let tnumber = defaults.string(forKey: "phoneNumber") {
-            userData["number"] = tnumber
-        }
+//        if let tserial = defaults.string(forKey: "serialNumber"){
+//            userData["serial"] = tserial
+//
+//        }
+//
+//        if let tcarrier = defaults.string(forKey: "carrier"){
+//            userData["carrier"] = tcarrier
+//        }
+//
+//        if let tnumber = defaults.string(forKey: "phoneNumber") {
+//            userData["number"] = tnumber
+//        }
         
         
         
@@ -130,7 +133,7 @@ class PaymentSignUpViewController: GUIViewController, STPPaymentCardTextFieldDel
     
     func showPaymentAlert() {
         
-        let message = "Dear customer, Kindly be informed that by signing-up with Mobile Gents, you will pay $\(40) as initial payment and $\(6) monthly"
+        let message = "Dear customer, Kindly be informed that by signing-up with Mobile Gents, you will pay $\(6) monthly"
         
         let alertController = UIAlertController(title: "One More Step", message: message, preferredStyle: .alert)
         
@@ -171,22 +174,22 @@ class PaymentSignUpViewController: GUIViewController, STPPaymentCardTextFieldDel
                         return
                     }
 
-                    let iPay = json!["initPayment"].float
+                   // let iPay = json!["initPayment"].float
                     let mPay = json!["monthlyPayment"].float
 
-                    guard iPay != nil && mPay != nil else {
+                    guard mPay != nil else {
                         return
                     }
 
                     DispatchQueue.main.async {
                         
-                            let iCharge = Int((self?.initalPayment)! * 100)
+                          //  let iCharge = Int((self?.initalPayment)! * 100)
                             let mCharge = Int((self?.monthlyPayment)! * 100)
                         
                         //need to bring this into firebase
                         self?.userData["mainDeviceCredit"] = "140"
                             
-                            GentsUser.shared.registerUser(withName: self!.name, email: self!.email, password: self!.pwd, cardToken: ctok, initCharge: iCharge, monthCharge: mCharge, userData: self!.userData) { isOK, Error in
+                            GentsUser.shared.registerUser(withName: self!.name, email: self!.email, password: self!.pwd, cardToken: ctok, monthCharge: mCharge, userData: self!.userData) { isOK, Error in
                                 
                                 if isOK {
                                     let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)

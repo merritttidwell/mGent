@@ -36,14 +36,14 @@ class GInitViewController: GUIViewController {
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper_edit_shield.png")!)
                 
-        if GentsUser.firebaseGentsAuth()?.currentUser != nil {
-            GentsUser.shared.reloadUserData(completion: { isReloaded in
-                let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
-                let vc = sb.instantiateViewController(withIdentifier: "tabsController")
-                self.present(vc, animated: false, completion: nil)
-           
-            })
-        } else {
+//        if GentsUser.firebaseGentsAuth()?.currentUser != nil {
+//            GentsUser.shared.reloadUserData(completion: { isReloaded in
+//                let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
+//                let vc = sb.instantiateViewController(withIdentifier: "tabsController")
+//                self.present(vc, animated: false, completion: nil)
+//
+//            })
+//        } else {
             GentsConfig.getModelConfig(completed: { specs -> (Void) in
                 DispatchQueue.main.async { [weak self] in
                     
@@ -62,7 +62,7 @@ class GInitViewController: GUIViewController {
                 }
             })
         }
-    }
+    
     
     @IBAction func unwindToInitView(segue: UIStoryboardSegue) {
         print("unwind")
