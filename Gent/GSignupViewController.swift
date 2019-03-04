@@ -315,6 +315,7 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentC
             
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main_NewDesign", bundle:nil)
             let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentSignUp") as! PaymentSignUpViewController
+          //  let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentSignUp") as!
             self.navigationController?.show(nextViewController, sender: self)
             
 

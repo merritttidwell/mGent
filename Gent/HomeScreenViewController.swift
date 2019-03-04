@@ -11,13 +11,30 @@ import UIKit
 class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 @IBOutlet
     var tableView: UITableView!
-    let screenNames = ["Repair", "BuyBack", "MVP"]
+    let screenNames = ["Repair", "Buy Back", "MVP Benefits"]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper_edit_shield.png")!)
+        
+        setUpNavigationBarItems()
 
         // Do any additional setup after loading the view.
+    }
+    
+    private func setUpNavigationBarItems() {
+        
+        let image = UIImage.init(named: "nav")
+        let titleImageView = UIImageView(image: image)
+        titleImageView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        titleImageView.contentMode = .scaleAspectFit
+        //     titleImageView.backgroundColor = .gray
+        navigationItem.titleView = titleImageView
+        navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.navigationBar.isTranslucent = false
+        
+        
     }
     
     //TableView Delegate
@@ -31,8 +48,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "screenNameCell", for: indexPath)
         
         cell.textLabel?.text = screenNames[indexPath.row]
-        
-        
+        cell.textLabel?.font = UIFont(descriptor: UIFontDescriptor(name: "Gill Sans", size: 20), size: 20)
+        cell.textLabel?.textAlignment = .center
         
         return cell
         
@@ -46,11 +63,10 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         if indexPath.row == 0  {
             
             let nextViewController = storyBoard.instantiateViewController(withIdentifier: "RepairViewController") as! RepairViewController
-
-            self.navigationController?.show(nextViewController, sender: self)
-            
-            
+           self.navigationController?.show(nextViewController, sender: self)
+     
         }
+        
         if indexPath.row == 1 {
             
             let nextViewController = storyBoard.instantiateViewController(withIdentifier: "BuyBackViewController") as! BuyBackViewController
@@ -68,4 +84,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 }
