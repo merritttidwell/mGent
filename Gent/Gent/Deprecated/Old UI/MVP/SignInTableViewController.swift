@@ -38,7 +38,7 @@ class SignInTableViewController: UITableViewController {
     func signIn(emailAdd: String, pass: String) {
         
 
-        FIRAuth.auth()?.signIn(withEmail: emailAdd, password: pass) { (user, error) in
+        Auth.auth().signIn(withEmail: emailAdd, password: pass) { (user, error) in
             
             if (error != nil) {
                 print(error)

@@ -5,9 +5,9 @@ target 'Gent' do
   use_frameworks!
 
 # Pods for Gent
-pod 'Firebase/Core', '~> 3.15.0'
-pod 'Firebase/Database', '~> 3.15.0'
-pod 'Firebase/Auth', '~> 3.15.0'
+pod 'Firebase/Core', '~> 4.3.0'
+pod 'Firebase/Database', '~> 4.3.0'
+pod 'Firebase/Auth', '~> 4.3.0'
 pod 'Stripe'
 pod 'Alamofire'
 pod 'SwiftyJSON'

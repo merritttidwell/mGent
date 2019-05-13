@@ -22,6 +22,7 @@
 		3C17C31F222C8D4F00ED9FFB /* BuyBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17C31E222C8D4F00ED9FFB /* BuyBackViewController.swift */; };
 		3C17C324222C8D7000ED9FFB /* RepairViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17C323222C8D7000ED9FFB /* RepairViewController.swift */; };
 		3C2A31F1222C5B2F00D3B5F0 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A31F0222C5B2F00D3B5F0 /* HomeScreenViewController.swift */; };
+		3CFF6E56223074D2001ACDBF /* AccountHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF6E55223074D2001ACDBF /* AccountHomeViewController.swift */; };
 		6B1F239C1F9EE46300B6F9D0 /* UnderConstruction.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B1F239B1F9EE46300B6F9D0 /* UnderConstruction.xib */; };
 		6B1F239E1F9EE5A400B6F9D0 /* UnderConstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1F239D1F9EE5A400B6F9D0 /* UnderConstruction.swift */; };
 		6B4DD7B81F85DE1C00D511B1 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */; };
@@ -47,7 +48,7 @@
 		8FDE9B331FF8C23A00C3B8F6 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B311FF8C23A00C3B8F6 /* UIHelper.swift */; };
 		8FDE9B361FF8C8FF00C3B8F6 /* GNewsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B351FF8C8FF00C3B8F6 /* GNewsTabViewController.swift */; };
 		8FDE9B381FF8DCA300C3B8F6 /* GSigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B371FF8DCA300C3B8F6 /* GSigninViewController.swift */; };
-		8FDE9B3B1FF8EB2400C3B8F6 /* GMVPTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B3A1FF8EB2400C3B8F6 /* GMVPTabViewController.swift */; };
+		8FDE9B3B1FF8EB2400C3B8F6 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDE9B3A1FF8EB2400C3B8F6 /* DeviceDetailViewController.swift */; };
 		920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E97FE1F79E63C00D97658 /* AppDelegate.swift */; };
 		920E98061F79E63C00D97658 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920E98041F79E63C00D97658 /* Main.storyboard */; };
 		920E98081F79E63C00D97658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 920E98071F79E63C00D97658 /* Assets.xcassets */; };
@@ -75,6 +76,7 @@
 		3C17C31E222C8D4F00ED9FFB /* BuyBackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyBackViewController.swift; sourceTree = "<group>"; };
 		3C17C323222C8D7000ED9FFB /* RepairViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairViewController.swift; sourceTree = "<group>"; };
 		3C2A31F0222C5B2F00D3B5F0 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		3CFF6E55223074D2001ACDBF /* AccountHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHomeViewController.swift; sourceTree = "<group>"; };
 		6B1F239B1F9EE46300B6F9D0 /* UnderConstruction.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnderConstruction.xib; sourceTree = "<group>"; };
 		6B1F239D1F9EE5A400B6F9D0 /* UnderConstruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderConstruction.swift; sourceTree = "<group>"; };
 		6B4DD7B71F85DE1C00D511B1 /* CreateAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTableViewController.swift; sourceTree = "<group>"; };
@@ -100,7 +102,7 @@
 		8FDE9B311FF8C23A00C3B8F6 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		8FDE9B351FF8C8FF00C3B8F6 /* GNewsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNewsTabViewController.swift; sourceTree = "<group>"; };
 		8FDE9B371FF8DCA300C3B8F6 /* GSigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSigninViewController.swift; sourceTree = "<group>"; };
-		8FDE9B3A1FF8EB2400C3B8F6 /* GMVPTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMVPTabViewController.swift; sourceTree = "<group>"; };
+		8FDE9B3A1FF8EB2400C3B8F6 /* DeviceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailViewController.swift; sourceTree = "<group>"; };
 		918239316A00CA3B7082B5B6 /* Pods-Gent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gent.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gent/Pods-Gent.release.xcconfig"; sourceTree = "<group>"; };
 		920E97FB1F79E63C00D97658 /* Gent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		920E97FE1F79E63C00D97658 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -253,7 +255,7 @@
 		8FDE9B391FF8EAF100C3B8F6 /* MVP */ = {
 			isa = PBXGroup;
 			children = (
-				8FDE9B3A1FF8EB2400C3B8F6 /* GMVPTabViewController.swift */,
+				8FDE9B3A1FF8EB2400C3B8F6 /* DeviceDetailViewController.swift */,
 				22B9F93F20C390EB001AB859 /* MainAccountTableViewController.swift */,
 				22B9F94120C44F37001AB859 /* LinesTableViewController.swift */,
 				2240C893210E8F0B006E2777 /* AccountSettingsViewController.swift */,
@@ -264,6 +266,7 @@
 		920E97F21F79E63C00D97658 = {
 			isa = PBXGroup;
 			children = (
+				3CFF6E55223074D2001ACDBF /* AccountHomeViewController.swift */,
 				3C2A31F0222C5B2F00D3B5F0 /* HomeScreenViewController.swift */,
 				22DA277D205DB499009607A3 /* GSignupViewController.swift */,
 				8FB8A4FD1FF4DC0300A849B3 /* GInitViewController.swift */,
@@ -483,6 +486,8 @@
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -492,6 +497,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -539,11 +546,12 @@
 				920E97FF1F79E63C00D97658 /* AppDelegate.swift in Sources */,
 				6B6C5CA31F8C5D080047A51F /* SignInTableViewController.swift in Sources */,
 				2E1E391D1F9BF15400290A87 /* GentsUser.swift in Sources */,
-				8FDE9B3B1FF8EB2400C3B8F6 /* GMVPTabViewController.swift in Sources */,
+				8FDE9B3B1FF8EB2400C3B8F6 /* DeviceDetailViewController.swift in Sources */,
 				8F5B1AC61FF73AAD00D11744 /* UITextFieldExt.swift in Sources */,
 				22B9F94220C44F37001AB859 /* LinesTableViewController.swift in Sources */,
 				8FDE9B321FF8C23A00C3B8F6 /* OnScreenKBListener.swift in Sources */,
 				3C17C31F222C8D4F00ED9FFB /* BuyBackViewController.swift in Sources */,
+				3CFF6E56223074D2001ACDBF /* AccountHomeViewController.swift in Sources */,
 				22DA2779205DA46E009607A3 /* UIViewExt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -181,46 +181,47 @@ class PaymentSignUpViewController: GUIViewController, STPPaymentCardTextFieldDel
                         return
                     }
 
-                    DispatchQueue.main.async {
+ 
                         
                           //  let iCharge = Int((self?.initalPayment)! * 100)
                             let mCharge = Int((self?.monthlyPayment)! * 100)
+                    
+                            self?.activityIndicator.isHidden = false
                         
-                        //need to bring this into firebase
-                        self?.userData["mainDeviceCredit"] = "140"
-                            
                             GentsUser.shared.registerUser(withName: self!.name, email: self!.email, password: self!.pwd, cardToken: ctok, monthCharge: mCharge, userData: self!.userData) { isOK, Error in
                                 
                                 if isOK {
-                                    let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
-                                    let vc = sb.instantiateViewController(withIdentifier: "tabsController")
-
-                                    self?.present(vc, animated: false, completion: nil)
-                                } else {
-                                    self?.activityIndicator.stopAnimating()
-                                    let err = Error?.localizedDescription  ?? "nothing"
-                                    
-                                    
-                                    let alertController = UIAlertController(title: "Error", message: err, preferredStyle: .alert)
-
-                                
-                                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
-                                        UIAlertAction in
-                
-                                        self?.navigationController?.popToRootViewController(animated: true)
+                                    DispatchQueue.main.async {
+                                        self?.activityIndicator.isHidden = false
+                                        let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
+                                        let vc = sb.instantiateViewController(withIdentifier: "MainNavVC")
+                                        self?.present(vc, animated: false, completion: nil)
+                                        
                                     }
-                                    
-                                    alertController.addAction(okAction)
-                                    
-                                    self?.present(alertController, animated: true, completion: nil)
-                                
+
+                                } else {
+                                    DispatchQueue.main.async {
+                                        self?.activityIndicator.stopAnimating()
+                                        let err = Error?.localizedDescription  ?? "nothing"
+                                        
+                                        
+                                        let alertController = UIAlertController(title: "Error", message: err, preferredStyle: .alert)
+                                        
+                                        
+                                        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+                                            UIAlertAction in
+                                            
+                                            self?.navigationController?.popToRootViewController(animated: true)
+                                        }
+                                        
+                                        alertController.addAction(okAction)
+                                        
+                                        self?.present(alertController, animated: true, completion: nil)
+                                    }
                                 }
                             }
                         
-                        
-                        self?.activityIndicator.isHidden = false
-
-                    }
+                    
                 }
             })
         }

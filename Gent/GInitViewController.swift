@@ -12,56 +12,30 @@ import SwiftyJSON
 
 class GInitViewController: GUIViewController {
     
-    @IBOutlet weak var signupLabel : UILabel?
-    @IBOutlet weak var saveLabel : UILabel?
-    @IBOutlet weak var decorativeView: UIView!
+    @IBOutlet weak var mvpBenefitsLabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var myView: UIView!
     
-    @IBAction func cancelButtonPressed(_ sender: Any) {
-        
-        
-        let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "tabsController")
 
-        self.present(vc, animated: true, completion: nil)
-    
-    }
-  
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        signupLabel?.text = "Sign up to MVP for better \(UIDevice.current.modelName) prices"
-        saveLabel?.text = "Save on repairs, and get money back when you trade in your phone"
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper_edit_shield.png")!)
-                
-//        if GentsUser.firebaseGentsAuth()?.currentUser != nil {
-//            GentsUser.shared.reloadUserData(completion: { isReloaded in
-//                let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
-//                let vc = sb.instantiateViewController(withIdentifier: "tabsController")
-//                self.present(vc, animated: false, completion: nil)
-//
-//            })
-//        } else {
-            GentsConfig.getModelConfig(completed: { specs -> (Void) in
-                DispatchQueue.main.async { [weak self] in
-                    
-                    self?.signupLabel?.text = "Sign up to MVP for better \(UIDevice.current.modelName) prices"
-                    
-                    guard specs != nil else {
-                        self?.saveLabel?.text = "Save on repairs, and get money back when you trade in your phone"
-                        return
-                    }
-                    
-                    self?.saveLabel?.text = "Save \(35)% on repairs, and get an extra \(25)% when you trade in your phone"
-                    
-                    
-                  //  self?.saveLabel?.text = "Save \(String(describing: specs!["save"]))% on repairs, and get an extra \(String(describing: specs!["extra"]))% when you trade in your phone"
-                
-                }
-            })
-        }
+        
+        myView.layer.borderColor = UIColor.lightGray.cgColor
+        myView.layer.borderWidth = 3
+        
+        let fontLarge =  UIFont(descriptor: UIFontDescriptor(name: "Gill Sans", size: 26), size: 26)
+        let fontSmall =  UIFont(descriptor: UIFontDescriptor(name: "Gill Sans", size: 18), size: 18)
+        
+        let attributedText = NSMutableAttributedString(string: "MVP Benefits\n\n", attributes: [NSAttributedStringKey.font: fontLarge, NSAttributedStringKey.underlineStyle : NSUnderlineStyle.styleSingle.rawValue])
+        
+        attributedText.append(NSAttributedString(string: "3 FREE SCREEN REPLACEMENTS\n\n $150 Purchase Credit for Lost/Stolen Replacement Devices\n\n 30% Discount on Accessory Purchases\n\n 20% Buyback Bonus on Devices Sold to TMG BuyBack Program\n\n 15% Discount on Repairs in TMG Tech AllianceTech Support\n Wireless Consultation Included", attributes: [NSAttributedStringKey.font: fontSmall]))
+
+        mvpBenefitsLabel.attributedText = attributedText
+     
+    }
     
     
     @IBAction func unwindToInitView(segue: UIStoryboardSegue) {

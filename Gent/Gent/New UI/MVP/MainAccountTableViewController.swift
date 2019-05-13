@@ -13,24 +13,9 @@ class MainAccountTableViewController: GUITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (GentsUser.firebaseGentsAuth()?.currentUser == nil) {
-            
-            self.dismiss(animated: true) {
-                
-                let vc = UIStoryboard(name: "Main_NewDesign", bundle: nil).instantiateViewController(withIdentifier: "signup") as UIViewController
-                self.present(vc, animated: true, completion: nil)
-               
-            }
-            
-        }
-        
+      
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func didReceiveMemoryWarning() {

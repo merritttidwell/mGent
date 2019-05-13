@@ -76,7 +76,7 @@ class GentsUser: NSObject {
             config.requiredBillingAddressFields = STPBillingAddressFields.full
          //   config.requiredShippingAddressFields = STPContactField.all
             config.shippingType = STPShippingType.shipping
-            config.additionalPaymentMethods = .all
+            config.additionalPaymentOptions = .all
             
             return config
             
@@ -133,25 +133,25 @@ class GentsUser: NSObject {
     }
     
     //MARK: - DB connection
-    class func firebaseGentsApp() -> FIRApp? {
+    class func firebaseGentsApp() -> FirebaseApp? {
         
-        var app = FIRApp(named: "gentsApp")
+        var app = FirebaseApp.app(name: "gentsApp")
         
         if app == nil {
             
-            let options = FIROptions.init(contentsOfFile: Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")!)
+            let options = FirebaseOptions.init(contentsOfFile: Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")!)
             
             // Configure an alternative FIRApp.
-            FIRApp.configure(withName: "gentsApp", options: options!)
+            FirebaseApp.configure(name: "gentsApp", options: options!)
             
             // Retrieve a previous created named app.
-            app = FIRApp(named: "gentsApp")
+            app = FirebaseApp.app(name: "gentsApp")
             guard app != nil else { assert(false, "Could not retrieve gentsApp"); return nil}
         }
         
         return app
     }
-    class func firebaseGentsDataBase() -> FIRDatabase? {
+    class func firebaseGentsDataBase() -> Database? {
         
         /*guard let app = firebaseGentsApp() else {
             return nil
@@ -159,10 +159,28 @@ class GentsUser: NSObject {
         
         return Database.database(app: app)*/
         
-        return FIRDatabase.database()
+        return Database.database()
     }
     
-    class func firebaseGentsAuth() -> FIRAuth? {
+    class func fetchCurrentUser(completion: @escaping([String: Any]?) -> Void) {
+        var user: [String: Any]? = [:]
+        
+        if let userId = Auth.auth().currentUser?.uid {
+            var ref: DatabaseReference = (GentsUser.firebaseGentsDataBase()?.reference())!
+            let usersRef = ref.child("users").child(userId)
+            
+            usersRef.observe(.value) { (snapshot, string) in
+                if snapshot.exists() {
+                    let value = snapshot.value as? [String: Any]
+                    completion(value)
+                    print("User... ", value)
+                }
+            }
+        } else {
+            completion(nil)
+        }
+    }
+    class func firebaseGentsAuth() -> Auth? {
         
         /*guard let app = firebaseGentsApp() else {
             return nil
@@ -170,7 +188,7 @@ class GentsUser: NSObject {
         
         return Auth.auth(app: app)*/
         
-        return FIRAuth.auth()
+        return Auth.auth()
     }
     
     //MARK: - Add A Device
@@ -208,18 +226,18 @@ class GentsUser: NSObject {
         if GentsUser.firebaseGentsAuth()?.currentUser == nil {
             return
         }
-        
-        StripeAPIClient.sharedClient.listInvoicesSubscription(subscriptionId: subscriptionID) { (resp, err) in
-            if err == nil {
-                
-               print(resp)
-                completion(resp, nil)
-
-            }else {
-                completion(nil,err)
-            }
-            
-        }
+//        
+//        StripeAPIClient.sharedClient.listInvoicesSubscription(subscriptionId: subscriptionID) { (resp, err) in
+//            if err == nil {
+//                
+//               print(resp)
+//                completion(resp, nil)
+//
+//            }else {
+//                completion(nil,err)
+//            }
+//            
+//        }
         
     }
     
@@ -232,7 +250,7 @@ class GentsUser: NSObject {
         let currentUser = GentsUser.firebaseGentsAuth()?.currentUser
 
  
-        var  ref: FIRDatabaseReference = (GentsUser.firebaseGentsDataBase()?.reference())!
+        var  ref: DatabaseReference = (GentsUser.firebaseGentsDataBase()?.reference())!
         
         guard let uuid = currentUser?.uid else {return}
         
@@ -262,31 +280,41 @@ class GentsUser: NSObject {
     func registerUser(withName: String, email: String, password: String, cardToken: STPToken? = nil, monthCharge: Int, userData:[String:String], completion: @escaping completionSuccess) {
         
         var userData = userData
-        GentsUser.firebaseGentsAuth()?.createUser(withEmail: email, password: password) { (user, error) in
-            if error != nil {
-                print(error ?? "unknown error")
-                completion(false, error)
+        
+        
+        StripeAPIClient.sharedClient.createStripeCustomer(email: email, cardToken: cardToken, monthCharge: monthCharge) { resp, err in
+            
+            guard err == nil else {
+                completion(false, err)
                 return
             }
             
-            guard let uuid = user?.uid else {return}
-            
-            StripeAPIClient.sharedClient.createStripeCustomer(email: email, cardToken: cardToken, monthCharge: monthCharge) { resp, err in
-                
-                guard err == nil else {
-                    completion(false, err)
+            print("Resp...", resp)
+        
+            GentsUser.firebaseGentsAuth()?.createUser(withEmail: email, password: password) { (user, error) in
+                if error != nil {
+                    print(error ?? "unknown error")
+                    completion(false, error)
                     return
                 }
                 
+                guard let uuid = user?.uid else { return }
+            
+                
                 // Create database reference
-                var ref: FIRDatabaseReference = (GentsUser.firebaseGentsDataBase()?.reference())!
+                var ref: DatabaseReference = (GentsUser.firebaseGentsDataBase()?.reference())!
+                
+    
                 
                 // Create users reference
                 let usersRef = ref.child("users").child(uuid)
-                userData["strp_customer_id"] = resp?["customer"] as? String
-                userData["mainSubID"] = resp?["id"] as? String
+                userData["strp_customer_id"] = resp?["customerId"] as? String
+                userData["mainSubID"] = resp?["subscriptionId"] as? String
                 userData["email"] = email
                 userData["name"] = withName
+                userData["mainPurchaseCredit"] = "150"
+                userData["mainRepairCredit"] = "3"
+                
                 usersRef.updateChildValues(userData, withCompletionBlock: { (err, ref) in //[weak usersRef] (err, ref) in
                     if err == nil {
                         self.reloadUserData(completion: { isOK in
@@ -494,7 +522,7 @@ class GentsUser: NSObject {
         })
     }
     
-    func getPayments() -> FIRDatabaseQuery? {
+    func getPayments() -> DatabaseQuery? {
         
         guard let cuser = GentsUser.firebaseGentsAuth()?.currentUser else {
             return nil
@@ -534,7 +562,7 @@ class GentsUser: NSObject {
         let payContext = STPPaymentContext.init(customerContext: customerCtx!)
         payContext.hostViewController = host
         payContext.delegate = delegate
-        payContext.presentPaymentMethodsViewController()
+        payContext.presentPaymentOptionsViewController()
     }
     
     //MARK: - posts

@@ -15,13 +15,17 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentC
     var alertController : UIAlertController?
     var isAlertControllerDisplayed = false
     
+    @IBOutlet weak var nextButton: UIButton!
+    
     var paymentCardTextField : STPPaymentCardTextField?
     
-    @IBOutlet weak var firstNameView: UIView!
-    @IBOutlet weak var lastNameView: UIView!
-    @IBOutlet weak var emailView: UIView!
-    @IBOutlet weak var passwordView: UIView!
-    @IBOutlet weak var rePasswordView: UIView!
+    @IBOutlet weak var stackView: UIStackView!
+    
+    @IBOutlet var firstNameView: UIView!
+    @IBOutlet var lastNameView: UIView!
+    @IBOutlet var emailView: UIView!
+    @IBOutlet var passwordView: UIView!
+    @IBOutlet var rePasswordView: UIView!
 
     
     @IBOutlet weak var firstNameTF: UITextField!
@@ -54,6 +58,8 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentC
 
         setUpNavigationBarItems()
  
+        nextButton.isHidden = true
+        showRow(firstNameView)
     }
     
     private func setUpNavigationBarItems() {
@@ -131,45 +137,30 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentC
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
-//better approach
-        
-//        let nextTag = textField.tag + 1
-//            print(textField.tag)
-//        if let nextResponder = textField.superview?.viewWithTag(nextTag) {
-//            nextResponder.becomeFirstResponder()
-//        } else {
-//            textField.resignFirstResponder()
-//        }
-
         if textField == self.firstNameTF {
             
-            if (checkFieldNotEmpty(textField: textField)) {
-                self.lastNameTF.becomeFirstResponder()
-
+            if checkFieldNotEmpty(textField: textField) {
+                showRow(lastNameView)
             }
-         
         }
         
         if textField == self.lastNameTF {
-            if (checkFieldNotEmpty(textField: textField)){
-                self.emailTF.becomeFirstResponder()
+            if checkFieldNotEmpty(textField: textField) {
+                showRow(emailView)
             }
         }
-
         
         if textField == self.emailTF {
-           
-            if isValidEmail(email: self.emailTF.text) {
-            self.passwordTF.becomeFirstResponder()
-            }else {
-                UIHelper.showAlertInView(self, msg: "Please enter a valid email")
-
-            }
             
+            if isValidEmail(email: self.emailTF.text) {
+                showRow(passwordView)
+            } else {
+                UIHelper.showAlertInView(self, msg: "Please enter a valid email")
+            }
         }
         
         if textField == self.passwordTF {
-            self.rePasswordTF.becomeFirstResponder()
+            showRow(rePasswordView)
         }
         
         if textField == self.rePasswordTF {
@@ -177,13 +168,37 @@ class GSignupViewController: GUIViewController, UITextFieldDelegate, STPPaymentC
             let firstEntry = self.passwordTF.text
 
             if checkPasswordValid(firstEntry: firstEntry ?? "", secondEntry: secondEntry ?? "") {
-
-                self.devicePickerView.isHidden = false
+                
+                showRow(devicePickerView)
+                nextButton.isHidden = false
                 textField.resignFirstResponder()
             }
         }
         
         return true
+    }
+    
+    /**
+     This way we can control the visibility of one row at a time
+     */
+    func showRow(_ view: UIView) {
+        for arrangedSubview in stackView.arrangedSubviews {
+            arrangedSubview.isHidden = true
+        }
+        view.isHidden = false
+        
+        // Make the textfield inside of that row a first responder (show the keyboard with the text field highlighted)
+        var newTextFieldFound = false
+        for subView in view.subviews {
+            if let textField = subView as? UITextField {
+                textField.becomeFirstResponder()
+                newTextFieldFound = true
+            }
+        }
+        if newTextFieldFound == false {
+            // Hide the keyboard
+            self.view.endEditing(true)
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

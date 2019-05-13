@@ -11,16 +11,26 @@ import UIKit
 class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 @IBOutlet
     var tableView: UITableView!
-    let screenNames = ["Repair", "Buy Back", "MVP Benefits"]
-    
+    var screenNames = ["Repair", "Buy Back", "MVP Account"]
+    var isMVP = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        if GentsUser.firebaseGentsAuth()?.currentUser == nil {
+           isMVP = false
+           screenNames = ["Repair", "Buy Back", "MVP Benefits"]
+        }
+
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper_edit_shield.png")!)
         
         setUpNavigationBarItems()
-
+        
         // Do any additional setup after loading the view.
+        
+    
+    
     }
     
     private func setUpNavigationBarItems() {
@@ -44,6 +54,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "screenNameCell", for: indexPath)
         
@@ -76,10 +87,14 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         if indexPath.row ==  2 {
             
-            
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MVPBenefitsHome") as! GInitViewController
-            self.navigationController?.show(nextViewController, sender: self)
-            
+            if isMVP == false {
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MVPBenefitsHome") as! GInitViewController
+                self.navigationController?.show(nextViewController, sender: self)
+            }else {
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "AccountHomeVC") as! AccountHomeViewController
+                self.navigationController?.show(nextViewController, sender: self)
+            }
             
         }
     }

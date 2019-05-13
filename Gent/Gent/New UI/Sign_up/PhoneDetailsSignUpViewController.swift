@@ -15,18 +15,11 @@ class PhoneDetailsSignUpViewController: GUIViewController {
     var userInfoDict = [String: String] ()
     var deviceName = String()
     
-    @IBOutlet weak var phoneNumberView: UIView!
-    @IBOutlet weak var carrierView: UIView!
-    @IBOutlet weak var serialView: UIView!
+  
     @IBOutlet weak var modelView: UIView!
     @IBOutlet weak var nickNameView: UIView!
     
     @IBOutlet weak var modelButton: UIButton!
-    @IBOutlet weak var carrierButton: UIButton!
-    
-    @IBOutlet weak var phoneNumberTF: UITextField!
-    @IBOutlet weak var serialNumberTF: UITextField!
-    
     @IBOutlet weak var nickNameTF: UITextField!
     
     @IBOutlet weak var addPhoneDetailsButton: UIButton!
@@ -51,9 +44,6 @@ class PhoneDetailsSignUpViewController: GUIViewController {
 
         modelButton?.setTitle(UIDevice.current.modelName, for: .normal)
    
-        phoneNumberView.addBottomBorderWithColor(color: .lightGray, width: 1)
-        carrierView.addBottomBorderWithColor(color: .lightGray, width: 1)
-        serialView.addBottomBorderWithColor(color: .lightGray, width: 1)
         modelView.addBottomBorderWithColor(color: .lightGray, width: 1)
     
     }
@@ -90,7 +80,6 @@ class PhoneDetailsSignUpViewController: GUIViewController {
                     for v in values! {
                         self?.alertController?.addAction(UIAlertAction.init(title: v, style: UIAlertActionStyle.default, handler: { action in
 
-                            self?.carrierButton?.setTitle(v, for: .normal)
                             self?.isAlertControllerDisplayed = false
                         }))
                     }
@@ -151,30 +140,9 @@ class PhoneDetailsSignUpViewController: GUIViewController {
 
     func checkFieldsValid () -> Bool {
         
-        let phoneNumber = phoneNumberTF?.text ?? ""
-        guard phoneNumber != "" else {
-            UIHelper.showAlertInView(self, msg: "Please complete needed details")
-            return false
-        }
-        
-        let serialNumber = serialNumberTF?.text ?? ""
-        guard serialNumber != "" else {
-            UIHelper.showAlertInView(self, msg: "Please complete needed details")
-            return false
-        }
-
-        let carrier = carrierButton.titleLabel?.text ?? ""
-        guard carrier != "" && carrier != "Choose your Carrier" else {
-            UIHelper.showAlertInView(self, msg: "Please complete needed details")
-            return false
-        }
-        
         self.deviceName = nickNameTF.text ?? "Main"
         
-        userInfoDict["carrier"] = carrier
         userInfoDict["model"] = modelButton.titleLabel?.text
-        userInfoDict["phoneNumber"] = phoneNumber
-        userInfoDict["serialNumber"] = serialNumber
         userInfoDict["deviceName"] = self.deviceName
         
         return true

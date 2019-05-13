@@ -19,10 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         STPPaymentConfiguration.shared().publishableKey = StripeAPIData.publishableKey
         
-        FIRApp.configure()
+        FirebaseApp.configure()
         //Database.database().isPersistenceEnabled = true
         //GentsUser.firebaseGentsApp().configure()
-        GentsUser.firebaseGentsDataBase()?.persistenceEnabled = true
+        GentsUser.firebaseGentsDataBase()?.isPersistenceEnabled = true
         
         //GentsConfig.firebaseConfigDataBase()?.isPersistenceEnabled = true
         

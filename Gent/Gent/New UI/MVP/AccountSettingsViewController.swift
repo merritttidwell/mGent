@@ -31,8 +31,13 @@ class AccountSettingsViewController: GUIViewController {
             
             if isOK {
                 
-                self?.dismiss(animated: true, completion: nil)
+               // self?.dismiss(animated: true, completion: nil)
             
+                let sb = UIStoryboard.init(name: "Main_NewDesign", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "HomeVC")
+                
+                self?.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+                
             
             } else {
                 UIHelper.showAlertInView(self!, msg: "Signout failed")

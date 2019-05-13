@@ -19,7 +19,6 @@ class LinesTableViewController: GUITableViewController {
 
         print(GentsUser.shared.devices)
         
-        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         // Uncomment the following line to preserve selection between presentations
@@ -28,17 +27,15 @@ class LinesTableViewController: GUITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,10 +50,15 @@ class LinesTableViewController: GUITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+   
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
+        
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        cell.textLabel?.font = UIFont(descriptor: UIFontDescriptor(name: "Gill Sans", size: 20), size: 20)
+        cell.textLabel?.textAlignment = .center
+        
         if indexPath.section == 0 {
-            cell.textLabel?.text = "main"
+            cell.textLabel?.text = "Main Device"
         }else{
         
             self.deviceDictionary = (GentsUser.shared.devices[indexPath.row] as! NSDictionary) as! [String : String]
@@ -72,7 +74,7 @@ class LinesTableViewController: GUITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        let viewController = UIStoryboard(name: "Main_NewDesign", bundle: nil).instantiateViewController(withIdentifier: "deviceDetail") as? GMVPTabViewController
+        let viewController = UIStoryboard(name: "Main_NewDesign", bundle: nil).instantiateViewController(withIdentifier: "deviceDetail") as? DeviceDetailViewController
         
         
         if indexPath.section == 0 {
